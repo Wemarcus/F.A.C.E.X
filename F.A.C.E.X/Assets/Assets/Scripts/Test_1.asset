@@ -51,7 +51,7 @@ MonoBehaviour:
       ambientOnly: 1
       highPrecision: 1
   screenSpaceReflection:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       reflection:
         blendType: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 10
+      focusDistance: 3.02
       aperture: 5.6
       focalLength: 50
       useCameraFov: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
     m_Settings:
       shutterAngle: 270
       sampleCount: 10
-      frameBlending: 0
+      frameBlending: 1
   eyeAdaptation:
     m_Enabled: 0
     m_Settings:
@@ -91,20 +91,20 @@ MonoBehaviour:
       minLuminance: -5
       maxLuminance: 1
       keyValue: 0.25
-      dynamicKeyValue: 1
+      dynamicKeyValue: 0
       adaptationType: 0
       speedUp: 2
       speedDown: 1
       logMin: -8
       logMax: 4
   bloom:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.5
-        threshold: 1.1
+        intensity: 0.2
+        threshold: 0.04
         softKnee: 0.5
-        radius: 4
+        radius: 1
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -135,9 +135,9 @@ MonoBehaviour:
       colorWheels:
         mode: 1
         log:
-          slope: {r: 0, g: 0, b: 0, a: 0}
-          power: {r: 0, g: 0, b: 0, a: 0}
-          offset: {r: 0, g: 0, b: 0, a: 0}
+          slope: {r: 1, g: 1, b: 1, a: 0}
+          power: {r: 1, g: 1, b: 1, a: 0}
+          offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
           lift: {r: 0, g: 0, b: 0, a: 0}
           gamma: {r: 0, g: 0, b: 0, a: 0}
@@ -309,7 +309,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 0.364
   grain:
     m_Enabled: 0
     m_Settings:
@@ -318,7 +318,7 @@ MonoBehaviour:
       size: 1
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
