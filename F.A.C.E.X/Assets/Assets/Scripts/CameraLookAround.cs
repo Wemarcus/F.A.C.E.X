@@ -25,5 +25,14 @@ public class CameraLookAround : MonoBehaviour
         rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
         rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
         transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && GetComponent<Camera>().fieldOfView >= 20) // forward
+        {
+            GetComponent<Camera>().fieldOfView -= 4;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && GetComponent<Camera>().fieldOfView <= 56) // backwards
+        {
+            GetComponent<Camera>().fieldOfView += 4;
+        }
     }
 }
