@@ -39,7 +39,7 @@ public class FacialExpressions : MonoBehaviour
 
     private bool blinking = false;
     private float blink_frequency = 3.5f;
-    private int emotion_id = 0; // 0 = Neutral Face
+    private int emotion_id = -1; // -1 = Nothing
     private bool eyes_movement = false;
     private float eyes_frequency = 0.2f; // OLD 2.0
     private bool cry = false;
@@ -102,8 +102,8 @@ public class FacialExpressions : MonoBehaviour
         head_movement = true;
         StartCoroutine(Head(1.5f));
 
-        // Active Standard Animation
-        StartCoroutine(Neutral_Animation());
+        // Active Standard Animation ===> OLD dall'introduzione della FSM!
+        // StartCoroutine(Neutral_Animation());
     }
 
     // Update is called once per frame
@@ -2335,5 +2335,61 @@ public class FacialExpressions : MonoBehaviour
             duration = 2.0f;
             animation_lock = true;
         }
+    }
+
+    // Functions called by Finite State Machine "CoreAffect.cs"
+
+    public void setNeutral()
+    {
+        emotion_id = 0;
+        StartCoroutine(Neutral(0.5f));
+    }
+
+    public void setSadness()
+    {
+        emotion_id = 1;
+        StartCoroutine(Sadness(0.5f));
+    }
+
+    public void setJoy()
+    {
+        emotion_id = 2;
+        StartCoroutine(Joy(0.5f));
+    }
+
+    public void setSurprise()
+    {
+        emotion_id = 3;
+        StartCoroutine(Surprise(0.5f));
+    }
+
+    public void setAnger()
+    {
+        emotion_id = 4;
+        StartCoroutine(Anger(0.5f));
+    }
+
+    public void setFear()
+    {
+        emotion_id = 5;
+        StartCoroutine(Fear(0.5f));
+    }
+
+    public void setDisgust()
+    {
+        emotion_id = 6;
+        StartCoroutine(Disgust(0.5f));
+    }
+
+    public void setSleepiness()
+    {
+        //emotion_id = 7;
+        //StartCoroutine(Sleepiness(0.5f));
+    }
+
+    public void setCalmness()
+    {
+        //emotion_id = 8;
+        //StartCoroutine(Calmness(0.5f));
     }
 }

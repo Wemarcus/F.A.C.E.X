@@ -10,8 +10,10 @@ public class CameraLookAround : MonoBehaviour
     public float maximumX = 90F;
     public float minimumY = -60F;
     public float maximumY = 60F;
-    float rotationY = 0F;
-    float rotationX = 0f;
+    public float rotationY = 0F;
+    public float rotationX = 0f;
+
+    public bool rotation = true;
 
     private void Start()
     {
@@ -20,19 +22,28 @@ public class CameraLookAround : MonoBehaviour
 
     void Update()
     {
-        rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-        rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
-        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-        transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+        if (rotation)
+        {
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f && GetComponent<Camera>().fieldOfView >= 20) // forward
-        {
-            GetComponent<Camera>().fieldOfView -= 4;
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f && GetComponent<Camera>().fieldOfView >= 20) // forward
+            {
+                GetComponent<Camera>().fieldOfView -= 4;
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f && GetComponent<Camera>().fieldOfView <= 56) // backwards
+            {
+                GetComponent<Camera>().fieldOfView += 4;
+            }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && GetComponent<Camera>().fieldOfView <= 56) // backwards
+
+        if (Input.GetMouseButtonDown(1))
         {
-            GetComponent<Camera>().fieldOfView += 4;
+            rotation = !rotation;
+            Cursor.visible = !Cursor.visible;
         }
     }
 }
