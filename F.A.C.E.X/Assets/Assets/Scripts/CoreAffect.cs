@@ -313,63 +313,63 @@ public class CoreAffect : MonoBehaviour
 
     public void setNeutral()
     {
-        Debug.Log("setNeutral");
+        Debug.Log(gameObject.name + ": setNeutral");
         face.setNeutral();
         status = "neutral";
     }
 
     public void setSadness()
     {
-        Debug.Log("setSadness");
+        Debug.Log(gameObject.name + ": setSadness");
         face.setSadness();
         status = "sadness";
     }
 
     public void setJoy()
     {
-        Debug.Log("setJoy");
+        Debug.Log(gameObject.name + ": setJoy");
         face.setJoy();
         status = "joy";
     }
 
     public void setSurprise()
     {
-        Debug.Log("setSurprise");
+        Debug.Log(gameObject.name + ": setSurprise");
         face.setSurprise();
         status = "surprise";
     }
 
     public void setAnger()
     {
-        Debug.Log("setAnger");
+        Debug.Log(gameObject.name + ": setAnger");
         face.setAnger();
         status = "anger";
     }
 
     public void setFear()
     {
-        Debug.Log("setFear");
+        Debug.Log(gameObject.name + ": setFear");
         face.setFear();
         status = "fear";
     }
 
     public void setDisgust()
     {
-        Debug.Log("setDisgust");
+        Debug.Log(gameObject.name + ": setDisgust");
         face.setDisgust();
         status = "disgust";
     }
 
     public void setSleepiness()
     {
-        Debug.Log("setSleepiness");
+        Debug.Log(gameObject.name + ": setSleepiness");
         face.setSleepiness();
         status = "sleepiness";
     }
 
     public void setCalmness()
     {
-        Debug.Log("setCalmness");
+        Debug.Log(gameObject.name + ": setCalmness");
         face.setCalmness();
         status = "calmness";
     }
@@ -459,7 +459,7 @@ public class CoreAffect : MonoBehaviour
 
     public void setPleasant(float value)
     {
-        pleasant += value;
+        pleasant = normalize(value);
     }
 
     public float getAroused()
@@ -469,6 +469,20 @@ public class CoreAffect : MonoBehaviour
 
     public void setAroused(float value)
     {
-        aroused += value;
+        aroused = normalize(value);
+    }
+
+    private float normalize(float value)
+    {
+        if(value > 1)
+        {
+            value = 1;
+        }
+        else if (value < -1)
+        {
+            value = -1;
+        }
+
+        return (value);
     }
 }

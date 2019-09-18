@@ -15,6 +15,8 @@ public class CameraLookAround : MonoBehaviour
 
     public bool rotation = true;
 
+    public GameObject final_mask;
+
     private void Start()
     {
         Cursor.visible = false;
@@ -22,28 +24,31 @@ public class CameraLookAround : MonoBehaviour
 
     void Update()
     {
-        if (rotation)
+        if (!final_mask.activeSelf)
         {
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-            rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
-
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f && GetComponent<Camera>().fieldOfView >= 20) // forward
+            if (rotation)
             {
-                GetComponent<Camera>().fieldOfView -= 4;
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f && GetComponent<Camera>().fieldOfView <= 56) // backwards
-            {
-                GetComponent<Camera>().fieldOfView += 4;
-            }
-        }
+                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+                rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+                transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            rotation = !rotation;
-            Cursor.visible = !Cursor.visible;
+                if (Input.GetAxis("Mouse ScrollWheel") > 0f && GetComponent<Camera>().fieldOfView >= 20) // forward
+                {
+                    GetComponent<Camera>().fieldOfView -= 4;
+                }
+                else if (Input.GetAxis("Mouse ScrollWheel") < 0f && GetComponent<Camera>().fieldOfView <= 56) // backwards
+                {
+                    GetComponent<Camera>().fieldOfView += 4;
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                rotation = !rotation;
+                Cursor.visible = !Cursor.visible;
+            }
         }
     }
 }
