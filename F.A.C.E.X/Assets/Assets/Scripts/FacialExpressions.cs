@@ -59,9 +59,9 @@ public class FacialExpressions : MonoBehaviour
     private int[] joy_eyelashes = new int[] { 6, 7, 12, 13, 43, 44 };
     private int[] joy_moustaches = new int[] { 5, 6, 7, 8, 21, 22, 25, 26, 28, 29, 30, 32, 33, 34, 35, 36, 37, 40, 41 };
 
-    private int[] surprise_face = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 26, 27, 28, 29, 30, 31, 33, 34, 35, 39, 40, 48, 49};
+    private int[] surprise_face = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 26, 27, 28, 29, 30, 31, 33, 34, 35, 39, 40, 48, 49 };
     private int[] surprise_eyelashes = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
-    private int[] surprise_moustaches = new int[] { 5, 6, 9, 10, 17, 21, 22, 23, 24, 25, 26, 28, 29, 30, 34, 35, 40, 41};
+    private int[] surprise_moustaches = new int[] { 5, 6, 9, 10, 17, 21, 22, 23, 24, 25, 26, 28, 29, 30, 34, 35, 40, 41 };
 
     private int[] anger_face = new int[] { 2, 3, 10, 11, 14, 15, 25, 28, 36, 39, 40, 46 };
     private int[] anger_eyelashes = new int[] { 2, 3 };
@@ -71,11 +71,12 @@ public class FacialExpressions : MonoBehaviour
     private int[] fear_eyelashes = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
     private int[] fear_moustaches = new int[] { 9, 10, 11, 17, 21, 22, 25, 26, 27, 28, 29, 34, 35, 36, 37, 38, 40, 41 };
 
-    private int[] disgust_face = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 14, 15, 25, 26, 27, 28, 33, 34, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49}; // NEW 28
-    private int[] disgust_eyelashes = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 43, 44 };
-    private int[] disgust_moustaches = new int[] { 9, 10, 20, 21, 22, 23, 28, 29, 31, 32, 33, 34, 35, 36, 37, 39, 40, 41 }; // NEW 23
+    private int[] disgust_face = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 14, 15, 17, 25, 26, 27, 28, 29, 33, 34, 36, 39, 40, 43, 44, 47, 48, 49 }; // NEW 28
+    private int[] disgust_eyelashes = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 43, 44 };
+    private int[] disgust_moustaches = new int[] { 9, 10, 12, 20, 23, 24, 28, 29, 31, 34, 35, 39, 40, 41 }; // NEW 23
 
     private bool animation_lock = true; // true = libera, false = occupata
+    private bool animation_interpolation = true; // true = in azione, false = ferma
 
     void Start()
     {
@@ -189,7 +190,7 @@ public class FacialExpressions : MonoBehaviour
                 {
                     head_left_right = UnityEngine.Random.Range(-30.0f, 0.0f);
                 }
-                
+
                 head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
 
                 while (time <= duration && emotion_id == 0)
@@ -629,7 +630,7 @@ public class FacialExpressions : MonoBehaviour
             float time = 0f;
             System.Random rnd = new System.Random();
 
-            if(emotion_id == 0) // Neutral
+            if (emotion_id == 0) // Neutral
             {
                 eyes_frequency = UnityEngine.Random.Range(0.0f, 7.0f); // OLD 0.2 5.0
                 eyes_up_down = UnityEngine.Random.Range(-5.0f, 15.0f); // OLD -5 15 // OLD -5 8 // OLD -10 10
@@ -940,8 +941,8 @@ public class FacialExpressions : MonoBehaviour
             } else if (emotion_id == 6) // disgust
             {
                 int Blink = (int)rnd.Next(0, 5);
-                int Squint_Left = (int)rnd.Next(50, 140); // OLD 110 140
-                int Squint_Right = (int)rnd.Next(50, 140); // OLD 110 140
+                int Squint_Left = (int)rnd.Next(100, 140); // OLD 110 140
+                int Squint_Right = (int)rnd.Next(100, 140); // OLD 110 140
 
                 face.SetBlendShapeWeight(0, Blink); // Blink_Left
                 face.SetBlendShapeWeight(1, Blink); // Blink_Right
@@ -986,7 +987,7 @@ public class FacialExpressions : MonoBehaviour
                 eyelashes.SetBlendShapeWeight(j, (end_curve.Evaluate(percent) * eyelashes.GetBlendShapeWeight(j)));
             }
 
-            if(moustaches_mesh != null)
+            if (moustaches_mesh != null)
             {
                 for (int k = 0; k < moustaches_mesh.blendShapeCount; k++)
                 {
@@ -1078,7 +1079,7 @@ public class FacialExpressions : MonoBehaviour
                             time = time + Time.deltaTime;
                             float percent = Mathf.Clamp01(time / duration);
 
-                            if(random == 1)
+                            if (random == 1)
                             {
                                 face.SetBlendShapeWeight(face_index[0], (original_expressions[0] + exp_curve.Evaluate(percent) * neutral_micro_expressions[0]));
                                 face.SetBlendShapeWeight(face_index[2], (original_expressions[2] + exp_curve.Evaluate(percent) * neutral_micro_expressions[2]));
@@ -1140,7 +1141,7 @@ public class FacialExpressions : MonoBehaviour
                             time = time + Time.deltaTime;
                             float percent = Mathf.Clamp01(time / duration);
 
-                            for(int i = 0; i < face_index.Length; i++)
+                            for (int i = 0; i < face_index.Length; i++)
                             {
                                 face.SetBlendShapeWeight(face_index[i], (original_expressions[i] + exp_curve.Evaluate(percent) * neutral_micro_expressions[i]));
                             }
@@ -1653,7 +1654,6 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Surprise(float duration)
     {
-        //float time = 0f;
         eyes_frequency = 0;
         head_frequency = 0;
         blink_frequency = 6;
@@ -1676,16 +1676,33 @@ public class FacialExpressions : MonoBehaviour
         cry = false;
         StartCoroutine(Crying(time_to_cry)); // Set Crying OFF
 
+        bool first_time = true;
+
         while (emotion_id == 3)
         {
             if (animation_lock)
             {
                 animation_lock = false;
                 float time = 0f;
+                float animation_frequency;
 
-                float animation_frequency = UnityEngine.Random.Range(0.0f, 1.0f);
+                if (first_time)
+                {
+                    animation_frequency = UnityEngine.Random.Range(0.0f, 1.0f);
+                    duration = 0.5f;
+                    first_time = false;
+                }
+                else
+                {
+                    animation_frequency = UnityEngine.Random.Range(1.5f, 2.5f); // OLD 0.0f 1.0f
+                    animation_interpolation = true; // NEW
+                    duration = 2.0f; // OLD 5.0f
+                    StartCoroutine(SurpriseInterpolation(animation_frequency / 2)); // NEW
+                }
 
                 yield return new WaitForSeconds(animation_frequency);
+
+                animation_interpolation = false; // NEW
 
                 int BrowsDown_Left = (int)rnd.Next(0, 50); // NEW
                 int BrowsDown_Right = BrowsDown_Left; // NEW
@@ -1700,16 +1717,16 @@ public class FacialExpressions : MonoBehaviour
                 int EyesWide_Left = (int)rnd.Next(120, 150);
                 int EyesWide_Right = EyesWide_Left;
                 int Frown_Left = (int)rnd.Next(0, 50); // OLD 30-60
-                int Frown_Right = (int)rnd.Next(0, 50); // OLD 30-60
+                int Frown_Right = Frown_Left; // OLD 0-50
                 int Jaw_Down = (int)rnd.Next(20, 80); // OLD 50-80
                 int LowerLipDown_Left = (int)rnd.Next(0, 20); // NEW
                 int LowerLipDown_Right = (int)rnd.Next(0, 20); // NEW
                 int LowerLipIn = (int)rnd.Next(0, 100); // NEW
                 int LowerLipOut = (int)rnd.Next(40, 60);
                 int MidMouth_Left = (int)rnd.Next(0, 10); // NEW
-                int MidMouth_Right = (int)rnd.Next(0, 10); // NEW
+                int MidMouth_Right = MidMouth_Left; // OLD 0-10
                 int MouthNarrow_Left = (int)rnd.Next(20, 40); // OLD 20-40
-                int MouthNarrow_Right = (int)rnd.Next(20, 40); // OLD 20-40
+                int MouthNarrow_Right = MouthNarrow_Left; // OLD 20-40
                 int Mouth_Open = (int)rnd.Next(20, 40); // OLD 10 40
                 int NoseScrunch_Left = (int)rnd.Next(0, 20); // NEW
                 int NoseScrunch_Right = NoseScrunch_Left; // NEW
@@ -1730,10 +1747,12 @@ public class FacialExpressions : MonoBehaviour
 
                 StartCoroutine(widensEyes());
 
-                while (time <= duration && emotion_id == 3)
+                while (time <= (duration / 2) && emotion_id == 3) // OLD duration
                 {
                     time = time + Time.deltaTime;
                     float percent = Mathf.Clamp01(time / duration);
+
+                    //Debug.Log("Basic Time: " + time + " Duration: " + duration + " Percent: " + percent);
 
                     // Reset unused facial muscles
                     foreach (var n in face_result)
@@ -1808,7 +1827,7 @@ public class FacialExpressions : MonoBehaviour
                 }
             }
 
-            duration = 2.0f;
+            //duration = 2.0f; // OLD 5.0f
             animation_lock = true;
         }
     }
@@ -1853,6 +1872,153 @@ public class FacialExpressions : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    IEnumerator SurpriseInterpolation(float duration)
+    {
+        System.Random rnd = new System.Random();
+
+        while (emotion_id == 3 && animation_interpolation)
+        {
+            float time = 0f;
+            int mod = (int)rnd.Next(-2, 2); // OLD -2 2
+            int[] face_surprise = new int[surprise_face.Length];
+            int[] eyelashes_surprise = new int[surprise_eyelashes.Length];
+            int[] moustaches_surprise = new int[surprise_moustaches.Length];
+
+            for (int k = 0; k < face_surprise.Length; k++)
+            {
+                if (mod < 0 && face.GetBlendShapeWeight(surprise_face[k]) >= (0 - mod))
+                {
+                    face_surprise[k] = (int)face.GetBlendShapeWeight(surprise_face[k]) + mod;
+                }
+                else if (mod > 0 && face.GetBlendShapeWeight(surprise_face[k]) <= (100 - mod))
+                {
+                    face_surprise[k] = (int)face.GetBlendShapeWeight(surprise_face[k]) + mod;
+                }
+                else
+                {
+                    face_surprise[k] = (int)face.GetBlendShapeWeight(surprise_face[k]);
+                }
+            }
+
+            for (int k = 0; k < eyelashes_surprise.Length; k++)
+            {
+                if (mod < 0 && eyelashes.GetBlendShapeWeight(surprise_eyelashes[k]) >= (0 - mod))
+                {
+                    eyelashes_surprise[k] = (int)eyelashes.GetBlendShapeWeight(surprise_eyelashes[k]) + mod;
+                }
+                else if (mod > 0 && eyelashes.GetBlendShapeWeight(surprise_eyelashes[k]) <= (100 - mod))
+                {
+                    eyelashes_surprise[k] = (int)eyelashes.GetBlendShapeWeight(surprise_eyelashes[k]) + mod;
+                }
+                else
+                {
+                    eyelashes_surprise[k] = (int)eyelashes.GetBlendShapeWeight(surprise_eyelashes[k]);
+                }
+            }
+
+            if (moustaches != null)
+            {
+                for (int k = 0; k < moustaches_surprise.Length; k++)
+                {
+                    if (mod < 0 && moustaches.GetBlendShapeWeight(surprise_moustaches[k]) >= (0 - mod))
+                    {
+                        moustaches_surprise[k] = (int)moustaches.GetBlendShapeWeight(surprise_moustaches[k]) + mod;
+                    }
+                    else if (mod > 0 && moustaches.GetBlendShapeWeight(surprise_moustaches[k]) <= (100 - mod))
+                    {
+                        moustaches_surprise[k] = (int)moustaches.GetBlendShapeWeight(surprise_moustaches[k]) + mod;
+                    }
+                    else
+                    {
+                        moustaches_surprise[k] = (int)moustaches.GetBlendShapeWeight(surprise_moustaches[k]);
+                    }
+                }
+            }
+
+            while (time <= (duration / 2) && emotion_id == 3 && animation_interpolation) // OLD duration
+            {
+                time += Time.deltaTime;
+                float percent = Mathf.Clamp01(time / duration);
+
+                //Debug.Log("Interpolation Time: " + time + " Duration: " + duration);
+
+                // Set mod of facial muscles
+                for (int k = 0; k < surprise_face.Length; k++)
+                {
+                    if (!animation_interpolation)
+                    {
+                        break;
+                    }
+                    else {
+                        if (face_surprise[k] > face.GetBlendShapeWeight(surprise_face[k]))
+                        {
+                            int difference = face_surprise[k] - (int)face.GetBlendShapeWeight(surprise_face[k]);
+                            face.SetBlendShapeWeight(surprise_face[k], (face.GetBlendShapeWeight(surprise_face[k]) + curve.Evaluate(percent) * difference));
+                        }
+                        else
+                        {
+                            int difference = (int)face.GetBlendShapeWeight(surprise_face[k]) - face_surprise[k];
+                            face.SetBlendShapeWeight(surprise_face[k], (face.GetBlendShapeWeight(surprise_face[k]) - curve.Evaluate(percent) * difference));
+                        }
+                    }
+                }
+
+                // Set mod of eyelashes muscles
+                for (int j = 0; j < surprise_eyelashes.Length; j++)
+                {
+                    if (!animation_interpolation)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if (eyelashes_surprise[j] > eyelashes.GetBlendShapeWeight(surprise_eyelashes[j]))
+                        {
+                            int difference = eyelashes_surprise[j] - (int)eyelashes.GetBlendShapeWeight(surprise_eyelashes[j]);
+                            eyelashes.SetBlendShapeWeight(surprise_eyelashes[j], (eyelashes.GetBlendShapeWeight(surprise_eyelashes[j]) + curve.Evaluate(percent) * difference));
+                        }
+                        else
+                        {
+                            int difference = (int)eyelashes.GetBlendShapeWeight(surprise_eyelashes[j]) - eyelashes_surprise[j];
+                            eyelashes.SetBlendShapeWeight(surprise_eyelashes[j], (eyelashes.GetBlendShapeWeight(surprise_eyelashes[j]) - curve.Evaluate(percent) * difference));
+                        }
+                    }
+                }
+
+                // Set mod of moustaches
+                if (moustaches != null)
+                {
+                    for (int j = 0; j < surprise_moustaches.Length; j++)
+                    {
+                        if (!animation_interpolation)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (moustaches_surprise[j] > moustaches.GetBlendShapeWeight(surprise_moustaches[j]))
+                            {
+                                int difference = moustaches_surprise[j] - (int)moustaches.GetBlendShapeWeight(surprise_moustaches[j]);
+                                moustaches.SetBlendShapeWeight(surprise_moustaches[j], (moustaches.GetBlendShapeWeight(surprise_moustaches[j]) + curve.Evaluate(percent) * difference));
+                            }
+                            else
+                            {
+                                int difference = (int)moustaches.GetBlendShapeWeight(surprise_moustaches[j]) - moustaches_surprise[j];
+                                moustaches.SetBlendShapeWeight(surprise_moustaches[j], (moustaches.GetBlendShapeWeight(surprise_moustaches[j]) - curve.Evaluate(percent) * difference));
+                            }
+                        }
+                    }
+                }
+
+                yield return null;
+            }
+
+            yield return null;
+        }
+
+        yield return null;
     }
 
     IEnumerator Anger(float duration)
@@ -2249,43 +2415,42 @@ public class FacialExpressions : MonoBehaviour
                 int Blink_Left = (int)rnd.Next(0, 5);
                 int Blink_Right = Blink_Left;
                 int BrowsDown_Left = (int)rnd.Next(80, 100); // OLD 90 100
-                int BrowsDown_Right = (int)rnd.Next(80, 100); // OLD 90 100
+                int BrowsDown_Right = BrowsDown_Left; // OLD 90 100
                 int BrowsIn_Left = (int)rnd.Next(50, 75);
-                int BrowsIn_Right = (int)rnd.Next(50, 75);
-                int BrowsOuterLower_Left = (int)rnd.Next(0, 70); // OLD 0 30
-                int BrowsOuterLower_Right = (int)rnd.Next(0, 70); // OLD 0 30
-                int Frown_Left = (int)rnd.Next(10, 30); // OLD 20 50
-                int Frown_Right = (int)rnd.Next(10, 30); // OLD 20 50
+                int BrowsIn_Right = BrowsIn_Left;
+                int BrowsOuterLower_Left = (int)rnd.Next(70, 100); // OLD 0 70
+                int BrowsOuterLower_Right = BrowsOuterLower_Left; // OLD 0 70
+                int BrowsUp_Left = (int)rnd.Next(-20, 0); // OLD 0 20
+                int BrowsUp_Right = BrowsUp_Left; // NEW
+                int Frown_Left = (int)rnd.Next(100, 150); // OLD 80 150
+                int Frown_Right = (int)rnd.Next(100, 150); // OLD 80 150
+                int JawForeward = (int)rnd.Next(50, 100); // NEW
                 int Jaw_Up = (int)rnd.Next(50, 70); // OLD 20 30
-                int LowerLipDown_Left = (int)rnd.Next(0, 1); // OLD 0 20
-                int LowerLipDown_Right = (int)rnd.Next(0, 1); // OLD 0 20
-                int LowerLipIn = (int)rnd.Next(0, 40); // NEW // OLD 20 40
-                int MouthNarrow_Left = (int)rnd.Next(30, 35);
-                int MouthNarrow_Right = (int)rnd.Next(30, 35);
-                int MouthUp = (int)rnd.Next(70, 100); // OLD 95 100
-                int MouthWhistle_NarrowAdjust_Left = (int)rnd.Next(0, 30); // NEW
-                int MouthWhistle_NarrowAdjust_Right = (int)rnd.Next(0, 30); // NEW
-                int NoseScrunch_Left = (int)rnd.Next(80, 100); // OLD 100 120
-                int NoseScrunch_Right = (int)rnd.Next(80, 100); // OLD 100 120
-                int Smile_Left = (int)rnd.Next(0, 20); // NEW
-                int Smile_Right = (int)rnd.Next(0, 20); // NEW
-                int Squint_Left = (int)rnd.Next(50, 140); // OLD 110 140
-                int Squint_Right = (int)rnd.Next(50, 140); // OLD 110 140
-                int UpperLipOut = (int)rnd.Next(80, 90);
-                int UpperLipUp_Left = (int)rnd.Next(30, 45); // OLD 45  70
-                int UpperLipUp_Right = UpperLipUp_Left; // OLD 45 70
+                int LowerLipDown_Left = (int)rnd.Next(0, 10); // NEW
+                int LowerLipDown_Right = (int)rnd.Next(0, 10); // NEW
+                int LowerLipIn = (int)rnd.Next(50, 70); // OLD 80 100
+                int LowerLipOut = (int)rnd.Next(80, 100); // NEW
+                int MouthNarrow_Left = (int)rnd.Next(-30, 0);
+                int MouthNarrow_Right = (int)rnd.Next(-30, 0);
+                int MouthUp = (int)rnd.Next(80, 120); // OLD 70 100
+                int NoseScrunch_Left = (int)rnd.Next(70, 150); // OLD 80 150
+                int NoseScrunch_Right = NoseScrunch_Left; // OLD 80 100
+                int Squint_Left = (int)rnd.Next(80, 130); // OLD 80 140
+                int Squint_Right = (int)rnd.Next(80, 130); // OLD 80 140
+                int UpperLipOut = (int)rnd.Next(60, 80); // OLD 80 100
+                int UpperLipUp_Left = (int)rnd.Next(30, 50); // OLD 30 45
+                int UpperLipUp_Right = (int)rnd.Next(30, 50); ; // OLD 30 45
 
-                int[] face_disgust = new int[] { Blink_Left, Blink_Right, BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left,
-                                      BrowsOuterLower_Right, Frown_Left, Frown_Right, Jaw_Up, LowerLipDown_Left, LowerLipDown_Right, LowerLipIn, MouthNarrow_Left,
-                                      MouthNarrow_Right, MouthUp, MouthWhistle_NarrowAdjust_Left, MouthWhistle_NarrowAdjust_Right, NoseScrunch_Left,
-                                      NoseScrunch_Right, Smile_Left, Smile_Right, Squint_Left, Squint_Right, UpperLipOut, UpperLipUp_Left, UpperLipUp_Right};
+                int[] face_disgust = new int[] { Blink_Left, Blink_Right, BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right,
+                                                 BrowsUp_Left, BrowsUp_Right, Frown_Left, Frown_Right, JawForeward, Jaw_Up, LowerLipDown_Left,  LowerLipDown_Right, LowerLipIn,
+                                                 LowerLipOut, MouthNarrow_Left, MouthNarrow_Right, MouthUp, NoseScrunch_Left, NoseScrunch_Right, Squint_Left, Squint_Right,
+                                                 UpperLipOut, UpperLipUp_Left, UpperLipUp_Right};
 
                 int[] eyelashes_disgust = new int[] { Blink_Left, Blink_Right, BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right,
-                                              BrowsOuterLower_Left, BrowsOuterLower_Right, Squint_Left, Squint_Right };
+                                                      BrowsOuterLower_Left, BrowsOuterLower_Right, BrowsUp_Left, BrowsUp_Right, Squint_Left, Squint_Right };
 
-                int[] moustaches_disgust = new int[] { Frown_Left, Frown_Right, Jaw_Up, LowerLipDown_Left, LowerLipDown_Right, LowerLipIn, MouthNarrow_Left,
-                                               MouthNarrow_Right, MouthUp, MouthWhistle_NarrowAdjust_Left, MouthWhistle_NarrowAdjust_Right,
-                                               NoseScrunch_Left, NoseScrunch_Right, Smile_Left, Smile_Right, UpperLipOut, UpperLipUp_Left, UpperLipUp_Right };
+                int[] moustaches_disgust = new int[] { Frown_Left, Frown_Right, JawForeward, Jaw_Up, LowerLipIn, LowerLipOut, MouthNarrow_Left, MouthNarrow_Right, MouthUp, 
+                                                       NoseScrunch_Left, NoseScrunch_Right, UpperLipOut, UpperLipUp_Left, UpperLipUp_Right };
 
                 while (time <= duration && emotion_id == 6)
                 {
