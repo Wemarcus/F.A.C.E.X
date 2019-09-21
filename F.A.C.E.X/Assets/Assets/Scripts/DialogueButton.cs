@@ -38,7 +38,9 @@ public class DialogueButton : MonoBehaviour
         ai_core_affect.setPleasant(ai_pleasant);
         ai_core_affect.setAroused(ai_aroused);
 
-        StartCoroutine(setting.nextMessage());
+        StartCoroutine(setting.setAnswer(transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().GetParsedText()));
+
+        //StartCoroutine(setting.nextMessage());
     }
 
     public void setHumanPleasant(string pleasant)

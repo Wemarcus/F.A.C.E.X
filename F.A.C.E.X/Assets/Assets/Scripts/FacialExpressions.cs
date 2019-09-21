@@ -77,6 +77,7 @@ public class FacialExpressions : MonoBehaviour
 
     private bool animation_lock = true; // true = libera, false = occupata
     private bool animation_interpolation = true; // true = in azione, false = ferma
+    private bool speak = false; // true = parlando, false = non parlando
 
     void Start()
     {
@@ -108,7 +109,7 @@ public class FacialExpressions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 1.Neutral
+        // 0.Neutral
         if (Input.GetKeyDown(KeyCode.Alpha0) && emotion_id != 0)
         {
             emotion_id = 0;
@@ -155,6 +156,13 @@ public class FacialExpressions : MonoBehaviour
         {
             emotion_id = 6;
             StartCoroutine(Disgust(0.5f));
+        }
+
+        // Speak
+        if (Input.GetKeyDown(KeyCode.S) && !speak)
+        {
+            speak = true;
+            StartCoroutine(Speaking());
         }
     }
 
@@ -2533,6 +2541,81 @@ public class FacialExpressions : MonoBehaviour
             duration = 2.0f;
             animation_lock = true;
         }
+    }
+
+    public IEnumerator Speaking()
+    {
+        /*int Jaw_Down = 0;
+        int LowerLipDown_Left = 0;
+        int LowerLipDown_Right = 0;
+        int LowerLipIn = 0;
+        int LowerLipOut = 0;
+        int Midmouth_Left = 0;
+        int Midmouth_Right = 0;
+        int Smile_Left = 0;
+        int Smile_Right = 0;
+        int TongueUp = 0;
+        int UpperLipIn = 0;
+        int UpperLipUp_Left = 0;
+        int UpperLipUp_Right = 0;*/
+
+        Debug.Log("Entrato in Speaking");
+
+        /*int[,] lip = new int[7, 13] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+                                           { 35, 48, 51, 86, 0, 30, 30, 0, 0, 5, 0, 27, 27 },
+                                           { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                                           { 45, 48, 51, 86, 0, 0, 0, 15, 15, 30, 0, 27, 27 },
+                                           { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                                           { 25, 10, 10, 0, 50, 40, 40, 0, 0, 0, 0, 20, 20 },
+                                           { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
+
+        int[] lip_face_index = new int[] { 22, 26, 27, 28, 29, 30, 31, 41, 42, 45, 46, 48, 49 };
+
+        for(int j = 0; j < 6; j++)
+        {
+            for (int i = 0; i < lip.GetLength(0); i++)
+            {
+                float time = 0f;
+                float duration = 0.10f;
+
+                while (time <= duration)
+                {
+                    time += Time.deltaTime;
+                    float percent = Mathf.Clamp01(time / duration);
+
+                    Debug.Log("Time: " + time + " Duration: " + duration);
+
+                    // Set lip facial muscles
+                    for (int k = 0; k < lip_face_index.Length; k++)
+                    {
+                        if (lip[i, k] > face.GetBlendShapeWeight(lip_face_index[k]))
+                        {
+                            int difference = lip[i, k] - (int)face.GetBlendShapeWeight(lip_face_index[k]);
+                            face.SetBlendShapeWeight(lip_face_index[k], (face.GetBlendShapeWeight(lip_face_index[k]) + curve.Evaluate(percent) * difference));
+                        }
+                        else
+                        {
+                            int difference = (int)face.GetBlendShapeWeight(lip_face_index[k]) - lip[i, k];
+                            face.SetBlendShapeWeight(lip_face_index[k], (face.GetBlendShapeWeight(lip_face_index[k]) - curve.Evaluate(percent) * difference));
+                        }
+                    }
+
+                    Debug.Log("Sto nel while..");
+                    yield return null;
+                }
+
+                yield return null;
+            }
+        }*/
+
+        GetComponent<Animation>().Play();
+
+        yield return new WaitForSeconds(4.0f);
+
+        GetComponent<Animation>().Stop();
+
+        Debug.Log("Uscito da Speaking");
+        speak = false;
     }
 
     // Functions called by Finite State Machine "CoreAffect.cs"
