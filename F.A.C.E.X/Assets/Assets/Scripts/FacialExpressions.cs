@@ -20,6 +20,7 @@ public class FacialExpressions : MonoBehaviour
     //public Material hair_material;
     //public Material eyelashes_material;
     //public Material eyelashes_backfaces_material;
+    public GameObject interlocutor;
     private LookAtConstraint left_lookAtConstraint;
     private LookAtConstraint right_lookAtConstraint;
     private LookAtConstraint head_lookAtConstraint;
@@ -55,17 +56,17 @@ public class FacialExpressions : MonoBehaviour
     private int[] sadness_eyelashes = new int[] { 0, 1, 4, 5, 6, 7 };
     private int[] sadness_moustaches = new int[] { 5, 6, 9, 10, 12, 21, 22, 23, 27 };
 
-    private int[] joy_face = new int[] { 6, 7, 10, 11, 12, 13, 26, 27, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 44, 48, 49 };
+    private int[] joy_face = new int[] { 6, 7, 10, 11, 12, 13, 26, 27, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 44, 46, 48, 49 };
     private int[] joy_eyelashes = new int[] { 6, 7, 12, 13, 43, 44 };
-    private int[] joy_moustaches = new int[] { 5, 6, 7, 8, 21, 22, 25, 26, 28, 29, 30, 32, 33, 34, 35, 36, 37, 40, 41 };
+    private int[] joy_moustaches = new int[] { 5, 6, 7, 8, 21, 22, 25, 26, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 40, 41 };
 
     private int[] surprise_face = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 26, 27, 28, 29, 30, 31, 33, 34, 35, 39, 40, 48, 49 };
     private int[] surprise_eyelashes = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
     private int[] surprise_moustaches = new int[] { 5, 6, 9, 10, 17, 21, 22, 23, 24, 25, 26, 28, 29, 30, 34, 35, 40, 41 };
 
-    private int[] anger_face = new int[] { 2, 3, 10, 11, 14, 15, 25, 28, 36, 39, 40, 46 };
-    private int[] anger_eyelashes = new int[] { 2, 3 };
-    private int[] anger_moustaches = new int[] { 5, 6, 9, 10, 20, 23, 31, 34, 35, 38 };
+    private int[] anger_face = new int[] { 2, 3, 6, 7, 10, 11, 12, 13, 14, 15, 25, 28, 35, 36, 39, 40, 43, 44, 46 };
+    private int[] anger_eyelashes = new int[] { 2, 3, 6, 7, 12, 13, 43, 44 };
+    private int[] anger_moustaches = new int[] { 5, 6, 9, 10, 20, 23, 30, 31, 34, 35, 38 };
 
     private int[] fear_face = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 22, 26, 27, 30, 31, 32, 33, 34, 39, 40, 41, 42, 46, 48, 49 };
     private int[] fear_eyelashes = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 12, 13 };
@@ -78,8 +79,12 @@ public class FacialExpressions : MonoBehaviour
     private bool animation_lock = true; // true = libera, false = occupata
     private bool animation_interpolation = true; // true = in azione, false = ferma
     private bool speak = false; // true = parlando, false = non parlando
+    private bool listen = false; // true = in ascolto, false = non in ascolto
 
-    void Start()
+    private Coroutine coroutine_Eyes;
+    private Coroutine coroutine_Head;
+
+    void Awake()
     {
         left_lookAtConstraint = left_eye.GetComponent<LookAtConstraint>();
         right_lookAtConstraint = right_eye.GetComponent<LookAtConstraint>();
@@ -96,11 +101,11 @@ public class FacialExpressions : MonoBehaviour
 
         // Active Standard Eyes Movement
         eyes_movement = true;
-        StartCoroutine(Eyes(0.8f)); //OLD 1.5
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f)); //OLD 1.5
 
         // Active Standard Head Movement
         head_movement = true;
-        StartCoroutine(Head(1.5f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
 
         // Active Standard Animation ===> OLD dall'introduzione della FSM!
         // StartCoroutine(Neutral_Animation());
@@ -170,422 +175,493 @@ public class FacialExpressions : MonoBehaviour
     {
         while (head_movement)
         {
-            yield return new WaitForSeconds(head_frequency); // impostato a 0 quando si cambia espressione facciale!
+            yield return new WaitForSeconds(head_frequency); // impostato a 0 quando si cambia espressione facciale o quando si parla!
 
             float time = 0f;
 
             System.Random rnd = new System.Random();
 
-            if (emotion_id == 0) // Neutral
+            if (!speak && !listen)
             {
-                duration = 3.0f; // OLD 2.5
-                head_frequency = UnityEngine.Random.Range(1.5f, 2.5f); // OLD 1.0 2.0
-
-                if (eyes_up_down >= 0)
+                if (emotion_id == 0) // Neutral
                 {
-                    head_up_down = UnityEngine.Random.Range(0.0f, 15.0f);
-                }
-                else
-                {
-                    head_up_down = UnityEngine.Random.Range(-15.0f, 0.0f);
-                }
+                    duration = 3.0f; // OLD 2.5
+                    head_frequency = UnityEngine.Random.Range(1.5f, 2.5f); // OLD 1.0 2.0
 
-                if (eyes_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 30.0f);
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-30.0f, 0.0f);
-                }
-
-                head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
-
-                while (time <= duration && emotion_id == 0)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                    if (eyes_up_down >= 0)
                     {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        head_up_down = UnityEngine.Random.Range(0.0f, 15.0f);
                     }
                     else
                     {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        head_up_down = UnityEngine.Random.Range(-15.0f, 0.0f);
                     }
 
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                    if (eyes_left_right >= 0)
                     {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        head_left_right = UnityEngine.Random.Range(0.0f, 30.0f);
                     }
                     else
                     {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        head_left_right = UnityEngine.Random.Range(-30.0f, 0.0f);
                     }
 
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                    head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 0)
                     {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 1) // Sadness
+                {
+                    duration = 3.0f;
+                    head_frequency = UnityEngine.Random.Range(0f, 0.5f); // OLD 1.0 2.0 // OLD 1.5 3.0
+
+                    if (head_up_down >= 10)
+                    {
+                        head_up_down = UnityEngine.Random.Range(5.0f, 10.0f);
                     }
                     else
                     {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        head_up_down = UnityEngine.Random.Range(10.0f, 15.0f);
                     }
 
-                    yield return null;
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 10.0f); // OLD 0.0 15.0
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-10.0f, 0.0f); // OLD -15.0 0.0
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 1)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 2) // Joy
+                {
+                    duration = 2.5f;
+                    head_frequency = UnityEngine.Random.Range(1f, 2.0f);
+
+                    if (eyes_up_down >= 0)
+                    {
+                        head_up_down = UnityEngine.Random.Range(-10.0f, -5.0f); // OLD -5.0f 0.0f
+                    }
+                    else
+                    {
+                        head_up_down = UnityEngine.Random.Range(-15.0f, -10.0f); // OLD -10.0f -5.0f
+                    }
+
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 10.0f); // OLD 0.0f 15.0f
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-10.0f, 0.0f); // OLD -15.0f 0.0f
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 2)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 3) // Surprise
+                {
+                    duration = 3.0f;
+                    head_frequency = UnityEngine.Random.Range(1.0f, 2.0f);
+
+                    head_up_down = UnityEngine.Random.Range(-10.0f, 0.0f);
+
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 2.0f);
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-2.0f, 0.0f);
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-1.0f, 1.0f);
+
+                    while (time <= duration && emotion_id == 3)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 4) // Anger
+                {
+                    duration = 2.0f; // OLD 3.0
+                    head_frequency = UnityEngine.Random.Range(0.0f, 1.5f); // OLD 1.0 2.0
+
+                    if (eyes_up_down >= 0)
+                    {
+                        head_up_down = UnityEngine.Random.Range(-9.0f, -6.0f);
+                    }
+                    else
+                    {
+                        head_up_down = UnityEngine.Random.Range(-12.0f, -9.0f);
+                    }
+
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 5.0f);
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-5.0f, 0.0f);
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 4)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 5) // Fear
+                {
+                    duration = 2.0f;
+                    head_frequency = UnityEngine.Random.Range(0.5f, 1.0f);
+
+                    head_up_down = UnityEngine.Random.Range(-10.0f, -8.0f);
+
+                    if (head_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 5.0f);
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-5.0f, 0.0f);
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-2.0f, 2.0f);
+
+                    while (time <= duration && emotion_id == 5)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 6) // Disgust
+                {
+                    duration = 1.5f; // OLD 1.0 // OLD 3.0 => forse meglio 1.5
+                    head_frequency = UnityEngine.Random.Range(0.5f, 1.0f); // OLD 1.0 2.0
+
+                    /*if (eyes_up_down <= 0) // OLD >= 0
+                    {
+                        head_up_down = UnityEngine.Random.Range(-2.0f, 0.0f);
+                    }
+                    else
+                    {
+                        head_up_down = UnityEngine.Random.Range(-5.0f, -2.0f);
+                    }*/
+
+                    head_up_down = UnityEngine.Random.Range(-15.0f, -10.0f); // OLD -13.0 -8.0
+
+                    if (head_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(-3.0f, 0.0f);
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 3.0f);
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-0.5f, 0.5f);
+
+                    while (time <= duration && emotion_id == 6)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
                 }
             }
-            else if (emotion_id == 1) // Sadness
+            else
             {
-                duration = 3.0f;
-                head_frequency = UnityEngine.Random.Range(0f, 0.5f); // OLD 1.0 2.0 // OLD 1.5 3.0
+                duration = 1.5f;
+                head_frequency = UnityEngine.Random.Range(1.5f, 2.5f);
 
-                if (head_up_down >= 10)
+                if(emotion_id == 1)
                 {
-                    head_up_down = UnityEngine.Random.Range(5.0f, 10.0f);
+                    head_up_down = UnityEngine.Random.Range(0.0f, 5.0f);
+
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 10.0f); // OLD 0.0 15.0
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-10.0f, 0.0f); // OLD -15.0 0.0
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
                 }
                 else
                 {
-                    head_up_down = UnityEngine.Random.Range(10.0f, 15.0f);
+                    head_up_down = UnityEngine.Random.Range(-15.0f, -13.0f);
+                    head_left_right = UnityEngine.Random.Range(-2.0f, 2.0f);
+                    head_rotation = UnityEngine.Random.Range(-2.0f, 2.0f);
                 }
 
-                if (eyes_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 10.0f); // OLD 0.0 15.0
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-10.0f, 0.0f); // OLD -15.0 0.0
-                }
-
-                head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
-
-                while (time <= duration && emotion_id == 1)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
-                    {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
-                    }
-
-                    yield return null;
-                }
-            }
-            else if (emotion_id == 2) // Joy
-            {
-                duration = 2.5f;
-                head_frequency = UnityEngine.Random.Range(1f, 2.0f);
-
-                if (eyes_up_down >= 0)
-                {
-                    head_up_down = UnityEngine.Random.Range(-10.0f, -5.0f); // OLD -5.0f 0.0f
-                }
-                else
-                {
-                    head_up_down = UnityEngine.Random.Range(-15.0f, -10.0f); // OLD -10.0f -5.0f
-                }
-
-                if (eyes_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 10.0f); // OLD 0.0f 15.0f
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-10.0f, 0.0f); // OLD -15.0f 0.0f
-                }
-
-                head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
-
-                while (time <= duration && emotion_id == 2)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
-                    {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
-                    }
-
-                    yield return null;
-                }
-            }
-            else if (emotion_id == 3) // Surprise
-            {
-                duration = 3.0f;
-                head_frequency = UnityEngine.Random.Range(1.0f, 2.0f);
-
-                head_up_down = UnityEngine.Random.Range(-10.0f, 0.0f);
-
-                if (eyes_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 2.0f);
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-2.0f, 0.0f);
-                }
-
-                head_rotation = UnityEngine.Random.Range(-1.0f, 1.0f);
-
-                while (time <= duration && emotion_id == 3)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
-                    {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
-                    }
-
-                    yield return null;
-                }
-            }
-            else if (emotion_id == 4) // Anger
-            {
-                duration = 2.0f; // OLD 3.0
-                head_frequency = UnityEngine.Random.Range(0.0f, 1.5f); // OLD 1.0 2.0
-
-                if (eyes_up_down >= 0)
-                {
-                    head_up_down = UnityEngine.Random.Range(-9.0f, -6.0f);
-                }
-                else
-                {
-                    head_up_down = UnityEngine.Random.Range(-12.0f, -9.0f);
-                }
-
-                if (eyes_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 5.0f);
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-5.0f, 0.0f);
-                }
-
-                head_rotation = UnityEngine.Random.Range(-5.0f, 5.0f);
-
-                while (time <= duration && emotion_id == 4)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
-                    {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
-                    }
-
-                    yield return null;
-                }
-            }
-            else if (emotion_id == 5) // Fear
-            {
-                duration = 2.0f;
-                head_frequency = UnityEngine.Random.Range(0.5f, 1.0f);
-
-                head_up_down = UnityEngine.Random.Range(-10.0f, -8.0f);
-
-                if (head_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 5.0f);
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(-5.0f, 0.0f);
-                }
-
-                head_rotation = UnityEngine.Random.Range(-2.0f, 2.0f);
-
-                while (time <= duration && emotion_id == 5)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
-                    }
-
-                    if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
-                    {
-                        float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
-                    }
-                    else
-                    {
-                        float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
-                        head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
-                    }
-
-                    yield return null;
-                }
-            }
-            else if (emotion_id == 6) // Disgust
-            {
-                duration = 1.5f; // OLD 1.0 // OLD 3.0 => forse meglio 1.5
-                head_frequency = UnityEngine.Random.Range(0.5f, 1.0f); // OLD 1.0 2.0
-
-                /*if (eyes_up_down <= 0) // OLD >= 0
-                {
-                    head_up_down = UnityEngine.Random.Range(-2.0f, 0.0f);
-                }
-                else
-                {
-                    head_up_down = UnityEngine.Random.Range(-5.0f, -2.0f);
-                }*/
-
-                head_up_down = UnityEngine.Random.Range(-15.0f, -10.0f); // OLD -13.0 -8.0
-
-                if (head_left_right >= 0)
-                {
-                    head_left_right = UnityEngine.Random.Range(-3.0f, 0.0f);
-                }
-                else
-                {
-                    head_left_right = UnityEngine.Random.Range(0.0f, 3.0f);
-                }
-
-                head_rotation = UnityEngine.Random.Range(-0.5f, 0.5f);
-
-                while (time <= duration && emotion_id == 6)
+                while (time <= duration && (speak || listen))
                 {
                     time = time + Time.deltaTime;
                     float percent = Mathf.Clamp01(time / duration);
@@ -638,251 +714,300 @@ public class FacialExpressions : MonoBehaviour
             float time = 0f;
             System.Random rnd = new System.Random();
 
-            if (emotion_id == 0) // Neutral
+            if (!speak && !listen)
             {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 7.0f); // OLD 0.2 5.0
-                eyes_up_down = UnityEngine.Random.Range(-5.0f, 15.0f); // OLD -5 15 // OLD -5 8 // OLD -10 10
-                eyes_left_right = UnityEngine.Random.Range(-20.0f, 20.0f); // OLD -25 25
-
-                while (time <= duration && emotion_id == 0)
+                if (left_lookAtConstraint.weight > 0.0f || right_lookAtConstraint.weight > 0.0f)
                 {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
+                    time = 0f;
+                    duration = 1.0f;
+                    float value = 1.0f;
 
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else if (emotion_id == 1) // Sadness
-            {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
-                eyes_up_down = UnityEngine.Random.Range(-1.5f, 3.5f);
-                eyes_left_right = UnityEngine.Random.Range(-6.0f, 6.0f);
-
-                while (time <= duration && emotion_id == 1)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else if (emotion_id == 2) // Joy
-            {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 0.0 7.0
-                eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
-                eyes_left_right = UnityEngine.Random.Range(-8.0f, 5.0f);
-
-                while (time <= duration && emotion_id == 2)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else if (emotion_id == 3) // Surprise
-            {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 2.0 4.0
-                eyes_up_down = UnityEngine.Random.Range(-1.5f, 3.5f); // OLD -1.0 3.0
-                eyes_left_right = UnityEngine.Random.Range(-3.0f, 3.0f); // OLD -2.0 2.0
-
-                while (time <= duration && emotion_id == 3)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else if (emotion_id == 4 && emotion_id == 6) // Anger & Disgust
-            {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
-                eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
-                eyes_left_right = UnityEngine.Random.Range(-8.0f, 3.0f);
-
-                while (time <= duration && (emotion_id == 4 || emotion_id == 6))
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else if (emotion_id == 5) // Fear
-            {
-                eyes_frequency = UnityEngine.Random.Range(0.0f, 2.0f); // OLD 0.0 4.0
-                eyes_up_down = UnityEngine.Random.Range(9.0f, 12.0f); // OLD 9.0 11.0
-                eyes_left_right = UnityEngine.Random.Range(-7.0f, 5.0f); // OLD -5.0 3.0
-
-                while (time <= duration && emotion_id == 5)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
-                    {
-                        float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
-                    }
-
-                    if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
-                    {
-                        float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
-                    }
-                    else
-                    {
-                        float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
-                        left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
-                    }
-
-                    yield return null;
-                }
-            } else // Other Case (Momentaneo)
-            {
-                if (left_lookAtConstraint.rotationAtRest.x != 0 || left_lookAtConstraint.rotationAtRest.y != 0)
-                {
                     while (time <= duration)
                     {
                         time = time + Time.deltaTime;
                         float percent = Mathf.Clamp01(time / duration);
 
-                        left_lookAtConstraint.rotationAtRest = new Vector3(end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.x, end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.y, 0);
-                        right_lookAtConstraint.rotationAtRest = new Vector3(end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.x, end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.y, 0);
+                        left_lookAtConstraint.weight = end_curve.Evaluate(percent) * value;
+                        right_lookAtConstraint.weight = end_curve.Evaluate(percent) * value;
+
+                        yield return null;
+                    }
+                }
+
+                time = 0f;
+
+                if (emotion_id == 0) // Neutral
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 7.0f); // OLD 0.2 5.0
+                    eyes_up_down = UnityEngine.Random.Range(-5.0f, 15.0f); // OLD -5 15 // OLD -5 8 // OLD -10 10
+                    eyes_left_right = UnityEngine.Random.Range(-20.0f, 20.0f); // OLD -25 25
+
+                    while (time <= duration && emotion_id == 0)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 1) // Sadness
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
+                    eyes_up_down = UnityEngine.Random.Range(-1.5f, 3.5f);
+                    eyes_left_right = UnityEngine.Random.Range(-6.0f, 6.0f);
+
+                    while (time <= duration && emotion_id == 1)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 2) // Joy
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 0.0 7.0
+                    eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
+                    eyes_left_right = UnityEngine.Random.Range(-8.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 2)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 3) // Surprise
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 2.0 4.0
+                    eyes_up_down = UnityEngine.Random.Range(-1.5f, 3.5f); // OLD -1.0 3.0
+                    eyes_left_right = UnityEngine.Random.Range(-3.0f, 3.0f); // OLD -2.0 2.0
+
+                    while (time <= duration && emotion_id == 3)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 4 && emotion_id == 6) // Anger & Disgust
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
+                    eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
+                    eyes_left_right = UnityEngine.Random.Range(-8.0f, 3.0f);
+
+                    while (time <= duration && (emotion_id == 4 || emotion_id == 6))
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 5) // Fear
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 2.0f); // OLD 0.0 4.0
+                    eyes_up_down = UnityEngine.Random.Range(9.0f, 12.0f); // OLD 9.0 11.0
+                    eyes_left_right = UnityEngine.Random.Range(-7.0f, 5.0f); // OLD -5.0 3.0
+
+                    while (time <= duration && emotion_id == 5)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else // Other Case (Momentaneo)
+                {
+                    if (left_lookAtConstraint.rotationAtRest.x != 0 || left_lookAtConstraint.rotationAtRest.y != 0)
+                    {
+                        while (time <= duration)
+                        {
+                            time = time + Time.deltaTime;
+                            float percent = Mathf.Clamp01(time / duration);
+
+                            left_lookAtConstraint.rotationAtRest = new Vector3(end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.x, end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.x, end_curve.Evaluate(percent) * left_lookAtConstraint.rotationAtRest.y, 0);
+
+                            yield return null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if ((left_lookAtConstraint.weight < 1.0f || right_lookAtConstraint.weight < 1.0f) && emotion_id != 1) // No durante Sadness
+                {
+                    time = 0f;
+                    duration = 1.0f;
+                    float value = 1.0f;
+
+                    while (time <= duration && (speak || listen))
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        left_lookAtConstraint.weight = curve.Evaluate(percent) * value;
+                        right_lookAtConstraint.weight = curve.Evaluate(percent) * value;
 
                         yield return null;
                     }
@@ -940,10 +1065,25 @@ public class FacialExpressions : MonoBehaviour
                 face.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right
                 eyelashes.SetBlendShapeWeight(12, EyesWide); // EyesWide_Left
                 eyelashes.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right
+            } else if (emotion_id == 4) // anger
+            {
+                int EyesWide = (int)rnd.Next(0, 80); // NEW
+                int Squint = (int)rnd.Next(0, 30); // NEW
+
+                face.SetBlendShapeWeight(12, EyesWide); // EyesWide_Left
+                face.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right               
+                face.SetBlendShapeWeight(43, Squint); // Squint_Left
+                face.SetBlendShapeWeight(44, Squint); // Squint_Right
+                eyelashes.SetBlendShapeWeight(12, EyesWide); // EyesWide_Left
+                eyelashes.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right
+                eyelashes.SetBlendShapeWeight(43, Squint); // Squint_Left
+                eyelashes.SetBlendShapeWeight(44, Squint); // Squint_Right
             } else if (emotion_id == 5) // fear
             {
                 int EyesWide = 100;
 
+                face.SetBlendShapeWeight(12, EyesWide); // EyesWide_Left
+                face.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right
                 eyelashes.SetBlendShapeWeight(12, EyesWide); // EyesWide_Left
                 eyelashes.SetBlendShapeWeight(13, EyesWide); // EyesWide_Right
             } else if (emotion_id == 6) // disgust
@@ -977,6 +1117,11 @@ public class FacialExpressions : MonoBehaviour
         eyes_frequency = 0;
         head_frequency = 0;
         blink_frequency = 3.5f;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
 
         float time = 0f;
 
@@ -1252,6 +1397,11 @@ public class FacialExpressions : MonoBehaviour
         head_frequency = 0;
         blink_frequency = 2;
 
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
         int[] face_joyUsurpriseUangerUfearUdisgust = joy_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
         int[] eyelashes_joyUsurpriseUangerUfearUdisgust = joy_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
         int[] moustaches_joyUsurpriseUangerUfearUdisgust = joy_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
@@ -1513,6 +1663,11 @@ public class FacialExpressions : MonoBehaviour
         head_frequency = 0;
         blink_frequency = 3.5f;
 
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
         int[] face_sadnessUsurpriseUangerUfearUdisgust = sadness_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
         int[] eyelashes_sadnessUsurpriseUangerUfearUdisgust = sadness_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
         int[] moustaches_sadnessUsurpriseUangerUfearUdisgust = sadness_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
@@ -1563,19 +1718,31 @@ public class FacialExpressions : MonoBehaviour
                 int Smile_Right = (int)rnd.Next(70, 120); // OLD 50-100
                 int Squint_Left = (int)rnd.Next(50, 70); // OLD 70-80
                 int Squint_Right = Squint_Left;
+                int UpperLipIn = 0; // Only for Policeman
                 int UpperLipUp_Left = (int)rnd.Next(0, 40); // OLD 30
                 int UpperLipUp_Right = (int)rnd.Next(0, 40); // OLD 30
+
+                // NEW TEMPORAL CODE
+                if (name == "Policeman")
+                {
+                    CheekPuff_Left = (int)rnd.Next(-30, -20);
+                    CheekPuff_Right = (int)rnd.Next(-30, -20);
+                    Smile_Left = (int)rnd.Next(70, 100);
+                    Smile_Right = (int)rnd.Next(70, 100);
+                    UpperLipIn = (int)rnd.Next(50, 80);
+                }
+                //
 
                 int[] face_joy = new int[] { BrowsOuterLower_Left, BrowsOuterLower_Right, CheekPuff_Left, CheekPuff_Right, EyesWide_Left, EyesWide_Right, LowerLipDown_Left,
                                              LowerLipDown_Right, Midmouth_Left, Midmouth_Right, MouthNarrow_Left, MouthNarrow_Right, Mouth_Open, MouthWhistle_NarrowAdjust_Left,
                                              MouthWhistle_NarrowAdjust_Right, NoseScrunch_Left, NoseScrunch_Right, Smile_Left, Smile_Right, Squint_Left, Squint_Right,
-                                             UpperLipUp_Left, UpperLipUp_Right};
+                                             UpperLipIn, UpperLipUp_Left, UpperLipUp_Right};
 
                 int[] eyelashes_joy = new int[] { BrowsOuterLower_Left, BrowsOuterLower_Right, EyesWide_Left, EyesWide_Right, Squint_Left, Squint_Right };
 
                 int[] moustaches_joy = new int[] { CheekPuff_Left, CheekPuff_Right, EyesWide_Left, EyesWide_Right, LowerLipDown_Left, LowerLipDown_Right, Midmouth_Left,
                                                    Midmouth_Right, MouthNarrow_Left, MouthNarrow_Right, Mouth_Open, MouthWhistle_NarrowAdjust_Left, MouthWhistle_NarrowAdjust_Right,
-                                                   NoseScrunch_Left, NoseScrunch_Right, Smile_Left, Smile_Right, UpperLipUp_Left, UpperLipUp_Right };
+                                                   NoseScrunch_Left, NoseScrunch_Right, Smile_Left, Smile_Right, UpperLipIn, UpperLipUp_Left, UpperLipUp_Right };
 
                 while (time <= duration && emotion_id == 2)
                 {
@@ -1666,6 +1833,11 @@ public class FacialExpressions : MonoBehaviour
         head_frequency = 0;
         blink_frequency = 6;
 
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
         int[] face_sadnessUjoyUangerUfearUdisgust = sadness_face.Union(joy_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
         int[] eyelashes_sadnessUjoyUangerUfearUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
         int[] moustaches_sadnessUjoyUangerUfearUdisgust = sadness_moustaches.Union(joy_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
@@ -1741,6 +1913,12 @@ public class FacialExpressions : MonoBehaviour
                 int UpperLipUp_Left = (int)rnd.Next(0, 30); // NEW
                 int UpperLipUp_Right = (int)rnd.Next(0, 30); // NEW
 
+                // Fix for Speaking
+                if (speak)
+                {
+                    Mouth_Open = (int)rnd.Next(0, 5);
+                }
+
                 int[] face_surprise = new int[] { BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right, BrowsUp_Left, BrowsUp_Right,
                                                   CheekPuff_Left, CheekPuff_Right, EyesWide_Left, EyesWide_Right, Frown_Left, Frown_Right, Jaw_Down, LowerLipDown_Left, LowerLipDown_Right,
                                                   LowerLipIn, LowerLipOut, MidMouth_Left, MidMouth_Right, MouthNarrow_Left, MouthNarrow_Right, Mouth_Open, NoseScrunch_Left,
@@ -1781,6 +1959,13 @@ public class FacialExpressions : MonoBehaviour
                         {
                             moustaches.SetBlendShapeWeight(k, (end_curve.Evaluate(percent) * moustaches.GetBlendShapeWeight(k)));
                         }
+                    }
+
+                    // Fix for Speaking
+                    if (speak)
+                    {
+                        face_surprise[23] = (int)rnd.Next(0, 5);
+                        moustaches_surprise[13] = face_surprise[23];
                     }
 
                     // Set surprise facial muscles
@@ -1952,6 +2137,13 @@ public class FacialExpressions : MonoBehaviour
 
                 //Debug.Log("Interpolation Time: " + time + " Duration: " + duration);
 
+                // Fix for Speaking
+                if (speak)
+                {
+                    face_surprise[23] = (int)rnd.Next(0, 5);
+                    moustaches_surprise[13] = face_surprise[23];
+                }
+
                 // Set mod of facial muscles
                 for (int k = 0; k < surprise_face.Length; k++)
                 {
@@ -2038,6 +2230,11 @@ public class FacialExpressions : MonoBehaviour
         head_frequency = 0;
         blink_frequency = 5;
 
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
         int[] face_sadnessUjoyUsurpriseUfearUdisgust = sadness_face.Union(joy_face).Union(surprise_face).Union(fear_face).Union(disgust_face).ToArray();
         int[] eyelashes_sadnessUjoyUsurpriseUfearUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
         int[] moustaches_sadnessUjoyUsurpriseUfearUdisgust = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
@@ -2074,26 +2271,53 @@ public class FacialExpressions : MonoBehaviour
 
                 yield return new WaitForSeconds(animation_frequency);
 
-                int BrowsDown_Left = (int)rnd.Next(80, 140); // OLD 80 100
-                int BrowsDown_Right = (int)rnd.Next(80, 140); // OLD 80 100
-                int CheekPuff_Left = (int)rnd.Next(20, 30);
-                int CheekPuff_Right = (int)rnd.Next(20, 30);
+                int BrowsDown_Left = (int)rnd.Next(80, 120); // OLD 80 140
+                int BrowsDown_Right = (int)rnd.Next(80, 120); // OLD 80 140
+                int BrowsOuterLower_Left = (int)rnd.Next(-50, 0); // OLD 0 50
+                int BrowsOuterLower_Right = (int)rnd.Next(-50, 0); // OLD 0 50
+                int CheekPuff_Left = (int)rnd.Next(0, 10); // OLD 20 30
+                int CheekPuff_Right = CheekPuff_Left; // OLD 20 30
+                int EyesWide_Left = (int)rnd.Next(0, 80); // OLD 50 100
+                int EyesWide_Right = EyesWide_Left; // OLD 50 100
                 int Frown_Left = (int)rnd.Next(20, 40); // OLD 20 35
                 int Frown_Right = (int)rnd.Next(20, 40); // OLD 20 35
                 int Jaw_Up = (int)rnd.Next(0, 50); // OLD 20 50
                 int LowerLipIn = (int)rnd.Next(70, 120); // OLD 70 100
+                int MouthOpen = (int)rnd.Next(0, 1); // NEW => serve per Speaking
                 int MouthUp = (int)rnd.Next(80, 120); // OLD 80 100
                 int NoseScrunch_Left = (int)rnd.Next(70, 110); // OLD 80 100
                 int NoseScrunch_Right = (int)rnd.Next(70, 110); // OLD 80 100
-                int UpperLipIn = (int)rnd.Next(80, 100);
+                int Squint_Left = (int)rnd.Next(0, 30); // OLD 0 100
+                int Squint_Right = Squint_Left; // OLD 0 100
+                int UpperLipIn = (int)rnd.Next(80, 100); // OLD 40 50
 
-                int[] face_anger = new int[] { BrowsDown_Left, BrowsDown_Right, CheekPuff_Left, CheekPuff_Right, Frown_Left, Frown_Right, Jaw_Up,
-                                          LowerLipIn, MouthUp, NoseScrunch_Left, NoseScrunch_Right, UpperLipIn};
+                // NEW TEMPORAL CODE
+                if (name == "Policeman")
+                {
+                    CheekPuff_Left = (int)rnd.Next(-30, -20);
+                    CheekPuff_Right = CheekPuff_Left;
+                    UpperLipIn = (int)rnd.Next(40, 60);
+                }
+                //
 
-                int[] eyelashes_anger = new int[] { BrowsDown_Left, BrowsDown_Right };
+                // Fix for Speaking
+                if (speak)
+                {
+                    LowerLipIn = (int)rnd.Next(10, 20);
+                    MouthOpen = (int)rnd.Next(10, 20);
+                    MouthUp = (int)rnd.Next(20, 30);
+                    NoseScrunch_Left = (int)rnd.Next(50, 60);
+                    NoseScrunch_Right = (int)rnd.Next(50, 60);
+                    UpperLipIn = (int)rnd.Next(20, 30);
+                }
 
-                int[] moustaches_anger = new int[] { CheekPuff_Left, CheekPuff_Right, Frown_Left, Frown_Right, Jaw_Up, LowerLipIn, MouthUp, NoseScrunch_Left,
-                                             NoseScrunch_Right, UpperLipIn };
+                int[] face_anger = new int[] { BrowsDown_Left, BrowsDown_Right, BrowsOuterLower_Left, BrowsOuterLower_Right, CheekPuff_Left, CheekPuff_Right, EyesWide_Left, EyesWide_Right, Frown_Left,
+                                               Frown_Right, Jaw_Up, LowerLipIn, MouthOpen, MouthUp, NoseScrunch_Left, NoseScrunch_Right, Squint_Left, Squint_Right, UpperLipIn};
+
+                int[] eyelashes_anger = new int[] { BrowsDown_Left, BrowsDown_Right, BrowsOuterLower_Left, BrowsOuterLower_Right, EyesWide_Left, EyesWide_Right, Squint_Left, Squint_Right };
+
+                int[] moustaches_anger = new int[] { CheekPuff_Left, CheekPuff_Right, Frown_Left, Frown_Right, Jaw_Up, LowerLipIn, MouthOpen, MouthUp, NoseScrunch_Left,
+                                                     NoseScrunch_Right, UpperLipIn };
 
                 while (time <= duration && emotion_id == 4)
                 {
@@ -2119,6 +2343,23 @@ public class FacialExpressions : MonoBehaviour
                         {
                             moustaches.SetBlendShapeWeight(k, (end_curve.Evaluate(percent) * moustaches.GetBlendShapeWeight(k)));
                         }
+                    }
+
+                    // Fix for Speaking
+                    if (speak)
+                    {
+                        face_anger[11] = (int)rnd.Next(10, 20);
+                        face_anger[12] = (int)rnd.Next(10, 20);
+                        face_anger[13] = (int)rnd.Next(20, 30);
+                        face_anger[14] = (int)rnd.Next(50, 60);
+                        face_anger[15] = (int)rnd.Next(50, 60);
+                        face_anger[18] = (int)rnd.Next(20, 30);
+                        moustaches_anger[5] = face_anger[11];
+                        moustaches_anger[6] = face_anger[12];
+                        moustaches_anger[7] = face_anger[13];
+                        moustaches_anger[8] = face_anger[14];
+                        moustaches_anger[9] = face_anger[15];
+                        moustaches_anger[10] = face_anger[18];
                     }
 
                     // Set anger facial muscles
@@ -2186,6 +2427,11 @@ public class FacialExpressions : MonoBehaviour
         eyes_frequency = 0;
         head_frequency = 0;
         blink_frequency = 5;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
 
         int[] face_sadnessUjoyUsurpriseUangerUdisgust = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(disgust_face).ToArray();
         int[] eyelashes_sadnessUjoyUsurpriseUangerUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(disgust_eyelashes).ToArray();
@@ -2287,6 +2533,15 @@ public class FacialExpressions : MonoBehaviour
                     NoseScrunch_Right = (int)rnd.Next(10, 35);
                 }
 
+                // Fix for Speaking
+                if (speak)
+                {
+                    //MouthOpen = (int)rnd.Next(0, 10);
+                    //MouthUp = (int)rnd.Next(20, 30);
+                    MouthNarrow_Left = (int)rnd.Next(0, 10);
+                    MouthNarrow_Right = MouthNarrow_Left;
+                }
+
                 int[] face_fear = new int[] { BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right,
                                        BrowsUp_Left, BrowsUp_Right, EyesWide_Left, EyesWide_Right, Frown_Left, Frown_Right, JawBackward, Jaw_Down, LowerLipDown_Left,
                                        LowerLipDown_Right, Midmouth_Left, Midmouth_Right, MouthDown, MouthNarrow_Left, MouthNarrow_Right,
@@ -2323,6 +2578,15 @@ public class FacialExpressions : MonoBehaviour
                         {
                             moustaches.SetBlendShapeWeight(k, (end_curve.Evaluate(percent) * moustaches.GetBlendShapeWeight(k)));
                         }
+                    }
+
+                    // Fix for Speaking
+                    if (speak)
+                    {
+                        face_fear[19] = (int)rnd.Next(0, 10);
+                        face_fear[20] = face_fear[19];
+                        moustaches_fear[9] = face_fear[19];
+                        moustaches_fear[10] = face_fear[20];
                     }
 
                     // Set fear facial muscles
@@ -2391,6 +2655,11 @@ public class FacialExpressions : MonoBehaviour
         head_frequency = 0;
         blink_frequency = 3.5f;
 
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
         int[] face_sadnessUjoyUsurpriseUangerUfear = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(fear_face).ToArray();
         int[] eyelashes_sadnessUjoyUsurpriseUangerUfear = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).ToArray();
         int[] moustaches_sadnessUjoyUsurpriseUangerUfear = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).ToArray();
@@ -2424,30 +2693,52 @@ public class FacialExpressions : MonoBehaviour
                 int Blink_Right = Blink_Left;
                 int BrowsDown_Left = (int)rnd.Next(80, 100); // OLD 90 100
                 int BrowsDown_Right = BrowsDown_Left; // OLD 90 100
-                int BrowsIn_Left = (int)rnd.Next(50, 75);
-                int BrowsIn_Right = BrowsIn_Left;
+                int BrowsIn_Left = (int)rnd.Next(20, 45); // OLD 50 75
+                int BrowsIn_Right = BrowsIn_Left; // OLD 50 75
                 int BrowsOuterLower_Left = (int)rnd.Next(70, 100); // OLD 0 70
                 int BrowsOuterLower_Right = BrowsOuterLower_Left; // OLD 0 70
                 int BrowsUp_Left = (int)rnd.Next(-20, 0); // OLD 0 20
                 int BrowsUp_Right = BrowsUp_Left; // NEW
-                int Frown_Left = (int)rnd.Next(100, 150); // OLD 80 150
-                int Frown_Right = (int)rnd.Next(100, 150); // OLD 80 150
+                int Frown_Left = (int)rnd.Next(100, 140); // OLD 100 150
+                int Frown_Right = (int)rnd.Next(100, 140); // OLD 100 150
                 int JawForeward = (int)rnd.Next(50, 100); // NEW
                 int Jaw_Up = (int)rnd.Next(50, 70); // OLD 20 30
-                int LowerLipDown_Left = (int)rnd.Next(0, 10); // NEW
-                int LowerLipDown_Right = (int)rnd.Next(0, 10); // NEW
+                int LowerLipDown_Left = (int)rnd.Next(10, 20); // OLD 0 10
+                int LowerLipDown_Right = (int)rnd.Next(10, 20); // OLD 0 10
                 int LowerLipIn = (int)rnd.Next(50, 70); // OLD 80 100
                 int LowerLipOut = (int)rnd.Next(80, 100); // NEW
-                int MouthNarrow_Left = (int)rnd.Next(-30, 0);
-                int MouthNarrow_Right = (int)rnd.Next(-30, 0);
+                int MouthNarrow_Left = (int)rnd.Next(-50, -10); // OLD -30 0
+                int MouthNarrow_Right = MouthNarrow_Left; // OLD -30 0
                 int MouthUp = (int)rnd.Next(80, 120); // OLD 70 100
                 int NoseScrunch_Left = (int)rnd.Next(70, 150); // OLD 80 150
                 int NoseScrunch_Right = NoseScrunch_Left; // OLD 80 100
                 int Squint_Left = (int)rnd.Next(80, 130); // OLD 80 140
                 int Squint_Right = (int)rnd.Next(80, 130); // OLD 80 140
                 int UpperLipOut = (int)rnd.Next(60, 80); // OLD 80 100
-                int UpperLipUp_Left = (int)rnd.Next(30, 50); // OLD 30 45
-                int UpperLipUp_Right = (int)rnd.Next(30, 50); ; // OLD 30 45
+                int UpperLipUp_Left = (int)rnd.Next(0, 30); // OLD 30 50
+                int UpperLipUp_Right = UpperLipUp_Left; // OLD 30 50
+
+                // NEW TEMPORAL CODE
+                if (name == "Policeman")
+                {
+                    JawForeward = (int)rnd.Next(0, 50);
+                    UpperLipOut = (int)rnd.Next(0, 10);
+                }
+                //
+
+                // Fix for Speaking
+                if (speak)
+                {
+                    Frown_Left = (int)rnd.Next(70, 80);
+                    Frown_Right = (int)rnd.Next(70, 80);
+                    JawForeward = (int)rnd.Next(70, 80);
+                    MouthNarrow_Left = (int)rnd.Next(-30, -20);
+                    MouthNarrow_Right = MouthNarrow_Left;
+                    MouthUp = (int)rnd.Next(20, 30);
+                    NoseScrunch_Left = (int)rnd.Next(70, 80);
+                    NoseScrunch_Right = NoseScrunch_Left;
+                    UpperLipOut = (int)rnd.Next(20, 30);
+                }
 
                 int[] face_disgust = new int[] { Blink_Left, Blink_Right, BrowsDown_Left, BrowsDown_Right, BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right,
                                                  BrowsUp_Left, BrowsUp_Right, Frown_Left, Frown_Right, JawForeward, Jaw_Up, LowerLipDown_Left,  LowerLipDown_Right, LowerLipIn,
@@ -2484,6 +2775,29 @@ public class FacialExpressions : MonoBehaviour
                         {
                             moustaches.SetBlendShapeWeight(k, (end_curve.Evaluate(percent) * moustaches.GetBlendShapeWeight(k)));
                         }
+                    }
+
+                    // Fix for Speaking
+                    if (speak)
+                    { 
+                        face_disgust[10] = (int)rnd.Next(70, 80);
+                        face_disgust[11] = (int)rnd.Next(70, 80);
+                        face_disgust[12] = (int)rnd.Next(70, 80);
+                        face_disgust[18] = (int)rnd.Next(-30, -20);
+                        face_disgust[19] = face_disgust[18];
+                        face_disgust[20] = (int)rnd.Next(10, 20);
+                        face_disgust[21] = (int)rnd.Next(70, 80);
+                        face_disgust[22] = face_disgust[21];
+                        face_disgust[25] = (int)rnd.Next(20, 30);
+                        moustaches_disgust[0] = face_disgust[10];
+                        moustaches_disgust[1] = face_disgust[11];
+                        moustaches_disgust[2] = face_disgust[12];
+                        moustaches_disgust[6] = face_disgust[18];
+                        moustaches_disgust[7] = face_disgust[19];
+                        moustaches_disgust[8] = face_disgust[20];
+                        moustaches_disgust[9] = face_disgust[21];
+                        moustaches_disgust[10] = face_disgust[22];
+                        moustaches_disgust[12] = face_disgust[25];
                     }
 
                     // Set disgust facial muscles
@@ -2559,8 +2873,6 @@ public class FacialExpressions : MonoBehaviour
         int UpperLipUp_Left = 0;
         int UpperLipUp_Right = 0;*/
 
-        Debug.Log("Entrato in Speaking");
-
         /*int[,] lip = new int[7, 13] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
                                            { 35, 48, 51, 86, 0, 30, 30, 0, 0, 5, 0, 27, 27 },
                                            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -2608,14 +2920,52 @@ public class FacialExpressions : MonoBehaviour
             }
         }*/
 
+        speak = true;
+
+        interlocutor.GetComponent<FacialExpressions>().Listening(); // Start Interlocutor Listening
+
+        head_frequency = 0f;
+        eyes_frequency = 0f;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
+        //interlocutor.GetComponent<FacialExpressions>().Listening(); // Start Interlocutor Listening
+
         GetComponent<Animation>().Play();
 
         yield return new WaitForSeconds(4.0f);
 
         GetComponent<Animation>().Stop();
 
-        Debug.Log("Uscito da Speaking");
         speak = false;
+
+        head_frequency = 0f;
+        eyes_frequency = 0f;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
+        interlocutor.GetComponent<FacialExpressions>().Listening(); // End Interlocutor Listening
+    }
+
+    public void Listening()
+    {
+        listen = !listen;
+
+        Debug.Log(gameObject.name + " listen");
+
+        head_frequency = 0f;
+        eyes_frequency = 0f;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
     }
 
     // Functions called by Finite State Machine "CoreAffect.cs"
