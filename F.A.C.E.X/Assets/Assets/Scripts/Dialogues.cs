@@ -10,20 +10,24 @@ public class Dialogues : MonoBehaviour
     public GameObject human_character;
     public GameObject ai_character;
 
-    public int dialogue_number; // 1 dialogue number = 2 possibili scelte
+    public bool first_character_is_NPC;
+    public bool second_character_is_NPC;
+
+    public static int dialogue_number = 10; // 1 dialogue number = 2 possibili scelte
 
     public string[] human_answer_text;
-    public string[] human_human_status;
-    public string[] human_ai_status;
+    public int[,] human_human_status = new int[dialogue_number, 9];
+    public int[,] human_ai_status = new int[dialogue_number, 9];
 
     public string[] ai_answer_text;
-    public string[] ai_ai_status;
-    public string[] ai_human_status;
+    public int[,] ai_ai_status = new int[dialogue_number, 9];
+    public int[,] ai_human_status = new int[dialogue_number, 9];
 
     public GameObject left_button;
     public GameObject right_button;
     public GameObject answer;
     public GameObject title_text;
+    public GameObject skip;
 
     public TMPro.TextMeshProUGUI left_button_text;
     public TMPro.TextMeshProUGUI right_button_text;
@@ -46,7 +50,7 @@ public class Dialogues : MonoBehaviour
         {
             for (int i = 0; i < dialogue_number; i++)
             {
-                answer_human[i] = new Answer(human_answer_text[i], human_human_status[i], human_ai_status[i]);
+                answer_human[i] = new Answer(human_answer_text[i], human_human_status.GetRow(i), human_ai_status.GetRow(i));
             }
         }
 
@@ -54,7 +58,7 @@ public class Dialogues : MonoBehaviour
         {
             for (int j = 0; j < dialogue_number; j++)
             {
-                answer_ai[j] = new Answer(ai_answer_text[j], ai_human_status[j], ai_ai_status[j]);
+                answer_ai[j] = new Answer(ai_answer_text[j], ai_human_status.GetRow(j), ai_ai_status.GetRow(j));
             }
         }
 
@@ -83,13 +87,16 @@ public class Dialogues : MonoBehaviour
             StartCoroutine(ai_character.GetComponent<FacialExpressions>().Speaking());
         }
 
-        yield return new WaitForSeconds(4.2f);
+        yield return new WaitForSeconds(4.0f); // OLD 4.2f
 
-        StartCoroutine(nextMessage());
+        skip.SetActive(true);
+
+        //StartCoroutine(nextMessage());
     }
 
     public IEnumerator nextMessage()
     {
+        skip.SetActive(false);
         left_button.GetComponent<Image>().enabled = true;
         left_button.GetComponent<Button>().enabled = true;
         right_button.GetComponent<Image>().enabled = true;
@@ -98,59 +105,66 @@ public class Dialogues : MonoBehaviour
         title_text.SetActive(true);
         answer.SetActive(false);
 
-        if (answer_human_count <= answer_ai_count && answer_human_count < dialogue_number) // HUMAN CASE
+        if (answer_human_count <= answer_ai_count && answer_human_count < dialogue_number) // FIRST CHARACTER
         {
             speak_turn = false;
-            title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Scegli una risposta:");
-
-            /*if (answer_human_count != 0)
-            {
-                yield return new WaitForSeconds(0.5f);
-            }*/
+            //title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Scegli una risposta:");
 
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
 
+            if (first_character_is_NPC)
+            {
+                setAiUI();
+                StartCoroutine(AIResponse());
+            }
+            else
+            {
+                setHumanUI();
+            }
+
             left_button_text.SetText(answer_human[answer_human_count].getText());
-            left_button.GetComponent<DialogueButton>().setHumanPleasant(answer_human[answer_human_count].getHumanStatus());
-            left_button.GetComponent<DialogueButton>().setHumanAroused(answer_human[answer_human_count].getHumanStatus());
-            left_button.GetComponent<DialogueButton>().setAiPleasant(answer_human[answer_human_count].getAiStatus());
-            left_button.GetComponent<DialogueButton>().setAiAroused(answer_human[answer_human_count].getAiStatus());
+            left_button.GetComponent<DialogueButton>().setEmotions1(answer_human[answer_human_count].getHumanStatus());
+            left_button.GetComponent<DialogueButton>().setEmotions2(answer_human[answer_human_count].getAiStatus());
+
 
             right_button_text.SetText(answer_human[answer_human_count + 1].getText());
-            right_button.GetComponent<DialogueButton>().setHumanPleasant(answer_human[answer_human_count + 1].getHumanStatus());
-            right_button.GetComponent<DialogueButton>().setHumanAroused(answer_human[answer_human_count + 1].getHumanStatus());
-            right_button.GetComponent<DialogueButton>().setAiPleasant(answer_human[answer_human_count + 1].getAiStatus());
-            right_button.GetComponent<DialogueButton>().setAiAroused(answer_human[answer_human_count + 1].getAiStatus());
+            right_button.GetComponent<DialogueButton>().setEmotions1(answer_human[answer_human_count + 1].getHumanStatus());
+            right_button.GetComponent<DialogueButton>().setEmotions2(answer_human[answer_human_count + 1].getAiStatus());
 
-            left_button.GetComponent<Button>().interactable = true;
-            right_button.GetComponent<Button>().interactable = true;
+            //left_button.GetComponent<Button>().interactable = true;
+            //right_button.GetComponent<Button>().interactable = true;
 
             answer_human_count += 2;
         }
-        else if (answer_ai_count < answer_human_count && answer_ai_count < dialogue_number) // AI CASE
+        else if (answer_ai_count < answer_human_count && answer_ai_count < dialogue_number) // SECOND CHARACTER
         {
-            //StartCoroutine(human_character.GetComponent<FacialExpressions>().Speaking());
             speak_turn = true;
-            title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("L'AI sta scegliendo una risposta..");
+            //title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("L'AI sta scegliendo una risposta..");
 
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
 
-            left_button.GetComponent<Button>().interactable = false;
-            right_button.GetComponent<Button>().interactable = false;
+            //left_button.GetComponent<Button>().interactable = false;
+            //right_button.GetComponent<Button>().interactable = false;
+
+            if (second_character_is_NPC)
+            {
+                setAiUI();
+                StartCoroutine(AIResponse());
+            }
+            else
+            {
+                setHumanUI();
+            }
 
             left_button_text.SetText(answer_ai[answer_ai_count].getText());
-            left_button.GetComponent<DialogueButton>().setAiPleasant(answer_ai[answer_ai_count].getAiStatus());
-            left_button.GetComponent<DialogueButton>().setAiAroused(answer_ai[answer_ai_count].getAiStatus());
-            left_button.GetComponent<DialogueButton>().setHumanPleasant(answer_ai[answer_ai_count].getHumanStatus());
-            left_button.GetComponent<DialogueButton>().setHumanAroused(answer_ai[answer_ai_count].getHumanStatus());
+            left_button.GetComponent<DialogueButton>().setEmotions1(answer_ai[answer_ai_count].getHumanStatus());
+            left_button.GetComponent<DialogueButton>().setEmotions2(answer_ai[answer_ai_count].getAiStatus());
 
             right_button_text.SetText(answer_ai[answer_ai_count + 1].getText());
-            right_button.GetComponent<DialogueButton>().setAiPleasant(answer_ai[answer_ai_count + 1].getAiStatus());
-            right_button.GetComponent<DialogueButton>().setAiAroused(answer_ai[answer_ai_count + 1].getAiStatus());
-            right_button.GetComponent<DialogueButton>().setHumanPleasant(answer_ai[answer_ai_count + 1].getHumanStatus());
-            right_button.GetComponent<DialogueButton>().setHumanAroused(answer_ai[answer_ai_count + 1].getHumanStatus());
+            right_button.GetComponent<DialogueButton>().setEmotions1(answer_ai[answer_ai_count + 1].getHumanStatus());
+            right_button.GetComponent<DialogueButton>().setEmotions2(answer_ai[answer_ai_count + 1].getAiStatus());
 
-            StartCoroutine(AIResponse());
+            //StartCoroutine(AIResponse());
 
             answer_ai_count += 2;
         }
@@ -187,25 +201,38 @@ public class Dialogues : MonoBehaviour
 
         if (choice == 1)
         {
-            //EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(left_button);
-            //left_button.GetComponent<Button>().onClick.Invoke();
-            //left_button.GetComponent<Button>().Select();
             left_button.GetComponent<Button>().interactable = true;
             left_button.GetComponent<Button>().OnSubmit(null);
         }
         else
         {
-            //EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(right_button);
-            //right_button.GetComponent<Button>().onClick.Invoke();
             right_button.GetComponent<Button>().interactable = true;
             right_button.GetComponent<Button>().OnSubmit(null);
         }
-
-        //StartCoroutine(ai_character.GetComponent<FacialExpressions>().Speaking());
 
         yield return new WaitForSeconds(0.15f);
 
         left_button.GetComponent<Button>().interactable = false;
         right_button.GetComponent<Button>().interactable = false;
+    }
+
+    private void setHumanUI()
+    {
+        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Scegli una risposta:");
+        left_button.GetComponent<Button>().interactable = true;
+        right_button.GetComponent<Button>().interactable = true;
+    }
+
+    private void setAiUI()
+    {
+        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("L'AI sta scegliendo una risposta..");
+        left_button.GetComponent<Button>().interactable = false;
+        right_button.GetComponent<Button>().interactable = false;
+    }
+
+    public void skipDialogue()
+    {
+        skip.SetActive(false);
+        StartCoroutine(nextMessage());
     }
 }

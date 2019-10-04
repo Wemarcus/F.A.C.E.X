@@ -5,10 +5,10 @@ using UnityEngine;
 public class Answer
 {
     private string text;
-    private string human_status;
-    private string ai_status;
+    private int[] human_status;
+    private int[] ai_status;
 
-    public Answer(string text, string human_status, string ai_status)
+    public Answer(string text, int[] human_status, int[] ai_status)
     {
         this.text = text;
         this.human_status = human_status;
@@ -20,12 +20,12 @@ public class Answer
         return text;
     }
 
-    public string getHumanStatus()
+    public int[] getHumanStatus()
     {
         return human_status;
     }
 
-    public string getAiStatus()
+    public int[] getAiStatus()
     {
         return ai_status;
     }
@@ -35,12 +35,12 @@ public class Answer
         this.text = text;
     }
 
-    public void setHumanStatus(string human_status)
+    public void setHumanStatus(int[] human_status)
     {
         this.human_status = human_status;
     }
 
-    public void setAiStatus(string ai_status)
+    public void setAiStatus(int[] ai_status)
     {
         this.ai_status = ai_status;
     }

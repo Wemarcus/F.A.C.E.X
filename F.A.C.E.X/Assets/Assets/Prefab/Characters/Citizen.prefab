@@ -2287,10 +2287,6 @@ GameObject:
   - component: {fileID: 3716064106400325481}
   - component: {fileID: 3716064106400325396}
   - component: {fileID: 3716064106400325394}
-  - component: {fileID: 3716064106400325392}
-  - component: {fileID: 3716064106400325398}
-  - component: {fileID: 3716064106400325397}
-  - component: {fileID: 3716064106400325483}
   m_Layer: 0
   m_Name: Citizen
   m_TagString: Untagged
@@ -2475,6 +2471,7 @@ MonoBehaviour:
   left_eye: {fileID: 3716064106936299648}
   right_eye: {fileID: 3716064106372468243}
   head: {fileID: 3716064106291988339}
+  interlocutor: {fileID: 0}
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -2604,856 +2601,6 @@ MonoBehaviour:
   status: neutral
   pleasant: 0
   aroused: 0
---- !u!114 &3716064106400325392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3716064106986418817}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60953a4eedd70a246ab4eadbed9f0591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blendSystem: {fileID: 3716064106400325398}
-  audioSource: {fileID: 3716064106400325399}
-  useBones: 1
-  boneUpdateAnimation: 0
-  phonemes:
-  - blendShapes: 23000000
-    blendableNames:
-    - MouthOpen (35)
-    weights:
-    - 42.7
-    bones: []
-    verified: 1
-    phonemeName: AI
-    phoneme: 0
-  - blendShapes: 23000000290000002a0000002d0000001e0000002f000000
-    blendableNames:
-    - MouthOpen (35)
-    - Smile_Left (41)
-    - Smile_Right (42)
-    - TongueUp (45)
-    - Midmouth_Left (30)
-    - UpperLipOut (47)
-    weights:
-    - 24.4
-    - 42.9
-    - 41.1
-    - 2.2
-    - 11.3
-    - 20.9
-    bones: []
-    verified: 1
-    phonemeName: E
-    phoneme: 0
-  - blendShapes: 2300000021000000220000001d0000002f000000
-    blendableNames:
-    - MouthOpen (35)
-    - MouthNarrow_Left (33)
-    - MouthNarrow_Right (34)
-    - LowerLipOut (29)
-    - UpperLipOut (47)
-    weights:
-    - 24.8
-    - 42.7
-    - 43.7
-    - 55.7
-    - 70.4
-    bones: []
-    verified: 1
-    phonemeName: U
-    phoneme: 0
-  - blendShapes: 230000002100000022000000
-    blendableNames:
-    - MouthOpen (35)
-    - MouthNarrow_Left (33)
-    - MouthNarrow_Right (34)
-    weights:
-    - 61.7
-    - 72
-    - 72
-    bones: []
-    verified: 1
-    phonemeName: O
-    phoneme: 0
-  - blendShapes: 16000000
-    blendableNames:
-    - Jaw_Down (22)
-    weights:
-    - 14.6
-    bones: []
-    verified: 1
-    phonemeName: CDGKNRSThYZ
-    phoneme: 0
-  - blendShapes: 160000001c000000290000002a0000002f000000
-    blendableNames:
-    - Jaw_Down (22)
-    - LowerLipIn (28)
-    - Smile_Left (41)
-    - Smile_Right (42)
-    - UpperLipOut (47)
-    weights:
-    - 0
-    - 100
-    - 22
-    - 36.9
-    - 100
-    bones: []
-    verified: 1
-    phonemeName: FV
-    phoneme: 0
-  - blendShapes: 230000002d00000027000000
-    blendableNames:
-    - MouthOpen (35)
-    - TongueUp (45)
-    - NoseScrunch_Left (39)
-    weights:
-    - 31.5
-    - 100
-    - 16.1
-    bones: []
-    verified: 1
-    phonemeName: L
-    phoneme: 0
-  - blendShapes: 200000001c0000002e000000
-    blendableNames:
-    - MouthDown (32)
-    - LowerLipIn (28)
-    - UpperLipIn (46)
-    weights:
-    - 12.6
-    - 69.4
-    - 66.8
-    bones: []
-    verified: 1
-    phonemeName: MBP
-    phoneme: 0
-  - blendShapes: 21000000220000001d000000
-    blendableNames:
-    - MouthNarrow_Left (33)
-    - MouthNarrow_Right (34)
-    - LowerLipOut (29)
-    weights:
-    - 89.6
-    - 89.8
-    - 28.7
-    bones: []
-    verified: 1
-    phonemeName: WQ
-    phoneme: 0
-  - blendShapes: 
-    blendableNames: []
-    weights: []
-    bones: []
-    verified: 1
-    phonemeName: Rest
-    phoneme: 0
-  emotions:
-  - blendShapes: 290000002a0000002b0000002c0000000800000009000000
-    blendableNames:
-    - Smile_Left (41)
-    - Smile_Right (42)
-    - Squint_Left (43)
-    - Squint_Right (44)
-    - BrowsUp_Left (8)
-    - BrowsUp_Right (9)
-    weights:
-    - 55.3
-    - 56.4
-    - 35.2
-    - 35.2
-    - 20.5
-    - 17.8
-    bones: []
-    verified: 1
-    emotion: Happy
-  - blendShapes: 200000000e0000000f0000000600000007000000
-    blendableNames:
-    - MouthDown (32)
-    - Frown_Left (14)
-    - Frown_Right (15)
-    - BrowsOuterLower_Left (6)
-    - BrowsOuterLower_Right (7)
-    weights:
-    - 18.9
-    - 43.2
-    - 47.5
-    - 57.7
-    - 60.3
-    bones: []
-    verified: 1
-    emotion: Sad
-  - blendShapes: 0200000003000000
-    blendableNames:
-    - BrowsDown_Left (2)
-    - BrowsDown_Right (3)
-    weights:
-    - 50.1
-    - 49.9
-    bones: []
-    verified: 1
-    emotion: Serious
-  - blendShapes: 08000000090000000700000006000000
-    blendableNames:
-    - BrowsUp_Left (8)
-    - BrowsUp_Right (9)
-    - BrowsOuterLower_Right (7)
-    - BrowsOuterLower_Left (6)
-    weights:
-    - 27.5
-    - 28.1
-    - 21.8
-    - 22.6
-    bones: []
-    verified: 1
-    emotion: Eyebrows Up
-  playOnAwake: 0
-  loop: 0
-  defaultClip: {fileID: 0}
-  defaultDelay: 0
-  scaleAudioSpeed: 1
-  m_animationTimingMode: 0
-  frameRate: 30
-  restTime: 0.2
-  restHoldTime: 0.4
-  phonemeCurveGenerationMode: 1
-  emotionCurveGenerationMode: 0
-  keepEmotionWhenFinished: 0
-  gesturesAnimator: {fileID: 0}
-  gesturesLayer: 0
-  gestures: []
-  onFinishedPlaying:
-    m_PersistentCalls:
-      m_Calls: []
-  animCurves: []
-  lastUsedVersion: 1.43
---- !u!114 &3716064106400325398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3716064106986418817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73062c91ee80bb040abd084433473a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isReady: 1
-  users:
-  - {fileID: 3716064106400325392}
-  _blendables:
-  - number: 0
-    currentWeight: 0
-  - number: 1
-    currentWeight: 0
-  - number: 2
-    currentWeight: 0
-  - number: 3
-    currentWeight: 0
-  - number: 4
-    currentWeight: 0
-  - number: 5
-    currentWeight: 0
-  - number: 6
-    currentWeight: 0
-  - number: 7
-    currentWeight: 0
-  - number: 8
-    currentWeight: 0
-  - number: 9
-    currentWeight: 0
-  - number: 10
-    currentWeight: 0
-  - number: 11
-    currentWeight: 0
-  - number: 12
-    currentWeight: 0
-  - number: 13
-    currentWeight: 0
-  - number: 14
-    currentWeight: 0
-  - number: 15
-    currentWeight: 0
-  - number: 16
-    currentWeight: 0
-  - number: 17
-    currentWeight: 0
-  - number: 18
-    currentWeight: 0
-  - number: 19
-    currentWeight: 0
-  - number: 20
-    currentWeight: 0
-  - number: 21
-    currentWeight: 0
-  - number: 22
-    currentWeight: 0
-  - number: 23
-    currentWeight: 0
-  - number: 24
-    currentWeight: 0
-  - number: 25
-    currentWeight: 0
-  - number: 26
-    currentWeight: 0
-  - number: 27
-    currentWeight: 0
-  - number: 28
-    currentWeight: 0
-  - number: 29
-    currentWeight: 0
-  - number: 30
-    currentWeight: 0
-  - number: 31
-    currentWeight: 0
-  - number: 32
-    currentWeight: 0
-  - number: 33
-    currentWeight: 0
-  - number: 34
-    currentWeight: 0
-  - number: 35
-    currentWeight: 0
-  - number: 36
-    currentWeight: 0
-  - number: 37
-    currentWeight: 0
-  - number: 38
-    currentWeight: 0
-  - number: 39
-    currentWeight: 0
-  - number: 40
-    currentWeight: 0
-  - number: 41
-    currentWeight: 0
-  - number: 42
-    currentWeight: 0
-  - number: 43
-    currentWeight: 0
-  - number: 44
-    currentWeight: 0
-  - number: 45
-    currentWeight: 0
-  - number: 46
-    currentWeight: 0
-  - number: 47
-    currentWeight: 0
-  - number: 48
-    currentWeight: 0
-  - number: 49
-    currentWeight: 0
-  manager: {fileID: 3716064106400325397}
---- !u!114 &3716064106400325397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3716064106986418817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc1e47bffd97414a93a92fb41f56b80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blendShapes:
-  - name: Blink_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 0
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 0
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 0
-  - name: Blink_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 1
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 1
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 1
-  - name: BrowsDown_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 2
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 2
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 2
-  - name: BrowsDown_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 3
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 3
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 3
-  - name: BrowsIn_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 4
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 4
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 4
-  - name: BrowsIn_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 5
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 5
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 5
-  - name: BrowsOuterLower_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 6
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 6
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 6
-  - name: BrowsOuterLower_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 7
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 7
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 7
-  - name: BrowsUp_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 8
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 8
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 8
-  - name: BrowsUp_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 9
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 9
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 9
-  - name: CheekPuff_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 10
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 10
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 10
-  - name: CheekPuff_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 11
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 11
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 11
-  - name: EyesWide_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 12
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 12
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 12
-  - name: EyesWide_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 13
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 13
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 13
-  - name: Frown_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 14
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 14
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 14
-  - name: Frown_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 15
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 15
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 15
-  - name: JawBackward
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 16
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 16
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 16
-  - name: JawForeward
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 17
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 17
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 17
-  - name: JawRotateY_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 18
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 18
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 18
-  - name: JawRotateY_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 19
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 19
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 19
-  - name: JawRotateZ_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 20
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 20
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 20
-  - name: JawRotateZ_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 21
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 21
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 21
-  - name: Jaw_Down
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 22
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 22
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 22
-  - name: Jaw_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 23
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 23
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 23
-  - name: Jaw_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 24
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 24
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 24
-  - name: Jaw_Up
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 25
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 25
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 25
-  - name: LowerLipDown_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 26
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 26
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 26
-  - name: LowerLipDown_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 27
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 27
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 27
-  - name: LowerLipIn
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 28
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 28
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 28
-  - name: LowerLipOut
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 29
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 29
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 29
-  - name: Midmouth_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 30
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 30
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 30
-  - name: Midmouth_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 31
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 31
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 31
-  - name: MouthDown
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 32
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 32
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 32
-  - name: MouthNarrow_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 33
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 33
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 33
-  - name: MouthNarrow_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 34
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 34
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 34
-  - name: MouthOpen
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 35
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 35
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 35
-  - name: MouthUp
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 36
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 36
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 36
-  - name: MouthWhistle_NarrowAdjust_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 37
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 37
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 37
-  - name: MouthWhistle_NarrowAdjust_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 38
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 38
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 38
-  - name: NoseScrunch_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 39
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 39
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 39
-  - name: NoseScrunch_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 40
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 40
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 40
-  - name: Smile_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 41
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 41
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 41
-  - name: Smile_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 42
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 42
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 42
-  - name: Squint_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 43
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 43
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 43
-  - name: Squint_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 44
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 44
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 44
-  - name: TongueUp
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 45
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 45
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 45
-  - name: UpperLipIn
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 46
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 46
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 46
-  - name: UpperLipOut
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 47
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 47
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 47
-  - name: UpperLipUp_Left
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 48
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 48
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 48
-  - name: UpperLipUp_Right
-    mappings:
-    - skinnedMeshRenderer: {fileID: 3716064107112351091}
-      blendShapeIndex: 49
-    - skinnedMeshRenderer: {fileID: 3716064107108070723}
-      blendShapeIndex: 49
-    - skinnedMeshRenderer: {fileID: 3716064107414176838}
-      blendShapeIndex: 49
-  blendSystem: {fileID: 3716064106400325398}
---- !u!114 &3716064106400325483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3716064106986418817}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1976067524, guid: 7a255d2e87aae364fbd819c455094253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 3716064107112351091}
-  prevSkinnedMeshRenderer: {fileID: 3716064107112351091}
-  getSkndMshRndr: 0
-  audioSrc: {fileID: 3716064106400325399}
-  audioClip: {fileID: 0}
-  blendShapes:
-  - Blink_Left
-  - Blink_Right
-  - BrowsDown_Left
-  - BrowsDown_Right
-  - BrowsIn_Left
-  - BrowsIn_Right
-  - BrowsOuterLower_Left
-  - BrowsOuterLower_Right
-  - BrowsUp_Left
-  - BrowsUp_Right
-  - CheekPuff_Left
-  - CheekPuff_Right
-  - EyesWide_Left
-  - EyesWide_Right
-  - Frown_Left
-  - Frown_Right
-  - JawBackward
-  - JawForeward
-  - JawRotateY_Left
-  - JawRotateY_Right
-  - JawRotateZ_Left
-  - JawRotateZ_Right
-  - Jaw_Down
-  - Jaw_Left
-  - Jaw_Right
-  - Jaw_Up
-  - LowerLipDown_Left
-  - LowerLipDown_Right
-  - LowerLipIn
-  - LowerLipOut
-  - Midmouth_Left
-  - Midmouth_Right
-  - MouthDown
-  - MouthNarrow_Left
-  - MouthNarrow_Right
-  - MouthOpen
-  - MouthUp
-  - MouthWhistle_NarrowAdjust_Left
-  - MouthWhistle_NarrowAdjust_Right
-  - NoseScrunch_Left
-  - NoseScrunch_Right
-  - Smile_Left
-  - Smile_Right
-  - Squint_Left
-  - Squint_Right
-  - TongueUp
-  - UpperLipIn
-  - UpperLipOut
-  - UpperLipUp_Left
-  - UpperLipUp_Right
-  saySmallIndex: 22
-  sayMediumIndex: 45
-  sayLargeIndex: 35
-  saySmallTrigger: 0.0001
-  sayMediumTrigger: 0.0002
-  sayLargeTrigger: 0.0005
-  audioUpdateDelay: 0.08
-  blendSpeed: 10
-  rangeOfMotion: 100
-  isTalking: 0
-  prevIsTalking: 0
-  lockShapes: 0
-  broadcast: 0
-  broadcastReceiversCount: 0
-  expandBroadcast: 0
-  broadcastReceivers: []
-  propagateToChildren: 0
-  average: 0
-  say: Rest
-  sayIndex: 0
-  sayAmount:
-    saySmall: 0
-    sayMedium: 0
-    sayLarge: 0
-  prevAudioUpdateDelay: 0.08
 --- !u!1 &3716064107011551582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4453,81 +3600,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3716064106291988336}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Name
-      value: Glasses
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.13198066
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.008534807
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9891495
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -15.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.26
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.97
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.06396543
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 7.4
-      objectReference: {fileID: 0}
-    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
-    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
-    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7182835855725437151, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0b2c5bc644efe8647beca175801c44e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4598,56 +3670,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.005
       objectReference: {fileID: 0}
-    - target: {fileID: -3151008132676588456, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
-    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
-    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1135244083771908629, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
-    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
-    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4024003404953995534, guid: 0b2c5bc644efe8647beca175801c44e9,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -4693,22 +3715,147 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -5.74
       objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.13198066
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.008534807
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9891495
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.97
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06396543
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8933005633727640499, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Name
+      value: Glasses
+      objectReference: {fileID: 0}
+    - target: {fileID: -7182835855725437151, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135244083771908629, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3151008132676588456, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4349783871942723630, guid: 0b2c5bc644efe8647beca175801c44e9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
+    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
+    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
+    - target: {fileID: 2406916848136235212, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
+    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
+    - target: {fileID: -8255192755992560932, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 95ee2db37c0fb89478c327a6de7c460a, type: 2}
+    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdd71121d9f55744282bbe3c355a4649, type: 2}
+    - target: {fileID: -1692595042935880906, guid: 0b2c5bc644efe8647beca175801c44e9,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c5bc644efe8647beca175801c44e9, type: 3}
---- !u!4 &8568283366167929040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0b2c5bc644efe8647beca175801c44e9,
-    type: 3}
-  m_PrefabInstance: {fileID: 3716064105967799242}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3599931367495669508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -9050095477880005426, guid: 0b2c5bc644efe8647beca175801c44e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3716064105967799242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8568283366167929040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0b2c5bc644efe8647beca175801c44e9,
     type: 3}
   m_PrefabInstance: {fileID: 3716064105967799242}
   m_PrefabAsset: {fileID: 0}

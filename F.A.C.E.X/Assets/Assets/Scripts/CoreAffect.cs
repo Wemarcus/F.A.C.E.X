@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class CoreAffect : MonoBehaviour
 {
     public string status = ""; // stato emotivo di partenza
 
-    public float pleasant = 0; // -1 = spiacevole, 1 = piacevole, 0 = neutrale
-    public float aroused = 0; // -1 = disattivato, 1 = attivato, 0 = neutrale
+    private int actual_status = -1;
+
+    // EMOZIONI DI BASE: questi valori sono inclusi nell'intervallo (0, 10), dove 0 = niente, 10 = molto
+    public int Neutral = 0;
+    public int Sadness = 0;
+    public int Joy = 0;
+    public int Surprise = 0;
+    public int Anger = 0;
+    public int Fear = 0;
+    public int Disgust = 0;
+    public int Sleepiness = 0;
+    public int Calmness = 0;
 
     private float reactionTime = 1f; // tempo di reazione del character
 
@@ -177,7 +189,6 @@ public class CoreAffect : MonoBehaviour
 
         // Setup a FSA at initial state
 
-        //fsm = new FSM(neutral);
         setInitialStatus(status);
 
 
@@ -204,67 +215,7 @@ public class CoreAffect : MonoBehaviour
     {
         //Debug.Log("isNeutral");
 
-        if (aroused == 0 && pleasant == 0) // punto neutrale
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool isJoy()
-    {
-        //Debug.Log("isJoy");
-
-        if ((calculateAngle() >= 0 && calculateAngle() < 45) && !(aroused == 0 && pleasant == 0)) // si trova nello spicchio relativo alla gioia?
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool isSurprise()
-    {
-        //Debug.Log("isSurprise");
-
-        if (calculateAngle() >= 45 && calculateAngle() < 90) // si trova nello spicchio relativo alla sorpresa?
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool isFear()
-    {
-        //Debug.Log("isFear");
-
-        if (calculateAngle() >= 90 && calculateAngle() < 135) // si trova nello spicchio relativo alla paura?
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool isAnger()
-    {
-        //Debug.Log("isAnger");
-
-        if (calculateAngle() >= 135 && calculateAngle() < 180) // si trova nello spicchio relativo alla rabbia?
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool isDisgust()
-    {
-        //Debug.Log("isDisgust");
-
-        if (calculateAngle() >= 180 && calculateAngle() < 225) // si trova nello spicchio relativo al disgusto?
+        if (dominantExpression() == 0)
         {
             return true;
         }
@@ -276,7 +227,67 @@ public class CoreAffect : MonoBehaviour
     {
         //Debug.Log("isSadness");
 
-        if (calculateAngle() >= 225 && calculateAngle() < 270) // si trova nello spicchio relativo alla tristezza?
+        if (dominantExpression() == 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool isJoy()
+    {
+        //Debug.Log("isJoy");
+
+        if (dominantExpression() == 2)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool isSurprise()
+    {
+        //Debug.Log("isSurprise");
+
+        if (dominantExpression() == 3)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool isAnger()
+    {
+        //Debug.Log("isAnger");
+
+        if (dominantExpression() == 4)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool isFear()
+    {
+        //Debug.Log("isFear");
+
+        if (dominantExpression() == 5)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool isDisgust()
+    {
+        //Debug.Log("isDisgust");
+
+        if (dominantExpression() == 6)
         {
             return true;
         }
@@ -288,7 +299,7 @@ public class CoreAffect : MonoBehaviour
     {
         //Debug.Log("isSleepiness");
 
-        if (calculateAngle() >= 270 && calculateAngle() < 315) // si trova nello spicchio relativo alla sonnolenza?
+        if (dominantExpression() == 7)
         {
             return true;
         }
@@ -300,7 +311,7 @@ public class CoreAffect : MonoBehaviour
     {
         //Debug.Log("isCalmness");
 
-        if (calculateAngle() >= 315 && calculateAngle() < 360) // si trova nello spicchio relativo alla calma?
+        if (dominantExpression() == 8)
         {
             return true;
         }
@@ -316,6 +327,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setNeutral");
         face.setNeutral();
         status = "neutral";
+        actual_status = 0;
     }
 
     public void setSadness()
@@ -323,6 +335,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setSadness");
         face.setSadness();
         status = "sadness";
+        actual_status = 1;
     }
 
     public void setJoy()
@@ -330,6 +343,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setJoy");
         face.setJoy();
         status = "joy";
+        actual_status = 2;
     }
 
     public void setSurprise()
@@ -337,6 +351,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setSurprise");
         face.setSurprise();
         status = "surprise";
+        actual_status = 3;
     }
 
     public void setAnger()
@@ -344,6 +359,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setAnger");
         face.setAnger();
         status = "anger";
+        actual_status = 4;
     }
 
     public void setFear()
@@ -351,6 +367,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setFear");
         face.setFear();
         status = "fear";
+        actual_status = 5;
     }
 
     public void setDisgust()
@@ -358,6 +375,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setDisgust");
         face.setDisgust();
         status = "disgust";
+        actual_status = 6;
     }
 
     public void setSleepiness()
@@ -365,6 +383,7 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setSleepiness");
         face.setSleepiness();
         status = "sleepiness";
+        actual_status = 7;
     }
 
     public void setCalmness()
@@ -372,20 +391,11 @@ public class CoreAffect : MonoBehaviour
         Debug.Log(gameObject.name + ": setCalmness");
         face.setCalmness();
         status = "calmness";
+        actual_status = 8;
     }
 
-    public double calculateAngle()
-    {
-        double radiant = Math.Atan2(aroused - 0, pleasant - 0);
-        double angle = radiant * (180 / Math.PI);
 
-        if (angle < 0.0)
-        {
-            angle += 360.0;
-        }
-
-        return angle;
-    }
+    // Other functions
 
     private void setInitialStatus(string status)
     {
@@ -393,96 +403,115 @@ public class CoreAffect : MonoBehaviour
 
         if(status == "" || status == "neutral")
         {
-            pleasant = 0;
-            aroused = 0;
+            Neutral += 1;
             fsm = new FSM(neutral);
         }
         else if (status == "sadness")
         {
-            pleasant = -0.35f;
-            aroused = -0.85f;
+            Sadness += 1;
             fsm = new FSM(sadness);
         }
         else if (status == "joy")
         {
-            pleasant = 0.85f;
-            aroused = 0.35f;
+            Joy += 1;
             fsm = new FSM(joy);
         }
         else if (status == "surprise")
         {
-            pleasant = 0.35f;
-            aroused = 0.85f;
+            Surprise += 1;
             fsm = new FSM(surprise);
         }
         else if (status == "anger")
         {
-            pleasant = -0.85f;
-            aroused = 0.35f;
+            Anger += 1;
             fsm = new FSM(anger);
         }
         else if (status == "fear")
         {
-            pleasant = -0.35f;
-            aroused = 0.85f;
+            Fear += 1;
             fsm = new FSM(fear);
         }
         else if (status == "disgust")
         {
-            pleasant = -0.85f;
-            aroused = -0.35f;
+            Disgust += 1;
             fsm = new FSM(disgust);
         }
         else if (status == "sleepiness")
         {
-            pleasant = 0.35f;
-            aroused = -0.85f;
+            Sleepiness += 1;
             fsm = new FSM(sleepiness);
         }
         else if (status == "calmness")
         {
-            pleasant = 0.85f;
-            aroused = -0.35f;
+            Calmness += 1;
             fsm = new FSM(calmness);
         }
         else
         {
             Debug.Log("Hai inserito uno status errato! E' stato impostato quello neutrale!");
+            Neutral += 1;
             fsm = new FSM(neutral);
         }
     }
 
-    public float getPleasant()
+    public int[] getEmotions()
     {
-        return pleasant;
+        return new int[] { Neutral, Sadness, Joy, Surprise, Anger, Fear, Disgust, Sleepiness, Calmness };
     }
 
-    public void setPleasant(float value)
+    public void setEmotions(int[] emotions)
     {
-        pleasant = normalize(value);
+        Neutral = normalize(Neutral + emotions[0]);
+        Sadness = normalize(Sadness + emotions[1]);
+        Joy = normalize(Joy + emotions[2]);
+        Surprise = normalize(Surprise + emotions[3]);
+        Anger = normalize(Anger + emotions[4]);
+        Fear = normalize(Fear + emotions[5]);
+        Disgust = normalize(Disgust + emotions[6]);
+        Sleepiness = normalize(Sleepiness + emotions[7]);
+        Calmness = normalize(Calmness + emotions[8]);
     }
 
-    public float getAroused()
+    private int normalize(int value)
     {
-        return aroused;
-    }
-
-    public void setAroused(float value)
-    {
-        aroused = normalize(value);
-    }
-
-    private float normalize(float value)
-    {
-        if(value > 1)
+        if(value > 10)
         {
-            value = 1;
+            value = 10;
         }
-        else if (value < -1)
+        else if (value < 0)
         {
-            value = -1;
+            value = 0;
         }
 
         return (value);
+    }
+
+    private int dominantExpression()
+    {
+        int[] Emotions = new int[] { Neutral, Sadness, Joy, Surprise, Anger, Fear, Disgust, Sleepiness, Calmness };
+        List<int> dominant_index = new List<int>();
+        int maxValue;
+
+        maxValue = Emotions.Max();
+
+        for(int i = 0; i < Emotions.Length; i++)
+        {
+            if(Emotions[i] == maxValue)
+            {
+                dominant_index.Add(i);
+            } 
+        }
+
+        if (!dominant_index.Contains(actual_status))
+        {
+            System.Random rnd = new System.Random();
+            int choice = rnd.Next(0, dominant_index.Count);
+
+            return dominant_index[choice];
+        }
+        else
+        {
+            return actual_status;
+        }
     }
 }

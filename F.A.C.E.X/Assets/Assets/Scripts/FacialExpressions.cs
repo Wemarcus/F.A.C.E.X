@@ -2957,7 +2957,7 @@ public class FacialExpressions : MonoBehaviour
     {
         listen = !listen;
 
-        Debug.Log(gameObject.name + " listen");
+        //Debug.Log(gameObject.name + " listen");
 
         head_frequency = 0f;
         eyes_frequency = 0f;
