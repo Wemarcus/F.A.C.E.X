@@ -76,6 +76,10 @@ public class FacialExpressions : MonoBehaviour
     private int[] disgust_eyelashes = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 43, 44 };
     private int[] disgust_moustaches = new int[] { 9, 10, 12, 20, 23, 24, 28, 29, 31, 34, 35, 39, 40, 41 }; // NEW 23
 
+    private int[] calmness_face = new int[] { 4, 5, 6, 7, 41, 42 };
+    private int[] calmness_eyelashes = new int[] { 4, 5, 6, 7 };
+    private int[] calmness_moustaches = new int[] { 36, 37 };
+
     private bool animation_lock = true; // true = libera, false = occupata
     private bool animation_interpolation = true; // true = in azione, false = ferma
     private bool speak = false; // true = parlando, false = non parlando
@@ -161,6 +165,13 @@ public class FacialExpressions : MonoBehaviour
         {
             emotion_id = 6;
             StartCoroutine(Disgust(0.5f));
+        }
+
+        // 8.Calmness
+        if (Input.GetKeyDown(KeyCode.Alpha8) && emotion_id != 8)
+        {
+            emotion_id = 8;
+            StartCoroutine(Calmness(0.5f));
         }
 
         // Speak
@@ -633,6 +644,72 @@ public class FacialExpressions : MonoBehaviour
                         yield return null;
                     }
                 }
+                else if (emotion_id == 8) // Calmness
+                {
+                    duration = 3.0f;
+                    head_frequency = UnityEngine.Random.Range(1.0f, 2.5f); // OLD 3.0 5.0
+
+                    if (eyes_up_down >= 0)
+                    {
+                        head_up_down = UnityEngine.Random.Range(-5.0f, 0.0f);
+                    }
+                    else
+                    {
+                        head_up_down = UnityEngine.Random.Range(-10.0f, -5.0f);
+                    }
+
+                    if (eyes_left_right >= 0)
+                    {
+                        head_left_right = UnityEngine.Random.Range(0.0f, 8.0f);
+                    }
+                    else
+                    {
+                        head_left_right = UnityEngine.Random.Range(-8.0f, 0.0f);
+                    }
+
+                    head_rotation = UnityEngine.Random.Range(-3.0f, 3.0f);
+
+                    while (time <= duration && emotion_id == 8)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (head_up_down > head_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = head_up_down - head_lookAtConstraint.rotationAtRest.x;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.x - head_up_down;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_left_right > head_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = head_left_right - head_lookAtConstraint.rotationAtRest.y;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.y - head_left_right;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, head_lookAtConstraint.rotationAtRest.z);
+                        }
+
+                        if (head_rotation > head_lookAtConstraint.rotationAtRest.z)
+                        {
+                            float difference = head_rotation - head_lookAtConstraint.rotationAtRest.z;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z + curve.Evaluate(percent) * difference);
+                        }
+                        else
+                        {
+                            float difference = head_lookAtConstraint.rotationAtRest.z - head_rotation;
+                            head_lookAtConstraint.rotationAtRest = new Vector3(head_lookAtConstraint.rotationAtRest.x, head_lookAtConstraint.rotationAtRest.y, head_lookAtConstraint.rotationAtRest.z - curve.Evaluate(percent) * difference);
+                        }
+
+                        yield return null;
+                    }
+                }
             }
             else
             {
@@ -943,6 +1020,46 @@ public class FacialExpressions : MonoBehaviour
                     eyes_left_right = UnityEngine.Random.Range(-7.0f, 5.0f); // OLD -5.0 3.0
 
                     while (time <= duration && emotion_id == 5)
+                    {
+                        time = time + Time.deltaTime;
+                        float percent = Mathf.Clamp01(time / duration);
+
+                        if (eyes_up_down > left_lookAtConstraint.rotationAtRest.x)
+                        {
+                            float difference = eyes_up_down - left_lookAtConstraint.rotationAtRest.x;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x + curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.x - eyes_up_down;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x - curve.Evaluate(percent) * difference, left_lookAtConstraint.rotationAtRest.y, 0);
+                        }
+
+                        if (eyes_left_right > left_lookAtConstraint.rotationAtRest.y)
+                        {
+                            float difference = eyes_left_right - left_lookAtConstraint.rotationAtRest.y;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y + curve.Evaluate(percent) * difference, 0);
+                        }
+                        else
+                        {
+                            float difference = left_lookAtConstraint.rotationAtRest.y - eyes_left_right;
+                            left_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                            right_lookAtConstraint.rotationAtRest = new Vector3(left_lookAtConstraint.rotationAtRest.x, left_lookAtConstraint.rotationAtRest.y - curve.Evaluate(percent) * difference, 0);
+                        }
+
+                        yield return null;
+                    }
+                }
+                else if (emotion_id == 8) // Calmness
+                {
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
+                    eyes_up_down = UnityEngine.Random.Range(-3.0f, 6.0f);
+                    eyes_left_right = UnityEngine.Random.Range(-5.0f, 5.0f);
+
+                    while (time <= duration && emotion_id == 8)
                     {
                         time = time + Time.deltaTime;
                         float percent = Mathf.Clamp01(time / duration);
@@ -1402,17 +1519,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_joyUsurpriseUangerUfearUdisgust = joy_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
-        int[] eyelashes_joyUsurpriseUangerUfearUdisgust = joy_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
-        int[] moustaches_joyUsurpriseUangerUfearUdisgust = joy_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
+        int[] face_joyUsurpriseUangerUfearUdisgustUcalmness = joy_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).Union(calmness_face).ToArray();
+        int[] eyelashes_joyUsurpriseUangerUfearUdisgustUcalmness = joy_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_joyUsurpriseUangerUfearUdisgustUcalmness = joy_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).Union(calmness_moustaches).ToArray();
 
-        Array.Sort(face_joyUsurpriseUangerUfearUdisgust);
-        Array.Sort(eyelashes_joyUsurpriseUangerUfearUdisgust);
-        Array.Sort(moustaches_joyUsurpriseUangerUfearUdisgust);
+        Array.Sort(face_joyUsurpriseUangerUfearUdisgustUcalmness);
+        Array.Sort(eyelashes_joyUsurpriseUangerUfearUdisgustUcalmness);
+        Array.Sort(moustaches_joyUsurpriseUangerUfearUdisgustUcalmness);
 
-        IEnumerable<int> face_result = face_joyUsurpriseUangerUfearUdisgust.Except(sadness_face);
-        IEnumerable<int> eyelashes_result = eyelashes_joyUsurpriseUangerUfearUdisgust.Except(sadness_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_joyUsurpriseUangerUfearUdisgust.Except(sadness_moustaches);
+        IEnumerable<int> face_result = face_joyUsurpriseUangerUfearUdisgustUcalmness.Except(sadness_face);
+        IEnumerable<int> eyelashes_result = eyelashes_joyUsurpriseUangerUfearUdisgustUcalmness.Except(sadness_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_joyUsurpriseUangerUfearUdisgustUcalmness.Except(sadness_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 4.0f); // OLD 0.5 3
@@ -1540,84 +1657,7 @@ public class FacialExpressions : MonoBehaviour
             duration = 2.0f;
             animation_lock = true;
         }
-        //StartCoroutine(Sadness_Animation());
     }
-
-    // OLD IDEA
-    /*IEnumerator Sadness_Animation()
-    {
-        System.Random rnd = new System.Random();
-        float duration = 2.0f; // OLD 0.5f
-
-        //Debug.Log("Sadness_Animation - START");
-
-        while (emotion_id == 1)
-        {
-            if (animation_lock)
-            {
-                animation_lock = false;
-                //Debug.Log("Sadness_Animation - MODIFY");
-
-                float animation_frequency = UnityEngine.Random.Range(0.0f, 1.0f); // OLD 1.0 4.0
-
-                yield return new WaitForSeconds(animation_frequency);
-
-                float time = 0f;
-
-                int BrowsUp_Left = (int)rnd.Next(0, 25); // OLD 0 10
-                int BrowsUp_Right = BrowsUp_Left; // OLD 0 10
-                int JawForeward = (int)rnd.Next(20, 25); // NEW
-                int LowerLipDown_Left = (int)rnd.Next(0, 10); // NEW
-                int LowerLipDown_Right = (int)rnd.Next(0, 10); // NEW
-                //int LowerLipOut = 40;
-                int Midmouth_Left = 5;
-                int Midmouth_Right = 5;
-                int MouthUp = (int)rnd.Next(20, 30); // OLD 10 20
-                int NoseScrunch_Left = (int)rnd.Next(0, 40); // OLD 0 20
-                int NoseScrunch_Right = NoseScrunch_Left;
-                //int UpperLipIn = (int)rnd.Next(30, 40); // OLD 20 50
-
-                int[] sadness_micro_expressions = new int[] { BrowsUp_Left, BrowsUp_Right, JawForeward, LowerLipDown_Left, LowerLipDown_Right,
-                                                          Midmouth_Left, Midmouth_Right, MouthUp, NoseScrunch_Left, NoseScrunch_Right };
-
-                int[] face_index = new int[] { 8, 9, 17, 26, 27, 30, 31, 36, 39, 40 }; // OLD 8, 9, 29, 30, 31, 36, 39, 40, 46
-
-                int[] moustaches_index = new int[] { 3, 4, 12, 21, 22, 25, 26, 31, 34, 35 };
-
-                float[] original_expressions = new float[10]; // OLD 8
-
-                for (int k = 0; k < face_index.Length; k++)
-                {
-                    original_expressions[k] = face.GetBlendShapeWeight(face_index[k]);
-                }
-
-                while (time <= duration && emotion_id == 1)
-                {
-                    time = time + Time.deltaTime;
-                    float percent = Mathf.Clamp01(time / duration);
-
-                    for (int i = 0; i < face_index.Length; i++)
-                    {
-                        face.SetBlendShapeWeight(face_index[i], (original_expressions[i] + exp_curve.Evaluate(percent) * sadness_micro_expressions[i]));
-                    }
-
-                    if (moustaches != null)
-                    {
-                        for (int k = 0; k < moustaches_index.Length; k++)
-                        {
-                            moustaches.SetBlendShapeWeight(moustaches_index[k], (original_expressions[k] + exp_curve.Evaluate(percent) * sadness_micro_expressions[k]));
-                        }
-                    }
-
-                    yield return null;
-                }
-            }
-
-            animation_lock = true;
-        }
-        
-        //Debug.Log("Sadness_Animation - END");
-    }*/
 
     IEnumerator Crying(float duration)
     {
@@ -1668,17 +1708,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_sadnessUsurpriseUangerUfearUdisgust = sadness_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
-        int[] eyelashes_sadnessUsurpriseUangerUfearUdisgust = sadness_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
-        int[] moustaches_sadnessUsurpriseUangerUfearUdisgust = sadness_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
+        int[] face_sadnessUsurpriseUangerUfearUdisgustUcalmness = sadness_face.Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).Union(calmness_face).ToArray();
+        int[] eyelashes_sadnessUsurpriseUangerUfearUdisgustUcalmness = sadness_eyelashes.Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_sadnessUsurpriseUangerUfearUdisgustUcalmness = sadness_moustaches.Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).Union(calmness_moustaches).ToArray();
 
-        Array.Sort(face_sadnessUsurpriseUangerUfearUdisgust);
-        Array.Sort(eyelashes_sadnessUsurpriseUangerUfearUdisgust);
-        Array.Sort(moustaches_sadnessUsurpriseUangerUfearUdisgust);
+        Array.Sort(face_sadnessUsurpriseUangerUfearUdisgustUcalmness);
+        Array.Sort(eyelashes_sadnessUsurpriseUangerUfearUdisgustUcalmness);
+        Array.Sort(moustaches_sadnessUsurpriseUangerUfearUdisgustUcalmness);
 
-        IEnumerable<int> face_result = face_sadnessUsurpriseUangerUfearUdisgust.Except(joy_face);
-        IEnumerable<int> eyelashes_result = eyelashes_sadnessUsurpriseUangerUfearUdisgust.Except(joy_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_sadnessUsurpriseUangerUfearUdisgust.Except(joy_moustaches);
+        IEnumerable<int> face_result = face_sadnessUsurpriseUangerUfearUdisgustUcalmness.Except(joy_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUsurpriseUangerUfearUdisgustUcalmness.Except(joy_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUsurpriseUangerUfearUdisgustUcalmness.Except(joy_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -1838,17 +1878,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_sadnessUjoyUangerUfearUdisgust = sadness_face.Union(joy_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
-        int[] eyelashes_sadnessUjoyUangerUfearUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
-        int[] moustaches_sadnessUjoyUangerUfearUdisgust = sadness_moustaches.Union(joy_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
+        int[] face_sadnessUjoyUangerUfearUdisgustUcalmness = sadness_face.Union(joy_face).Union(anger_face).Union(fear_face).Union(disgust_face).Union(calmness_face).ToArray();
+        int[] eyelashes_sadnessUjoyUangerUfearUdisgustUcalmness = sadness_eyelashes.Union(joy_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_sadnessUjoyUangerUfearUdisgustUcalmness = sadness_moustaches.Union(joy_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).Union(calmness_eyelashes).ToArray();
 
-        Array.Sort(face_sadnessUjoyUangerUfearUdisgust);
-        Array.Sort(eyelashes_sadnessUjoyUangerUfearUdisgust);
-        Array.Sort(moustaches_sadnessUjoyUangerUfearUdisgust);
+        Array.Sort(face_sadnessUjoyUangerUfearUdisgustUcalmness);
+        Array.Sort(eyelashes_sadnessUjoyUangerUfearUdisgustUcalmness);
+        Array.Sort(moustaches_sadnessUjoyUangerUfearUdisgustUcalmness);
 
-        IEnumerable<int> face_result = face_sadnessUjoyUangerUfearUdisgust.Except(surprise_face);
-        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUangerUfearUdisgust.Except(surprise_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUangerUfearUdisgust.Except(surprise_moustaches);
+        IEnumerable<int> face_result = face_sadnessUjoyUangerUfearUdisgustUcalmness.Except(surprise_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUangerUfearUdisgustUcalmness.Except(surprise_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUangerUfearUdisgustUcalmness.Except(surprise_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -2235,17 +2275,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_sadnessUjoyUsurpriseUfearUdisgust = sadness_face.Union(joy_face).Union(surprise_face).Union(fear_face).Union(disgust_face).ToArray();
-        int[] eyelashes_sadnessUjoyUsurpriseUfearUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
-        int[] moustaches_sadnessUjoyUsurpriseUfearUdisgust = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
+        int[] face_sadnessUjoyUsurpriseUfearUdisgustUcalmness = sadness_face.Union(joy_face).Union(surprise_face).Union(fear_face).Union(disgust_face).Union(calmness_face).ToArray();
+        int[] eyelashes_sadnessUjoyUsurpriseUfearUdisgustUcalmness = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_sadnessUjoyUsurpriseUfearUdisgustUcalmness = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(fear_moustaches).Union(disgust_moustaches).Union(calmness_moustaches).ToArray();
 
-        Array.Sort(face_sadnessUjoyUsurpriseUfearUdisgust);
-        Array.Sort(eyelashes_sadnessUjoyUsurpriseUfearUdisgust);
-        Array.Sort(moustaches_sadnessUjoyUsurpriseUfearUdisgust);
+        Array.Sort(face_sadnessUjoyUsurpriseUfearUdisgustUcalmness);
+        Array.Sort(eyelashes_sadnessUjoyUsurpriseUfearUdisgustUcalmness);
+        Array.Sort(moustaches_sadnessUjoyUsurpriseUfearUdisgustUcalmness);
 
-        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUfearUdisgust.Except(anger_face);
-        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUfearUdisgust.Except(anger_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUfearUdisgust.Except(anger_moustaches);
+        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUfearUdisgustUcalmness.Except(anger_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUfearUdisgustUcalmness.Except(anger_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUfearUdisgustUcalmness.Except(anger_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -2433,17 +2473,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_sadnessUjoyUsurpriseUangerUdisgust = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(disgust_face).ToArray();
-        int[] eyelashes_sadnessUjoyUsurpriseUangerUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(disgust_eyelashes).ToArray();
-        int[] moustaches_sadnessUjoyUsurpriseUangerUdisgust = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(disgust_moustaches).ToArray();
+        int[] face_sadnessUjoyUsurpriseUangerUdisgustUcalmness = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(disgust_face).Union(calmness_face).ToArray();
+        int[] eyelashes_sadnessUjoyUsurpriseUangerUdisgustUcalmness = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(disgust_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_sadnessUjoyUsurpriseUangerUdisgustUcalmness = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(disgust_moustaches).Union(calmness_moustaches).ToArray();
 
-        Array.Sort(face_sadnessUjoyUsurpriseUangerUdisgust);
-        Array.Sort(eyelashes_sadnessUjoyUsurpriseUangerUdisgust);
-        Array.Sort(moustaches_sadnessUjoyUsurpriseUangerUdisgust);
+        Array.Sort(face_sadnessUjoyUsurpriseUangerUdisgustUcalmness);
+        Array.Sort(eyelashes_sadnessUjoyUsurpriseUangerUdisgustUcalmness);
+        Array.Sort(moustaches_sadnessUjoyUsurpriseUangerUdisgustUcalmness);
 
-        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUangerUdisgust.Except(fear_face);
-        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUangerUdisgust.Except(fear_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUangerUdisgust.Except(fear_moustaches);
+        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUangerUdisgustUcalmness.Except(fear_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUangerUdisgustUcalmness.Except(fear_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUangerUdisgustUcalmness.Except(fear_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -2660,17 +2700,17 @@ public class FacialExpressions : MonoBehaviour
         coroutine_Eyes = StartCoroutine(Eyes(0.8f));
         coroutine_Head = StartCoroutine(Head(1.5f));
 
-        int[] face_sadnessUjoyUsurpriseUangerUfear = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(fear_face).ToArray();
-        int[] eyelashes_sadnessUjoyUsurpriseUangerUfear = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).ToArray();
-        int[] moustaches_sadnessUjoyUsurpriseUangerUfear = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).ToArray();
+        int[] face_sadnessUjoyUsurpriseUangerUfearUcalmness = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(fear_face).Union(calmness_face).ToArray();
+        int[] eyelashes_sadnessUjoyUsurpriseUangerUfearUcalmness = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(calmness_eyelashes).ToArray();
+        int[] moustaches_sadnessUjoyUsurpriseUangerUfearUcalmness = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(calmness_moustaches).ToArray();
 
-        Array.Sort(face_sadnessUjoyUsurpriseUangerUfear);
-        Array.Sort(eyelashes_sadnessUjoyUsurpriseUangerUfear);
-        Array.Sort(moustaches_sadnessUjoyUsurpriseUangerUfear);
+        Array.Sort(face_sadnessUjoyUsurpriseUangerUfearUcalmness);
+        Array.Sort(eyelashes_sadnessUjoyUsurpriseUangerUfearUcalmness);
+        Array.Sort(moustaches_sadnessUjoyUsurpriseUangerUfearUcalmness);
 
-        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUangerUfear.Except(disgust_face);
-        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUangerUfear.Except(disgust_eyelashes);
-        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUangerUfear.Except(disgust_moustaches);
+        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUangerUfearUcalmness.Except(disgust_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUangerUfearUcalmness.Except(disgust_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUangerUfearUcalmness.Except(disgust_moustaches);
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -2857,6 +2897,160 @@ public class FacialExpressions : MonoBehaviour
         }
     }
 
+    IEnumerator Calmness(float duration)
+    {
+        StartCoroutine(tightenEyes());
+
+        eyes_frequency = 0;
+        head_frequency = 0;
+        blink_frequency = 6;
+
+        StopCoroutine(coroutine_Eyes);
+        StopCoroutine(coroutine_Head);
+        coroutine_Eyes = StartCoroutine(Eyes(0.8f));
+        coroutine_Head = StartCoroutine(Head(1.5f));
+
+        int[] face_sadnessUjoyUsurpriseUangerUfearUdisgust = sadness_face.Union(joy_face).Union(surprise_face).Union(anger_face).Union(fear_face).Union(disgust_face).ToArray();
+        int[] eyelashes_sadnessUjoyUsurpriseUangerUfearUdisgust = sadness_eyelashes.Union(joy_eyelashes).Union(surprise_eyelashes).Union(anger_eyelashes).Union(fear_eyelashes).Union(disgust_eyelashes).ToArray();
+        int[] moustaches_sadnessUjoyUsurpriseUangerUfearUdisgust = sadness_moustaches.Union(joy_moustaches).Union(surprise_moustaches).Union(anger_moustaches).Union(fear_moustaches).Union(disgust_moustaches).ToArray();
+
+        Array.Sort(face_sadnessUjoyUsurpriseUangerUfearUdisgust);
+        Array.Sort(eyelashes_sadnessUjoyUsurpriseUangerUfearUdisgust);
+        Array.Sort(moustaches_sadnessUjoyUsurpriseUangerUfearUdisgust);
+
+        IEnumerable<int> face_result = face_sadnessUjoyUsurpriseUangerUfearUdisgust.Except(calmness_face);
+        IEnumerable<int> eyelashes_result = eyelashes_sadnessUjoyUsurpriseUangerUfearUdisgust.Except(calmness_eyelashes);
+        IEnumerable<int> moustaches_result = moustaches_sadnessUjoyUsurpriseUangerUfearUdisgust.Except(calmness_moustaches);
+
+        System.Random rnd = new System.Random();
+        float time_to_cry = UnityEngine.Random.Range(1f, 2f);
+
+        cry = false;
+        StartCoroutine(Crying(time_to_cry)); // Set Crying OFF
+
+        while (emotion_id == 8)
+        {
+            if (animation_lock)
+            {
+                animation_lock = false;
+                float time = 0f;
+                float animation_frequency;
+
+                animation_frequency = UnityEngine.Random.Range(0.0f, 1.0f);
+
+                yield return new WaitForSeconds(animation_frequency);
+
+                int BrowsIn_Left = (int)rnd.Next(-20, 0);
+                int BrowsIn_Right = BrowsIn_Left;
+                int BrowsOuterLower_Left = (int)rnd.Next(30, 50);
+                int BrowsOuterLower_Right = BrowsOuterLower_Left;
+                int Smile_Left = (int)rnd.Next(30, 50);
+                int Smile_Right = Smile_Left;
+
+                // Fix for Speaking
+                /*if (speak)
+                {
+                    Mouth_Open = (int)rnd.Next(0, 5);
+                }*/
+
+                int[] face_calmness = new int[] { BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right, Smile_Left, Smile_Right };
+
+                int[] eyelashes_calmness = new int[] { BrowsIn_Left, BrowsIn_Right, BrowsOuterLower_Left, BrowsOuterLower_Right };
+
+                int[] moustaches_calmness = new int[] { Smile_Left, Smile_Right };
+
+                while (time <= duration && emotion_id == 8) // OLD duration/2
+                {
+                    time = time + Time.deltaTime;
+                    float percent = Mathf.Clamp01(time / duration);
+
+                    //Debug.Log("Basic Time: " + time + " Duration: " + duration + " Percent: " + percent);
+
+                    // Reset unused facial muscles
+                    foreach (var n in face_result)
+                    {
+                        face.SetBlendShapeWeight(n, (end_curve.Evaluate(percent) * face.GetBlendShapeWeight(n)));
+                    }
+
+                    // Reset unused eyelashes muscles
+                    foreach (var m in eyelashes_result)
+                    {
+                        eyelashes.SetBlendShapeWeight(m, (end_curve.Evaluate(percent) * eyelashes.GetBlendShapeWeight(m)));
+                    }
+
+                    // Reset unused moustaches 
+                    if (moustaches != null)
+                    {
+                        foreach (var k in moustaches_result)
+                        {
+                            moustaches.SetBlendShapeWeight(k, (end_curve.Evaluate(percent) * moustaches.GetBlendShapeWeight(k)));
+                        }
+                    }
+
+                    // Fix for Speaking
+                    /*if (speak)
+                    {
+                        face_calmness[23] = (int)rnd.Next(0, 5);
+                        moustaches_calmness[13] = face_calmness[23];
+                    }*/
+
+                    // Set calmness facial muscles
+                    for (int k = 0; k < face_calmness.Length; k++)
+                    {
+                        if (face_calmness[k] > face.GetBlendShapeWeight(calmness_face[k]))
+                        {
+                            int difference = face_calmness[k] - (int)face.GetBlendShapeWeight(calmness_face[k]);
+                            face.SetBlendShapeWeight(calmness_face[k], (face.GetBlendShapeWeight(calmness_face[k]) + curve.Evaluate(percent) * difference));
+                        }
+                        else
+                        {
+                            int difference = (int)face.GetBlendShapeWeight(calmness_face[k]) - face_calmness[k];
+                            face.SetBlendShapeWeight(calmness_face[k], (face.GetBlendShapeWeight(calmness_face[k]) - curve.Evaluate(percent) * difference));
+                        }
+                    }
+
+                    // Set calmness eyelashes muscles
+                    for (int j = 0; j < eyelashes_calmness.Length; j++)
+                    {
+                        if (eyelashes_calmness[j] > eyelashes.GetBlendShapeWeight(calmness_eyelashes[j]))
+                        {
+                            int difference = eyelashes_calmness[j] - (int)eyelashes.GetBlendShapeWeight(calmness_eyelashes[j]);
+                            eyelashes.SetBlendShapeWeight(calmness_eyelashes[j], (eyelashes.GetBlendShapeWeight(calmness_eyelashes[j]) + curve.Evaluate(percent) * difference));
+                        }
+                        else
+                        {
+                            int difference = (int)eyelashes.GetBlendShapeWeight(calmness_eyelashes[j]) - eyelashes_calmness[j];
+                            eyelashes.SetBlendShapeWeight(calmness_eyelashes[j], (eyelashes.GetBlendShapeWeight(calmness_eyelashes[j]) - curve.Evaluate(percent) * difference));
+                        }
+                    }
+
+                    // Set calmness moustaches
+                    if (moustaches != null)
+                    {
+                        for (int j = 0; j < moustaches_calmness.Length; j++)
+                        {
+                            if (moustaches_calmness[j] > moustaches.GetBlendShapeWeight(calmness_moustaches[j]))
+                            {
+                                int difference = moustaches_calmness[j] - (int)moustaches.GetBlendShapeWeight(calmness_moustaches[j]);
+                                moustaches.SetBlendShapeWeight(calmness_moustaches[j], (moustaches.GetBlendShapeWeight(calmness_moustaches[j]) + curve.Evaluate(percent) * difference));
+                            }
+                            else
+                            {
+                                int difference = (int)moustaches.GetBlendShapeWeight(calmness_moustaches[j]) - moustaches_calmness[j];
+                                moustaches.SetBlendShapeWeight(calmness_moustaches[j], (moustaches.GetBlendShapeWeight(calmness_moustaches[j]) - curve.Evaluate(percent) * difference));
+                            }
+                        }
+                    }
+
+                    yield return null;
+                }
+            }
+
+            duration = 2.0f;
+            animation_lock = true;
+        }
+    }
+
     public IEnumerator Speaking()
     {
         /*int Jaw_Down = 0;
@@ -3020,7 +3214,7 @@ public class FacialExpressions : MonoBehaviour
 
     public void setCalmness()
     {
-        //emotion_id = 8;
-        //StartCoroutine(Calmness(0.5f));
+        emotion_id = 8;
+        StartCoroutine(Calmness(0.5f));
     }
 }
