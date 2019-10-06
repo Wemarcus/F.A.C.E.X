@@ -11,15 +11,15 @@ public class CoreAffect : MonoBehaviour
     private int actual_status = -1;
 
     // EMOZIONI DI BASE: questi valori sono inclusi nell'intervallo (0, 10), dove 0 = niente, 10 = molto
-    public int Neutral = 0;
-    public int Sadness = 0;
-    public int Joy = 0;
-    public int Surprise = 0;
-    public int Anger = 0;
-    public int Fear = 0;
-    public int Disgust = 0;
-    public int Sleepiness = 0;
-    public int Calmness = 0;
+    [Range(0, 10)] public int Neutral = 0;
+    [Range(0, 10)] public int Sadness = 0;
+    [Range(0, 10)] public int Joy = 0;
+    [Range(0, 10)] public int Surprise = 0;
+    [Range(0, 10)] public int Anger = 0;
+    [Range(0, 10)] public int Fear = 0;
+    [Range(0, 10)] public int Disgust = 0;
+    [Range(0, 10)] public int Sleepiness = 0;
+    [Range(0, 10)] public int Calmness = 0;
 
     private float reactionTime = 1f; // tempo di reazione del character
 
