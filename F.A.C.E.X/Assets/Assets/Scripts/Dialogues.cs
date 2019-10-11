@@ -115,7 +115,7 @@ public class Dialogues : MonoBehaviour
             if (first_character_is_NPC)
             {
                 setAiUI();
-                StartCoroutine(AIResponse());
+                StartCoroutine(AIResponse(human_character, 0));
             }
             else
             {
@@ -149,7 +149,7 @@ public class Dialogues : MonoBehaviour
             if (second_character_is_NPC)
             {
                 setAiUI();
-                StartCoroutine(AIResponse());
+                StartCoroutine(AIResponse(ai_character, 1));
             }
             else
             {
@@ -190,14 +190,28 @@ public class Dialogues : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator AIResponse()
+    private IEnumerator AIResponse(GameObject character, int n)
     {
         float reaction_time = UnityEngine.Random.Range(3.0f, 8.0f);
 
         yield return new WaitForSeconds(reaction_time);
 
-        System.Random rnd = new System.Random();
-        int choice = rnd.Next(1, 3);
+        int choice;
+        
+        if (n == 0)
+        {
+            choice = character.GetComponent<Personality>().chooseAnswer(left_button.GetComponent<DialogueButton>().emotions_1, right_button.GetComponent<DialogueButton>().emotions_1);
+        }
+        else
+        {
+            choice = character.GetComponent<Personality>().chooseAnswer(left_button.GetComponent<DialogueButton>().emotions_2, right_button.GetComponent<DialogueButton>().emotions_2);
+        }
+
+        if (choice == -1)
+        {
+            System.Random rnd = new System.Random();
+            choice = rnd.Next(1, 3);
+        }
 
         if (choice == 1)
         {
