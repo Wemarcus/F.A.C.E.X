@@ -13,6 +13,7 @@ public class Personality : MonoBehaviour
     // Attributi Dinamici/Obiettivi
     //public int Onestà = 0;
 
+    public Dialogues dialogues;
     private CoreAffect emotions;
 
     void Start()
@@ -20,7 +21,7 @@ public class Personality : MonoBehaviour
         emotions = GetComponent<CoreAffect>();
     }
 
-    public int chooseAnswer(int[] first_answer, int[] second_answer)
+    public int chooseAnswer(int dialog_index, int[] first_answer, int[] second_answer, int first_trigger, int second_trigger)
     {
         int first_answer_score = 0;
         int second_answer_score = 0;
@@ -41,463 +42,474 @@ public class Personality : MonoBehaviour
         int first_Anger = first_answer[4];
         int second_Anger = second_answer[4];
 
-        if (emotions.Neutral + emotions.Joy + emotions.Calmness > emotions.Anger + emotions.Disgust)
-        {
-            if (Ostile_Amichevole > 0)
-            {
-                if (first_JoyUCalmness >= 0)
-                {
-                    first_answer_score += emotions.Joy + emotions.Calmness + (first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole));
-                }
-                else
-                {
-                    first_answer_score += emotions.Joy + emotions.Calmness + (first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole));
-                }
-
-                if (second_JoyUCalmness >= 0)
-                {
-                    second_answer_score += emotions.Joy + emotions.Calmness + (second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole));
-                }
-                else
-                {
-                    second_answer_score += emotions.Joy + emotions.Calmness + (second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole));
-                }
-
-                Debug.Log("CALMO E AMICHEVOLE - First answer score: " + first_answer_score);
-                Debug.Log("CALMO E AMICHEVOLE - Second answer score: " + second_answer_score);
-            }
-            else if (Ostile_Amichevole < 0)
-            {
-                if (first_AngerUDisgust >= 0)
-                {
-                    first_answer_score += (emotions.Joy + emotions.Calmness + (first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole))) / 2;
-                }
-                else
-                {
-                    first_answer_score += (emotions.Joy + emotions.Calmness + (first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole))) * 2;
-                }
-
-                if (second_AngerUDisgust >= 0)
-                {
-                    second_answer_score += (emotions.Joy + emotions.Calmness + (second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole))) / 2;
-                }
-                else
-                {
-                    second_answer_score += (emotions.Joy + emotions.Calmness + (second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole))) * 2;
-                }
-
-                Debug.Log("CALMO MA OSTILE - First answer score: " + first_answer_score);
-                Debug.Log("CALMO MA OSTILE - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (emotions.Neutral + emotions.Anger + emotions.Disgust > emotions.Joy + emotions.Calmness)
-        {
-            if (Ostile_Amichevole > 0)
-            {
-                if (first_JoyUCalmness >= 0)
-                {
-                    first_answer_score += (emotions.Anger + emotions.Disgust + (first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole))) / 2;
-                }
-                else
-                {
-                    first_answer_score += (emotions.Anger + emotions.Disgust + (first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole))) * 2;
-                }
-
-                if (second_JoyUCalmness >= 0)
-                {
-                    second_answer_score += (emotions.Anger + emotions.Disgust + (second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole))) / 2;
-                }
-                else
-                {
-                    second_answer_score += (emotions.Anger + emotions.Disgust + (second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole))) * 2;
-                }
-
-                Debug.Log("ARRABBIATO MA AMICHEVOLE - First answer score: " + first_answer_score);
-                Debug.Log("ARRABBIATO MA AMICHEVOLE - Second answer score: " + second_answer_score);
-            }
-            else if (Ostile_Amichevole < 0)
-            {
-                if (first_AngerUDisgust >= 0)
-                {
-                    first_answer_score += emotions.Anger + emotions.Disgust + (first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole));
-                }
-                else
-                {
-                    first_answer_score += emotions.Anger + emotions.Disgust + (first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole));
-                }
-
-                if (second_AngerUDisgust >= 0)
-                {
-                    second_answer_score += emotions.Anger + emotions.Disgust + (second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole));
-                }
-                else
-                {
-                    second_answer_score += emotions.Anger + emotions.Disgust + (second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole));
-                }
-
-                Debug.Log("ARRABBIATO E OSTILE - First answer score: " + first_answer_score);
-                Debug.Log("ARRABBIATO E OSTILE - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (emotions.Joy + emotions.Calmness == emotions.Anger + emotions.Disgust)
-        {
-            if (Ostile_Amichevole > 0)
-            {
-                if (first_JoyUCalmness >= 0)
-                {
-                    first_answer_score += ((first_JoyUCalmness + (first_AngerUDisgust / 2)) * Mathf.Abs(Ostile_Amichevole)) / 2;
-                }
-                else
-                {
-                    first_answer_score += ((first_JoyUCalmness + (first_AngerUDisgust / 2)) / Mathf.Abs(Ostile_Amichevole)) * 2;
-                }
-
-                if (second_JoyUCalmness >= 0)
-                {
-                    second_answer_score += ((second_JoyUCalmness + (second_AngerUDisgust / 2)) * Mathf.Abs(Ostile_Amichevole)) / 2;
-                }
-                else
-                {
-                    second_answer_score += ((second_JoyUCalmness + (second_AngerUDisgust / 2)) / Mathf.Abs(Ostile_Amichevole)) * 2;
-                }
-
-                Debug.Log("NEUTRALE E AMICHEVOLE - First answer score: " + first_answer_score);
-                Debug.Log("NEUTRALE E AMICHEVOLE - Second answer score: " + second_answer_score);
-            }
-            else if (Ostile_Amichevole < 0)
-            {
-                if (first_AngerUDisgust >= 0)
-                {
-                    first_answer_score += (((first_JoyUCalmness / 2) + first_AngerUDisgust) * Mathf.Abs(Ostile_Amichevole)) / 2;
-                }
-                else
-                {
-                    first_answer_score += (((first_JoyUCalmness / 2) + first_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole)) * 2;
-                }
-
-                if (second_AngerUDisgust >= 0)
-                {
-                    second_answer_score += (((second_JoyUCalmness / 2) + second_AngerUDisgust) * Mathf.Abs(Ostile_Amichevole)) / 2;
-                }
-                else
-                {
-                    second_answer_score += (((second_JoyUCalmness / 2) + second_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole)) * 2;
-                }
-
-                Debug.Log("NEUTRALE E OSTILE - First answer score: " + first_answer_score);
-                Debug.Log("NEUTRALE E OSTILE - Second answer score: " + second_answer_score);
-            }
-        }
-
-        /*if (Ostile_Amichevole > 0)
-        {
-            if (emotions.Neutral + emotions.Joy + emotions.Calmness >= emotions.Anger + emotions.Disgust)
-            {
-                if (first_JoyUCalmness >= 0)
-                {
-                    first_answer_score += first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole);
-                }
-                else
-                {
-                    first_answer_score += first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole);
-                }
-
-                if (second_JoyUCalmness >= 0)
-                {
-                    second_answer_score += second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole);
-                }
-                else
-                {
-                    second_answer_score += second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole);
-                }
-
-                Debug.Log("AMICHEVOLE E CALMO - First answer score: " + first_answer_score);
-                Debug.Log("AMICHEVOLE E CALMO - Second answer score: " + second_answer_score);
-            }
-            else
-            {
-                first_answer_score += - Mathf.Abs(first_JoyUCalmness) / Mathf.Abs(Ostile_Amichevole);
-                second_answer_score += - Mathf.Abs(second_JoyUCalmness) / Mathf.Abs(Ostile_Amichevole);
-
-                Debug.Log("AMICHEVOLE MA ARRABBIATO - First answer score: " + first_answer_score);
-                Debug.Log("AMICHEVOLE MA ARRABBIATO - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (Ostile_Amichevole < 0)
-        {
-            if (emotions.Neutral + emotions.Anger + emotions.Disgust >= emotions.Joy + emotions.Calmness)
-            {
-                if (first_AngerUDisgust >= 0)
-                {
-                    first_answer_score += first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole);
-                }
-                else
-                {
-                    first_answer_score += first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole);
-                }
-
-                if (second_AngerUDisgust >= 0)
-                {
-                    second_answer_score += second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole);
-                }
-                else
-                {
-                    second_answer_score += second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole);
-                }
-
-                Debug.Log("OSTILE E ARRABBIATO - First answer score: " + first_answer_score);
-                Debug.Log("OSTILE E ARRABBIATO - Second answer score: " + second_answer_score);
-            }
-            else
-            {
-                first_answer_score += - Mathf.Abs(first_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole);
-                second_answer_score += - Mathf.Abs(second_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole);
-
-                Debug.Log("OSTILE MA CALMO - First answer score: " + first_answer_score);
-                Debug.Log("OSTILE MA CALMO - Second answer score: " + second_answer_score);
-            }
-        }*/
-
-        //////////// NEW SOTTO
-
-        if (emotions.Neutral + emotions.Calmness > emotions.Sadness + emotions.Fear)
-        {
-            if (Timoroso_Deciso > 0)
-            {
-                if (first_Calmness >= 0)
-                {
-                    first_answer_score += emotions.Calmness + ((first_Calmness + first_Joy) * Mathf.Abs(Timoroso_Deciso));
-                }
-                else
-                {
-                    first_answer_score += emotions.Calmness + ((first_Calmness + first_Joy) / Mathf.Abs(Timoroso_Deciso));
-                }
-
-                if (second_Calmness >= 0)
-                {
-                    second_answer_score += emotions.Calmness + ((second_Calmness + second_Joy) * Mathf.Abs(Timoroso_Deciso));
-                }
-                else
-                {
-                    second_answer_score += emotions.Calmness + ((second_Calmness + second_Joy) / Mathf.Abs(Timoroso_Deciso));
-                }
-
-                Debug.Log("TRANQUILLO E DECISO - First answer score: " + first_answer_score);
-                Debug.Log("TRANQUILLO E DECISO - Second answer score: " + second_answer_score);
-            } 
-            else if (Timoroso_Deciso < 0)
-            {
-                if (first_SadnessUFear >= 0)
-                {
-                    first_answer_score += emotions.Calmness + ((first_SadnessUFear * Mathf.Abs(Timoroso_Deciso)) / 2);
-                }
-                else
-                {
-                    first_answer_score += emotions.Calmness + ((first_SadnessUFear / Mathf.Abs(Timoroso_Deciso)) * 2);
-                }
-
-                if (second_SadnessUFear >= 0)
-                {
-                    second_answer_score += emotions.Calmness + ((second_SadnessUFear * Mathf.Abs(Timoroso_Deciso)) / 2);
-                }
-                else
-                {
-                    second_answer_score += emotions.Calmness + ((second_SadnessUFear / Mathf.Abs(Timoroso_Deciso)) * 2);
-                }
-
-                Debug.Log("TRANQUILLO MA TIMOROSO - First answer score: " + first_answer_score);
-                Debug.Log("TRANQUILLO MA TIMOROSO - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (emotions.Neutral + emotions.Sadness + emotions.Fear > emotions.Calmness)
-        {
-            if (Timoroso_Deciso > 0)
-            {
-                if (first_Calmness >= 0)
-                {
-                    first_answer_score += emotions.Sadness + emotions.Fear + ((first_Calmness * Mathf.Abs(Timoroso_Deciso)) / 2);
-                }
-                else
-                {
-                    first_answer_score += emotions.Sadness + emotions.Fear + ((first_Calmness / Mathf.Abs(Timoroso_Deciso)) * 2);
-                }
-
-                if (second_Calmness >= 0)
-                {
-                    second_answer_score += emotions.Sadness + emotions.Fear + ((second_Calmness * Mathf.Abs(Timoroso_Deciso)) / 2);
-                }
-                else
-                {
-                    second_answer_score += emotions.Sadness + emotions.Fear + ((second_Calmness / Mathf.Abs(Timoroso_Deciso)) * 2);
-                }
-
-                Debug.Log("IMPAURITO MA DECISO - First answer score: " + first_answer_score);
-                Debug.Log("IMPAURITO MA DECISO - Second answer score: " + second_answer_score);
-            }
-            else if (Timoroso_Deciso < 0)
-            {
-                if (first_SadnessUFear >= 0)
-                {
-                    first_answer_score += emotions.Sadness + emotions.Fear + ((first_SadnessUFear + first_Anger) * Mathf.Abs(Timoroso_Deciso));
-                }
-                else
-                {
-                    first_answer_score += emotions.Sadness + emotions.Fear + ((first_SadnessUFear + first_Anger) / Mathf.Abs(Timoroso_Deciso));
-                }
-
-                if (second_SadnessUFear >= 0)
-                {
-                    second_answer_score += emotions.Sadness + emotions.Fear + ((second_SadnessUFear + second_Anger) * Mathf.Abs(Timoroso_Deciso));
-                }
-                else
-                {
-                    second_answer_score += emotions.Sadness + emotions.Fear + ((second_SadnessUFear + second_Anger) / Mathf.Abs(Timoroso_Deciso));
-                }
-
-                Debug.Log("IMPAURITO E TIMOROSO - First answer score: " + first_answer_score);
-                Debug.Log("IMPAURITO E TIMOROSO - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (emotions.Calmness == emotions.Sadness + emotions.Fear)
-        {
-            if (Timoroso_Deciso > 0)
-            {
-                if (first_Calmness >= 0)
-                {
-                    first_answer_score += ((first_Calmness + (first_SadnessUFear/2)) * Mathf.Abs(Timoroso_Deciso)) / 2;
-                }
-                else
-                {
-                    first_answer_score += ((first_Calmness + (first_SadnessUFear/2)) / Mathf.Abs(Timoroso_Deciso)) * 2;
-                }
-
-                if (second_Calmness >= 0)
-                {
-                    second_answer_score += ((second_Calmness + (second_SadnessUFear/2)) * Mathf.Abs(Timoroso_Deciso)) / 2;
-                }
-                else
-                {
-                    second_answer_score += ((second_Calmness + (second_SadnessUFear/2)) / Mathf.Abs(Timoroso_Deciso)) * 2;
-                }
-
-                Debug.Log("NEUTRALE E DECISO - First answer score: " + first_answer_score);
-                Debug.Log("NEUTRALE E DECISO - Second answer score: " + second_answer_score);
-            }
-            else if (Timoroso_Deciso < 0)
-            {
-                if (first_SadnessUFear >= 0)
-                {
-                    first_answer_score += (((first_Calmness/2) + first_SadnessUFear) * Mathf.Abs(Timoroso_Deciso)) / 2;
-                }
-                else
-                {
-                    first_answer_score += (((first_Calmness/2) + first_SadnessUFear) / Mathf.Abs(Timoroso_Deciso)) * 2;
-                }
-
-                if (second_SadnessUFear >= 0)
-                {
-                    second_answer_score += (((second_Calmness/2) + second_SadnessUFear) * Mathf.Abs(Timoroso_Deciso)) / 2;
-                }
-                else
-                {
-                    second_answer_score += (((second_Calmness/2) + second_SadnessUFear) / Mathf.Abs(Timoroso_Deciso)) * 2;
-                }
-
-                Debug.Log("NEUTRALE E TIMOROSO - First answer score: " + first_answer_score);
-                Debug.Log("NEUTRALE E TIMOROSO - Second answer score: " + second_answer_score);
-            }
-        }
-
-        //////////// OLD SOTTO
-
-        /*if (Timoroso_Deciso > 0)
-        {
-            if (emotions.Neutral + emotions.Calmness > emotions.Fear)
-            {
-                if (first_Calmness >= 0)
-                {
-                    first_answer_score += first_Calmness * Mathf.Abs(Timoroso_Deciso);
-                }
-                else
-                {
-                    first_answer_score += first_Calmness / Mathf.Abs(Timoroso_Deciso);
-                }
-
-                if (second_Calmness >= 0)
-                {
-                    second_answer_score += second_Calmness * Mathf.Abs(Timoroso_Deciso);
-                }
-                else
-                {
-                    second_answer_score += second_Calmness / Mathf.Abs(Timoroso_Deciso);
-                }
-
-                Debug.Log("DECISO E CALMO - First answer score: " + first_answer_score);
-                Debug.Log("DECISO E CALMO - Second answer score: " + second_answer_score);
-            }
-            else if (emotions.Neutral + emotions.Fear > emotions.Calmness)
-            {
-                first_answer_score += - Mathf.Abs(first_Calmness) / Mathf.Abs(Timoroso_Deciso);
-                second_answer_score += - Mathf.Abs(second_Calmness) / Mathf.Abs(Timoroso_Deciso);
-
-                Debug.Log("DECISO MA IMPAURITO - First answer score: " + first_answer_score);
-                Debug.Log("DECISO MA IMPAURITO - Second answer score: " + second_answer_score);
-            }
-            else if (emotions.Calmness == emotions.Fear)
-            {
-                first_answer_score += first_Calmness + Mathf.Abs(Timoroso_Deciso);
-                second_answer_score += second_Calmness + Mathf.Abs(Timoroso_Deciso);
-
-                Debug.Log("DECISO E NEUTRALE - First answer score: " + first_answer_score);
-                Debug.Log("DECISO E NEUTRALE - Second answer score: " + second_answer_score);
-            }
-        }
-        else if (Timoroso_Deciso < 0)
-        {
-            if (emotions.Neutral + emotions.Fear >= emotions.Calmness)
-            {
-                if (first_Fear >= 0)
-                {
-                    first_answer_score += first_Fear * Mathf.Abs(Timoroso_Deciso);
-                }
-                else
-                {
-                    first_answer_score += first_Fear / Mathf.Abs(Timoroso_Deciso);
-                }
-
-                if (second_Fear >= 0)
-                {
-                    second_answer_score += second_Fear * Mathf.Abs(Timoroso_Deciso);
-                }
-                else
-                {
-                    second_answer_score += second_Fear / Mathf.Abs(Timoroso_Deciso);
-                }
-
-                Debug.Log("TIMOROSO E IMPAURITO - First answer score: " + first_answer_score);
-                Debug.Log("TIMOROSO E IMPAURITO - Second answer score: " + second_answer_score);
-            }
-            else
-            {
-                first_answer_score += - Mathf.Abs(first_Fear) / Mathf.Abs(Timoroso_Deciso);
-                second_answer_score += - Mathf.Abs(second_Fear) / Mathf.Abs(Timoroso_Deciso);
-
-                Debug.Log("TIMOROSO MA CALMO - First answer score: " + first_answer_score);
-                Debug.Log("TIMOROSO MA CALMO - Second answer score: " + second_answer_score);
-            }
-        }*/
-
-        if (first_answer_score > second_answer_score)
+        if (dialog_index > 0 && dialogues.trigger_history[dialog_index - 1] != 0 && dialogues.trigger_history[dialog_index-1] == first_trigger)
         {
             return 1;
         }
-        else if (first_answer_score < second_answer_score)
+        else if (dialog_index > 0 && dialogues.trigger_history[dialog_index - 1] != 0 && dialogues.trigger_history[dialog_index-1] == second_trigger)
         {
             return 2;
         }
         else
         {
-            return -1; // risultato uguale, scelta random!
+            if (emotions.Neutral + emotions.Joy + emotions.Calmness > emotions.Anger + emotions.Disgust)
+            {
+                if (Ostile_Amichevole > 0)
+                {
+                    if (first_JoyUCalmness >= 0)
+                    {
+                        first_answer_score += emotions.Joy + emotions.Calmness + (first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole));
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Joy + emotions.Calmness + (first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole));
+                    }
+
+                    if (second_JoyUCalmness >= 0)
+                    {
+                        second_answer_score += emotions.Joy + emotions.Calmness + (second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole));
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Joy + emotions.Calmness + (second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole));
+                    }
+
+                    Debug.Log("CALMO E AMICHEVOLE - First answer score: " + first_answer_score);
+                    Debug.Log("CALMO E AMICHEVOLE - Second answer score: " + second_answer_score);
+                }
+                else if (Ostile_Amichevole < 0)
+                {
+                    if (first_AngerUDisgust >= 0)
+                    {
+                        first_answer_score += (emotions.Joy + emotions.Calmness + (first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole))) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += (emotions.Joy + emotions.Calmness + (first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole))) * 2;
+                    }
+
+                    if (second_AngerUDisgust >= 0)
+                    {
+                        second_answer_score += (emotions.Joy + emotions.Calmness + (second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole))) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += (emotions.Joy + emotions.Calmness + (second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole))) * 2;
+                    }
+
+                    Debug.Log("CALMO MA OSTILE - First answer score: " + first_answer_score);
+                    Debug.Log("CALMO MA OSTILE - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (emotions.Neutral + emotions.Anger + emotions.Disgust > emotions.Joy + emotions.Calmness)
+            {
+                if (Ostile_Amichevole > 0)
+                {
+                    if (first_JoyUCalmness >= 0)
+                    {
+                        first_answer_score += (emotions.Anger + emotions.Disgust + (first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole))) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += (emotions.Anger + emotions.Disgust + (first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole))) * 2;
+                    }
+
+                    if (second_JoyUCalmness >= 0)
+                    {
+                        second_answer_score += (emotions.Anger + emotions.Disgust + (second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole))) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += (emotions.Anger + emotions.Disgust + (second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole))) * 2;
+                    }
+
+                    Debug.Log("ARRABBIATO MA AMICHEVOLE - First answer score: " + first_answer_score);
+                    Debug.Log("ARRABBIATO MA AMICHEVOLE - Second answer score: " + second_answer_score);
+                }
+                else if (Ostile_Amichevole < 0)
+                {
+                    if (first_AngerUDisgust >= 0)
+                    {
+                        first_answer_score += emotions.Anger + emotions.Disgust + (first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole));
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Anger + emotions.Disgust + (first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole));
+                    }
+
+                    if (second_AngerUDisgust >= 0)
+                    {
+                        second_answer_score += emotions.Anger + emotions.Disgust + (second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole));
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Anger + emotions.Disgust + (second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole));
+                    }
+
+                    Debug.Log("ARRABBIATO E OSTILE - First answer score: " + first_answer_score);
+                    Debug.Log("ARRABBIATO E OSTILE - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (emotions.Joy + emotions.Calmness == emotions.Anger + emotions.Disgust)
+            {
+                if (Ostile_Amichevole > 0)
+                {
+                    if (first_JoyUCalmness >= 0)
+                    {
+                        first_answer_score += ((first_JoyUCalmness + (first_AngerUDisgust / 2)) * Mathf.Abs(Ostile_Amichevole)) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += ((first_JoyUCalmness + (first_AngerUDisgust / 2)) / Mathf.Abs(Ostile_Amichevole)) * 2;
+                    }
+
+                    if (second_JoyUCalmness >= 0)
+                    {
+                        second_answer_score += ((second_JoyUCalmness + (second_AngerUDisgust / 2)) * Mathf.Abs(Ostile_Amichevole)) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += ((second_JoyUCalmness + (second_AngerUDisgust / 2)) / Mathf.Abs(Ostile_Amichevole)) * 2;
+                    }
+
+                    Debug.Log("NEUTRALE E AMICHEVOLE - First answer score: " + first_answer_score);
+                    Debug.Log("NEUTRALE E AMICHEVOLE - Second answer score: " + second_answer_score);
+                }
+                else if (Ostile_Amichevole < 0)
+                {
+                    if (first_AngerUDisgust >= 0)
+                    {
+                        first_answer_score += (((first_JoyUCalmness / 2) + first_AngerUDisgust) * Mathf.Abs(Ostile_Amichevole)) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += (((first_JoyUCalmness / 2) + first_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole)) * 2;
+                    }
+
+                    if (second_AngerUDisgust >= 0)
+                    {
+                        second_answer_score += (((second_JoyUCalmness / 2) + second_AngerUDisgust) * Mathf.Abs(Ostile_Amichevole)) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += (((second_JoyUCalmness / 2) + second_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole)) * 2;
+                    }
+
+                    Debug.Log("NEUTRALE E OSTILE - First answer score: " + first_answer_score);
+                    Debug.Log("NEUTRALE E OSTILE - Second answer score: " + second_answer_score);
+                }
+            }
+
+            /*if (Ostile_Amichevole > 0)
+            {
+                if (emotions.Neutral + emotions.Joy + emotions.Calmness >= emotions.Anger + emotions.Disgust)
+                {
+                    if (first_JoyUCalmness >= 0)
+                    {
+                        first_answer_score += first_JoyUCalmness * Mathf.Abs(Ostile_Amichevole);
+                    }
+                    else
+                    {
+                        first_answer_score += first_JoyUCalmness / Mathf.Abs(Ostile_Amichevole);
+                    }
+
+                    if (second_JoyUCalmness >= 0)
+                    {
+                        second_answer_score += second_JoyUCalmness * Mathf.Abs(Ostile_Amichevole);
+                    }
+                    else
+                    {
+                        second_answer_score += second_JoyUCalmness / Mathf.Abs(Ostile_Amichevole);
+                    }
+
+                    Debug.Log("AMICHEVOLE E CALMO - First answer score: " + first_answer_score);
+                    Debug.Log("AMICHEVOLE E CALMO - Second answer score: " + second_answer_score);
+                }
+                else
+                {
+                    first_answer_score += - Mathf.Abs(first_JoyUCalmness) / Mathf.Abs(Ostile_Amichevole);
+                    second_answer_score += - Mathf.Abs(second_JoyUCalmness) / Mathf.Abs(Ostile_Amichevole);
+
+                    Debug.Log("AMICHEVOLE MA ARRABBIATO - First answer score: " + first_answer_score);
+                    Debug.Log("AMICHEVOLE MA ARRABBIATO - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (Ostile_Amichevole < 0)
+            {
+                if (emotions.Neutral + emotions.Anger + emotions.Disgust >= emotions.Joy + emotions.Calmness)
+                {
+                    if (first_AngerUDisgust >= 0)
+                    {
+                        first_answer_score += first_AngerUDisgust * Mathf.Abs(Ostile_Amichevole);
+                    }
+                    else
+                    {
+                        first_answer_score += first_AngerUDisgust / Mathf.Abs(Ostile_Amichevole);
+                    }
+
+                    if (second_AngerUDisgust >= 0)
+                    {
+                        second_answer_score += second_AngerUDisgust * Mathf.Abs(Ostile_Amichevole);
+                    }
+                    else
+                    {
+                        second_answer_score += second_AngerUDisgust / Mathf.Abs(Ostile_Amichevole);
+                    }
+
+                    Debug.Log("OSTILE E ARRABBIATO - First answer score: " + first_answer_score);
+                    Debug.Log("OSTILE E ARRABBIATO - Second answer score: " + second_answer_score);
+                }
+                else
+                {
+                    first_answer_score += - Mathf.Abs(first_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole);
+                    second_answer_score += - Mathf.Abs(second_AngerUDisgust) / Mathf.Abs(Ostile_Amichevole);
+
+                    Debug.Log("OSTILE MA CALMO - First answer score: " + first_answer_score);
+                    Debug.Log("OSTILE MA CALMO - Second answer score: " + second_answer_score);
+                }
+            }*/
+
+            //////////// NEW SOTTO
+
+            if (emotions.Neutral + emotions.Calmness > emotions.Sadness + emotions.Fear)
+            {
+                if (Timoroso_Deciso > 0)
+                {
+                    if (first_Calmness >= 0)
+                    {
+                        first_answer_score += emotions.Calmness + ((first_Calmness + first_Joy) * Mathf.Abs(Timoroso_Deciso));
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Calmness + ((first_Calmness + first_Joy) / Mathf.Abs(Timoroso_Deciso));
+                    }
+
+                    if (second_Calmness >= 0)
+                    {
+                        second_answer_score += emotions.Calmness + ((second_Calmness + second_Joy) * Mathf.Abs(Timoroso_Deciso));
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Calmness + ((second_Calmness + second_Joy) / Mathf.Abs(Timoroso_Deciso));
+                    }
+
+                    Debug.Log("TRANQUILLO E DECISO - First answer score: " + first_answer_score);
+                    Debug.Log("TRANQUILLO E DECISO - Second answer score: " + second_answer_score);
+                }
+                else if (Timoroso_Deciso < 0)
+                {
+                    if (first_SadnessUFear >= 0)
+                    {
+                        first_answer_score += emotions.Calmness + ((first_SadnessUFear * Mathf.Abs(Timoroso_Deciso)) / 2);
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Calmness + ((first_SadnessUFear / Mathf.Abs(Timoroso_Deciso)) * 2);
+                    }
+
+                    if (second_SadnessUFear >= 0)
+                    {
+                        second_answer_score += emotions.Calmness + ((second_SadnessUFear * Mathf.Abs(Timoroso_Deciso)) / 2);
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Calmness + ((second_SadnessUFear / Mathf.Abs(Timoroso_Deciso)) * 2);
+                    }
+
+                    Debug.Log("TRANQUILLO MA TIMOROSO - First answer score: " + first_answer_score);
+                    Debug.Log("TRANQUILLO MA TIMOROSO - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (emotions.Neutral + emotions.Sadness + emotions.Fear > emotions.Calmness)
+            {
+                if (Timoroso_Deciso > 0)
+                {
+                    if (first_Calmness >= 0)
+                    {
+                        first_answer_score += emotions.Sadness + emotions.Fear + ((first_Calmness * Mathf.Abs(Timoroso_Deciso)) / 2);
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Sadness + emotions.Fear + ((first_Calmness / Mathf.Abs(Timoroso_Deciso)) * 2);
+                    }
+
+                    if (second_Calmness >= 0)
+                    {
+                        second_answer_score += emotions.Sadness + emotions.Fear + ((second_Calmness * Mathf.Abs(Timoroso_Deciso)) / 2);
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Sadness + emotions.Fear + ((second_Calmness / Mathf.Abs(Timoroso_Deciso)) * 2);
+                    }
+
+                    Debug.Log("IMPAURITO MA DECISO - First answer score: " + first_answer_score);
+                    Debug.Log("IMPAURITO MA DECISO - Second answer score: " + second_answer_score);
+                }
+                else if (Timoroso_Deciso < 0)
+                {
+                    if (first_SadnessUFear >= 0)
+                    {
+                        first_answer_score += emotions.Sadness + emotions.Fear + ((first_SadnessUFear + first_Anger) * Mathf.Abs(Timoroso_Deciso));
+                    }
+                    else
+                    {
+                        first_answer_score += emotions.Sadness + emotions.Fear + ((first_SadnessUFear + first_Anger) / Mathf.Abs(Timoroso_Deciso));
+                    }
+
+                    if (second_SadnessUFear >= 0)
+                    {
+                        second_answer_score += emotions.Sadness + emotions.Fear + ((second_SadnessUFear + second_Anger) * Mathf.Abs(Timoroso_Deciso));
+                    }
+                    else
+                    {
+                        second_answer_score += emotions.Sadness + emotions.Fear + ((second_SadnessUFear + second_Anger) / Mathf.Abs(Timoroso_Deciso));
+                    }
+
+                    Debug.Log("IMPAURITO E TIMOROSO - First answer score: " + first_answer_score);
+                    Debug.Log("IMPAURITO E TIMOROSO - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (emotions.Calmness == emotions.Sadness + emotions.Fear)
+            {
+                if (Timoroso_Deciso > 0)
+                {
+                    if (first_Calmness >= 0)
+                    {
+                        first_answer_score += ((first_Calmness + (first_SadnessUFear / 2)) * Mathf.Abs(Timoroso_Deciso)) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += ((first_Calmness + (first_SadnessUFear / 2)) / Mathf.Abs(Timoroso_Deciso)) * 2;
+                    }
+
+                    if (second_Calmness >= 0)
+                    {
+                        second_answer_score += ((second_Calmness + (second_SadnessUFear / 2)) * Mathf.Abs(Timoroso_Deciso)) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += ((second_Calmness + (second_SadnessUFear / 2)) / Mathf.Abs(Timoroso_Deciso)) * 2;
+                    }
+
+                    Debug.Log("NEUTRALE E DECISO - First answer score: " + first_answer_score);
+                    Debug.Log("NEUTRALE E DECISO - Second answer score: " + second_answer_score);
+                }
+                else if (Timoroso_Deciso < 0)
+                {
+                    if (first_SadnessUFear >= 0)
+                    {
+                        first_answer_score += (((first_Calmness / 2) + first_SadnessUFear) * Mathf.Abs(Timoroso_Deciso)) / 2;
+                    }
+                    else
+                    {
+                        first_answer_score += (((first_Calmness / 2) + first_SadnessUFear) / Mathf.Abs(Timoroso_Deciso)) * 2;
+                    }
+
+                    if (second_SadnessUFear >= 0)
+                    {
+                        second_answer_score += (((second_Calmness / 2) + second_SadnessUFear) * Mathf.Abs(Timoroso_Deciso)) / 2;
+                    }
+                    else
+                    {
+                        second_answer_score += (((second_Calmness / 2) + second_SadnessUFear) / Mathf.Abs(Timoroso_Deciso)) * 2;
+                    }
+
+                    Debug.Log("NEUTRALE E TIMOROSO - First answer score: " + first_answer_score);
+                    Debug.Log("NEUTRALE E TIMOROSO - Second answer score: " + second_answer_score);
+                }
+            }
+
+            //////////// OLD SOTTO
+
+            /*if (Timoroso_Deciso > 0)
+            {
+                if (emotions.Neutral + emotions.Calmness > emotions.Fear)
+                {
+                    if (first_Calmness >= 0)
+                    {
+                        first_answer_score += first_Calmness * Mathf.Abs(Timoroso_Deciso);
+                    }
+                    else
+                    {
+                        first_answer_score += first_Calmness / Mathf.Abs(Timoroso_Deciso);
+                    }
+
+                    if (second_Calmness >= 0)
+                    {
+                        second_answer_score += second_Calmness * Mathf.Abs(Timoroso_Deciso);
+                    }
+                    else
+                    {
+                        second_answer_score += second_Calmness / Mathf.Abs(Timoroso_Deciso);
+                    }
+
+                    Debug.Log("DECISO E CALMO - First answer score: " + first_answer_score);
+                    Debug.Log("DECISO E CALMO - Second answer score: " + second_answer_score);
+                }
+                else if (emotions.Neutral + emotions.Fear > emotions.Calmness)
+                {
+                    first_answer_score += - Mathf.Abs(first_Calmness) / Mathf.Abs(Timoroso_Deciso);
+                    second_answer_score += - Mathf.Abs(second_Calmness) / Mathf.Abs(Timoroso_Deciso);
+
+                    Debug.Log("DECISO MA IMPAURITO - First answer score: " + first_answer_score);
+                    Debug.Log("DECISO MA IMPAURITO - Second answer score: " + second_answer_score);
+                }
+                else if (emotions.Calmness == emotions.Fear)
+                {
+                    first_answer_score += first_Calmness + Mathf.Abs(Timoroso_Deciso);
+                    second_answer_score += second_Calmness + Mathf.Abs(Timoroso_Deciso);
+
+                    Debug.Log("DECISO E NEUTRALE - First answer score: " + first_answer_score);
+                    Debug.Log("DECISO E NEUTRALE - Second answer score: " + second_answer_score);
+                }
+            }
+            else if (Timoroso_Deciso < 0)
+            {
+                if (emotions.Neutral + emotions.Fear >= emotions.Calmness)
+                {
+                    if (first_Fear >= 0)
+                    {
+                        first_answer_score += first_Fear * Mathf.Abs(Timoroso_Deciso);
+                    }
+                    else
+                    {
+                        first_answer_score += first_Fear / Mathf.Abs(Timoroso_Deciso);
+                    }
+
+                    if (second_Fear >= 0)
+                    {
+                        second_answer_score += second_Fear * Mathf.Abs(Timoroso_Deciso);
+                    }
+                    else
+                    {
+                        second_answer_score += second_Fear / Mathf.Abs(Timoroso_Deciso);
+                    }
+
+                    Debug.Log("TIMOROSO E IMPAURITO - First answer score: " + first_answer_score);
+                    Debug.Log("TIMOROSO E IMPAURITO - Second answer score: " + second_answer_score);
+                }
+                else
+                {
+                    first_answer_score += - Mathf.Abs(first_Fear) / Mathf.Abs(Timoroso_Deciso);
+                    second_answer_score += - Mathf.Abs(second_Fear) / Mathf.Abs(Timoroso_Deciso);
+
+                    Debug.Log("TIMOROSO MA CALMO - First answer score: " + first_answer_score);
+                    Debug.Log("TIMOROSO MA CALMO - Second answer score: " + second_answer_score);
+                }
+            }*/
+
+            if (first_answer_score > second_answer_score)
+            {
+                return 1;
+            }
+            else if (first_answer_score < second_answer_score)
+            {
+                return 2;
+            }
+            else
+            {
+                return -1; // risultato uguale, scelta random!
+            }
         }
     }
 
@@ -512,7 +524,7 @@ public class Personality : MonoBehaviour
                     if (i == 0 || i == emotions.Length - 1 || i == emotions.Length - 2) // Diminuisco Neutral, Calmness e Sleepiness
                     {
                         //emotions[i] = emotions[i] - Mathf.Abs(Insensibile_Emotivo);
-                        emotions[i] = emotions[i] - (Mathf.Abs(emotions[i]) * (Mathf.Abs(Insensibile_Emotivo)/10));
+                        emotions[i] = emotions[i] - (Mathf.Abs(emotions[i]) * (Mathf.Abs(Insensibile_Emotivo) / 10));
                     }
                     else // Aumento Sadness, Joy, Surprise, Anger, Fear, Disgust
                     {

@@ -10,6 +10,7 @@ public class VisualDialogues : MonoBehaviour
     private int[] emotions_1 = new int[9];
     private int[] emotions_2 = new int[9];
     private string phrase;
+    private int trigger;
 
     private string[] first_character = new string[] { "1_Neutral", "1_Sadness", "1_Joy", "1_Surprise", "1_Anger", "1_Fear", "1_Disgust", "1_Sleepiness", "1_Calmness" };
     private string[] second_character = new string[] { "2_Neutral", "2_Sadness", "2_Joy", "2_Surprise", "2_Anger", "2_Fear", "2_Disgust", "2_Sleepiness", "2_Calmness" };
@@ -44,7 +45,16 @@ public class VisualDialogues : MonoBehaviour
             {
                 phrase = data.comments[0];
 
-                for(int j = 0; j < first_character.Length; j++)
+                if (data.extraVars.ContainsKey("Trigger"))
+                {
+                    trigger = (int)data.extraVars["Trigger"];
+                }
+                else
+                {
+                    trigger = 0;
+                }
+
+                for (int j = 0; j < first_character.Length; j++)
                 {
                     if (data.extraVars.ContainsKey(first_character[j]))
                     {
@@ -89,6 +99,7 @@ public class VisualDialogues : MonoBehaviour
                 if (data.isPlayer)
                 {
                     dialoguesUI.human_answer_text[first_character_count] = phrase;
+                    dialoguesUI.human_trigger[first_character_count] = trigger;
                     first_character_count++;
                     human_human_count++;
                     human_ai_count++;
@@ -96,6 +107,7 @@ public class VisualDialogues : MonoBehaviour
                 else
                 {
                     dialoguesUI.ai_answer_text[second_character_count] = phrase;
+                    dialoguesUI.ai_trigger[second_character_count] = trigger;
                     second_character_count++;
                     ai_ai_count++;
                     ai_human_count++;

@@ -18,10 +18,16 @@ public class Dialogues : MonoBehaviour
     public string[] human_answer_text;
     public int[,] human_human_status = new int[dialogue_number, 9];
     public int[,] human_ai_status = new int[dialogue_number, 9];
+    public int[] human_trigger = new int[dialogue_number];
 
     public string[] ai_answer_text;
     public int[,] ai_ai_status = new int[dialogue_number, 9];
     public int[,] ai_human_status = new int[dialogue_number, 9];
+    public int[] ai_trigger = new int[dialogue_number];
+
+    public int[] dialog_history = new int[dialogue_number]; // cronologia delle scelte (pulsanti) fatte nei dialoghi (1 = left_button, 2 = right_button)
+    public int[] trigger_history = new int[dialogue_number]; // cronologia delle scelte (trigger) fatte nei dialoghi (0 = null, 1 = false, 2 = true)
+    public int dialog_index = 0;
 
     public GameObject left_button;
     public GameObject right_button;
@@ -125,11 +131,12 @@ public class Dialogues : MonoBehaviour
             left_button_text.SetText(answer_human[answer_human_count].getText());
             left_button.GetComponent<DialogueButton>().setEmotions1(answer_human[answer_human_count].getHumanStatus());
             left_button.GetComponent<DialogueButton>().setEmotions2(answer_human[answer_human_count].getAiStatus());
-
+            left_button.GetComponent<DialogueButton>().setTrigger(human_trigger[answer_human_count]);
 
             right_button_text.SetText(answer_human[answer_human_count + 1].getText());
             right_button.GetComponent<DialogueButton>().setEmotions1(answer_human[answer_human_count + 1].getHumanStatus());
             right_button.GetComponent<DialogueButton>().setEmotions2(answer_human[answer_human_count + 1].getAiStatus());
+            right_button.GetComponent<DialogueButton>().setTrigger(human_trigger[answer_human_count + 1]);
 
             //left_button.GetComponent<Button>().interactable = true;
             //right_button.GetComponent<Button>().interactable = true;
@@ -159,10 +166,12 @@ public class Dialogues : MonoBehaviour
             left_button_text.SetText(answer_ai[answer_ai_count].getText());
             left_button.GetComponent<DialogueButton>().setEmotions1(answer_ai[answer_ai_count].getHumanStatus());
             left_button.GetComponent<DialogueButton>().setEmotions2(answer_ai[answer_ai_count].getAiStatus());
+            left_button.GetComponent<DialogueButton>().setTrigger(ai_trigger[answer_ai_count]);
 
             right_button_text.SetText(answer_ai[answer_ai_count + 1].getText());
             right_button.GetComponent<DialogueButton>().setEmotions1(answer_ai[answer_ai_count + 1].getHumanStatus());
             right_button.GetComponent<DialogueButton>().setEmotions2(answer_ai[answer_ai_count + 1].getAiStatus());
+            right_button.GetComponent<DialogueButton>().setTrigger(ai_trigger[answer_ai_count + 1]);
 
             //StartCoroutine(AIResponse());
 
@@ -200,11 +209,11 @@ public class Dialogues : MonoBehaviour
         
         if (n == 0)
         {
-            choice = character.GetComponent<Personality>().chooseAnswer(left_button.GetComponent<DialogueButton>().emotions_1, right_button.GetComponent<DialogueButton>().emotions_1);
+            choice = character.GetComponent<Personality>().chooseAnswer(dialog_index, left_button.GetComponent<DialogueButton>().emotions_1, right_button.GetComponent<DialogueButton>().emotions_1, left_button.GetComponent<DialogueButton>().trigger, right_button.GetComponent<DialogueButton>().trigger);
         }
         else
         {
-            choice = character.GetComponent<Personality>().chooseAnswer(left_button.GetComponent<DialogueButton>().emotions_2, right_button.GetComponent<DialogueButton>().emotions_2);
+            choice = character.GetComponent<Personality>().chooseAnswer(dialog_index, left_button.GetComponent<DialogueButton>().emotions_2, right_button.GetComponent<DialogueButton>().emotions_2, left_button.GetComponent<DialogueButton>().trigger, right_button.GetComponent<DialogueButton>().trigger);
         }
 
         if (choice == -1)
@@ -215,14 +224,19 @@ public class Dialogues : MonoBehaviour
 
         if (choice == 1)
         {
+            trigger_history[dialog_index] = left_button.GetComponent<DialogueButton>().trigger;
             left_button.GetComponent<Button>().interactable = true;
-            left_button.GetComponent<Button>().OnSubmit(null);
+            left_button.GetComponent<Button>().OnSubmit(null);    
         }
         else
         {
+            trigger_history[dialog_index] = right_button.GetComponent<DialogueButton>().trigger;
             right_button.GetComponent<Button>().interactable = true;
             right_button.GetComponent<Button>().OnSubmit(null);
         }
+
+        dialog_history[dialog_index] = choice;
+        dialog_index++;
 
         yield return new WaitForSeconds(0.15f);
 

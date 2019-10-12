@@ -7,6 +7,8 @@ public class DialogueButton : MonoBehaviour
     public int[] emotions_1;
     public int[] emotions_2;
 
+    public int trigger; // utilizzato per risposte particolari..
+
     public Dialogues setting;
 
     public GameObject human_character;
@@ -42,5 +44,10 @@ public class DialogueButton : MonoBehaviour
     public void setEmotions2(int[] emotions)
     {
         emotions_2 = emotions;
+    }
+
+    public void setTrigger(int value)
+    {
+        trigger = value;
     }
 }

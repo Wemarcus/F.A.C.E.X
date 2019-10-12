@@ -588,6 +588,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244303098}
   m_CullTransparentMesh: 0
+--- !u!84 &272239139
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &278816841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4891652045630572058, guid: 1bba461dac904394b9567d1bb9b703a0,
@@ -696,7 +731,12 @@ MonoBehaviour:
   first_character_is_NPC: 1
   second_character_is_NPC: 1
   human_answer_text: []
+  human_trigger: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   ai_answer_text: []
+  ai_trigger: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  dialog_history: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  trigger_history: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  dialog_index: 0
   left_button: {fileID: 466074127}
   right_button: {fileID: 1730086908}
   answer: {fileID: 1682404529}
@@ -744,7 +784,7 @@ MonoBehaviour:
   defaultPlayerSprite: {fileID: 0}
   targetManager: {fileID: 0}
   preload: 1
-  notuptodate: 1
+  notuptodate: 0
   startp: 0
   loadtag: 
   langs: []
@@ -1113,7 +1153,7 @@ MonoBehaviour:
     pTag: 
     sprite: {fileID: 0}
     vars:
-    - 5
+    - 1
     - 1
     - 6
     - -1
@@ -1225,6 +1265,7 @@ MonoBehaviour:
     - -2
     - 5
     - 2
+    - 2
     varKeys:
     - 2_Calmness
     - 2_Anger
@@ -1234,6 +1275,7 @@ MonoBehaviour:
     - 1_Calmness
     - 1_Anger
     - 1_Disgust
+    - Trigger
     isPlayer: 0
   - commentCount: 1
     s_comment:
@@ -1260,6 +1302,7 @@ MonoBehaviour:
     - -5
     - -4
     - -1
+    - 1
     varKeys:
     - 2_Sadness
     - 1_Calmness
@@ -1270,6 +1313,7 @@ MonoBehaviour:
     - 2_Disgust
     - 2_Anger
     - 2_Surprise
+    - Trigger
     isPlayer: 0
   - commentCount: 1
     s_comment:
@@ -1297,6 +1341,7 @@ MonoBehaviour:
     - -10
     - -2
     - -2
+    - 2
     varKeys:
     - 1_Anger
     - 1_Sadness
@@ -1309,6 +1354,7 @@ MonoBehaviour:
     - 2_Joy
     - 1_Joy
     - 1_Calmness
+    - Trigger
     isPlayer: 1
   - commentCount: 1
     s_comment:
@@ -1335,6 +1381,7 @@ MonoBehaviour:
     - -3
     - 5
     - -2
+    - 1
     varKeys:
     - 1_Calmness
     - 1_Anger
@@ -1345,6 +1392,7 @@ MonoBehaviour:
     - 2_Fear
     - 2_Sadness
     - 1_Disgust
+    - Trigger
     isPlayer: 1
   - commentCount: 1
     s_comment:
@@ -1360,25 +1408,27 @@ MonoBehaviour:
     pTag: 
     sprite: {fileID: 0}
     vars:
-    - -10
-    - 10
-    - -10
-    - 10
     - -5
+    - 4
+    - -10
+    - 10
     - -5
     - -5
     - 7
     - -3
+    - 4
+    - 2
     varKeys:
     - 2_Calmness
     - 2_Anger
     - 1_Calmness
     - 1_Anger
-    - 2_Joy
     - 2_Sadness
     - 2_Fear
     - 1_Disgust
     - 1_Joy
+    - 2_Disgust
+    - Trigger
     isPlayer: 0
   - commentCount: 1
     s_comment:
@@ -1394,17 +1444,17 @@ MonoBehaviour:
     pTag: 
     sprite: {fileID: 0}
     vars:
-    - 4
-    - 6
-    - -10
-    - 4
-    - -10
+    - 2
+    - 2
+    - 1
+    - 2
+    - 1
     varKeys:
     - 2_Fear
     - 2_Sadness
-    - 2_Calmness
-    - 2_Anger
-    - 2_Joy
+    - 2_Disgust
+    - 2_Surprise
+    - Trigger
     isPlayer: 0
   S_actionNodes: []
 --- !u!114 &318158424
@@ -1967,6 +2017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotions_1: 
   emotions_2: 
+  trigger: 0
   setting: {fileID: 318158422}
   human_character: {fileID: 498215547}
   ai_character: {fileID: 1942766984}
@@ -2010,9 +2061,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401387965a4935b439e08d69b5d46a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ostile_Amichevole: -3
-  Timoroso_Deciso: 3
-  Insensibile_Emotivo: 2
+  Ostile_Amichevole: 3
+  Timoroso_Deciso: 2
+  Insensibile_Emotivo: -1
+  dialogues: {fileID: 318158422}
 --- !u!1 &541196083
 GameObject:
   m_ObjectHideFlags: 0
@@ -8570,41 +8622,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305395409}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!84 &1338615915
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1484405621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7974061328987165783, guid: f927b938f34ab9b4fa59dec35a82edab,
@@ -9296,6 +9313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotions_1: 
   emotions_2: 
+  trigger: 0
   setting: {fileID: 318158422}
   human_character: {fileID: 498215547}
   ai_character: {fileID: 1942766984}
@@ -9635,15 +9653,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401387965a4935b439e08d69b5d46a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ostile_Amichevole: -2
-  Timoroso_Deciso: -4
-  Insensibile_Emotivo: 2
+  Ostile_Amichevole: 4
+  Timoroso_Deciso: -1
+  Insensibile_Emotivo: 3
+  dialogues: {fileID: 318158422}
 --- !u!4 &1955705671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 508035542925815301, guid: f927b938f34ab9b4fa59dec35a82edab,
     type: 3}
   m_PrefabInstance: {fileID: 1739052637693011732}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &2012889002
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2091249195 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4891652045215879082, guid: 1bba461dac904394b9567d1bb9b703a0,
@@ -9680,41 +9734,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7cd5928b65e93994a855dcc9d863172e, type: 3}
---- !u!84 &2111941132
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &1739052637693011732
 PrefabInstance:
   m_ObjectHideFlags: 0
