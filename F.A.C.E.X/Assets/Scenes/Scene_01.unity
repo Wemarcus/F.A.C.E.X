@@ -832,12 +832,14 @@ MonoBehaviour:
     - -1
     - -1
     - -1
+    - 1
     varKeys:
     - 2_Joy
     - 1_Disgust
     - 1_Joy
     - 2_Neutral
     - 2_Disgust
+    - 2_Calmness
     isPlayer: 0
   - commentCount: 1
     s_comment:
@@ -861,6 +863,8 @@ MonoBehaviour:
     - -1
     - -1
     - 1
+    - 1
+    - 1
     varKeys:
     - 2_Anger
     - 1_Anger
@@ -869,6 +873,8 @@ MonoBehaviour:
     - 2_Calmness
     - 1_Joy
     - 1_Disgust
+    - 2_Disgust
+    - 2_Fear
     isPlayer: 0
   - commentCount: 1
     s_comment:
@@ -1593,6 +1599,41 @@ CapsuleCollider:
   m_Height: 0.31013343
   m_Direction: 1
   m_Center: {x: -0.0107248165, y: -0.0058666775, z: -0.00784451}
+--- !u!84 &384409509
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &410632587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,8 +2067,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401387965a4935b439e08d69b5d46a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ostile_Amichevole: 3
+  Ostile_Amichevole: -3
   Timoroso_Deciso: 2
+  Malinconico_Allegro: 0
   Insensibile_Emotivo: -1
   dialogues: {fileID: 318158422}
 --- !u!1 &541196083
@@ -7971,41 +8013,6 @@ CapsuleCollider:
   m_Height: 0.1603589
   m_Direction: 1
   m_Center: {x: 0.0018143507, y: 0.031445526, z: 0.024147438}
---- !u!84 &751812487
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &833365012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4891652044313030201, guid: 1bba461dac904394b9567d1bb9b703a0,
@@ -8496,41 +8503,6 @@ CapsuleCollider:
   m_Height: 0.2008295
   m_Direction: 1
   m_Center: {x: 2.0626792e-10, y: 0.06714381, z: 0.009326923}
---- !u!84 &1276781183
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!84 &1292706933
 RenderTexture:
   m_ObjectHideFlags: 0
@@ -8975,6 +8947,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!84 &1583294016
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1682404529
 GameObject:
   m_ObjectHideFlags: 0
@@ -9688,9 +9695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401387965a4935b439e08d69b5d46a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ostile_Amichevole: 4
-  Timoroso_Deciso: -3
-  Insensibile_Emotivo: 3
+  Ostile_Amichevole: 1
+  Timoroso_Deciso: -2
+  Malinconico_Allegro: -3
+  Insensibile_Emotivo: 2
   dialogues: {fileID: 318158422}
 --- !u!4 &1955705671 stripped
 Transform:
