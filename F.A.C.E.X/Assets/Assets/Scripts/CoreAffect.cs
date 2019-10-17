@@ -499,7 +499,7 @@ public class CoreAffect : MonoBehaviour
         List<int> dominant_emotions_index = new List<int>();
         int emotions_maxValue;
 
-        int[] Personality = new int[] { Mathf.Abs(personality.Ostile_Amichevole), Mathf.Abs(personality.Timoroso_Deciso) };
+        int[] Personality = new int[] { Mathf.Abs(personality.Ostile_Amichevole), Mathf.Abs(personality.Timoroso_Deciso), Math.Abs(personality.Malinconico_Allegro), Math.Abs(personality.Insensibile_Emotivo) };
         List<int> dominant_personality_index = new List<int>();
         List<int> non_dominant_personality_index = new List<int>();
         int personality_maxValue;
@@ -531,33 +531,10 @@ public class CoreAffect : MonoBehaviour
             }
         }
 
-        if (dominant_personality_index.Count > 1)
+        if (dominant_personality_index.Count > 0)
         {
-            if(personality.Ostile_Amichevole > 0)
-            {
-                dominant_result_index.Add(2); // Joy
-                dominant_result_index.Add(8); // Calmness
-            }
-            else if (personality.Ostile_Amichevole < 0)
-            {
-                dominant_result_index.Add(4); // Anger
-                dominant_result_index.Add(6); // Disgust
-            }
-
-            if (personality.Timoroso_Deciso > 0 && personality.Ostile_Amichevole <= 0) // evito doppioni
-            {
-                dominant_result_index.Add(2); // Joy
-                dominant_result_index.Add(8); // Calmness
-            }
-            else if (personality.Timoroso_Deciso < 0)
-            {
-                dominant_result_index.Add(1); // Sadness
-                dominant_result_index.Add(5); // Fear
-            }
-        }
-        else
-        {
-            if (dominant_personality_index.Contains(0)) // Ostile_Amichevole
+            // Ostile_Amichevole
+            if (dominant_personality_index.Contains(0))
             {
                 if (personality.Ostile_Amichevole > 0)
                 {
@@ -571,23 +548,49 @@ public class CoreAffect : MonoBehaviour
                 }
             }
 
-            if (dominant_personality_index.Contains(1)) // Timoroso_Decisivo
+            // Timoroso_Decisivo
+            if (dominant_personality_index.Contains(1))
             {
-                if (personality.Timoroso_Deciso > 0)
+                if (personality.Timoroso_Deciso > 0 && personality.Ostile_Amichevole <= 0) // serve per evitare doppioni di indici
                 {
-                    dominant_result_index.Add(2); // Joy
                     dominant_result_index.Add(8); // Calmness
                 }
                 else if (personality.Timoroso_Deciso < 0)
                 {
-                    dominant_result_index.Add(1); // Sadness
                     dominant_result_index.Add(5); // Fear
+                }
+            }
+
+            // Malinconico_Allegro
+            if (dominant_personality_index.Contains(2)) 
+            {
+                if (personality.Malinconico_Allegro > 0 && personality.Ostile_Amichevole <= 0) // serve per evitare doppioni di indici
+                {
+                    dominant_result_index.Add(2); // Joy
+                }
+                else if (personality.Malinconico_Allegro < 0)
+                {
+                    dominant_result_index.Add(1); // Sadness
+                }
+            }
+
+            // Insensibile_Emotivo
+            if (dominant_personality_index.Contains(3))
+            {
+                if (personality.Insensibile_Emotivo > 0)
+                {
+                    dominant_result_index.Add(3); // Surprise
+                }
+                else if (personality.Insensibile_Emotivo < 0)
+                {
+                    dominant_result_index.Add(0); // Neutral
                 }
             }
         }
 
-        if(non_dominant_personality_index.Count > 0)
+        if (non_dominant_personality_index.Count > 0)
         {
+            // Ostile_Amichevole
             if (non_dominant_personality_index.Contains(0))
             {
                 if (personality.Ostile_Amichevole > 0)
@@ -602,24 +605,49 @@ public class CoreAffect : MonoBehaviour
                 }
             }
 
+            // Timoroso_Decisivo
             if (non_dominant_personality_index.Contains(1))
             {
-                if (personality.Timoroso_Deciso > 0)
+                if (personality.Timoroso_Deciso > 0 && personality.Ostile_Amichevole <= 0) // serve per evitare doppioni di indici
                 {
-                    non_dominant_result_index.Add(2); // Joy
                     non_dominant_result_index.Add(8); // Calmness
                 }
                 else if (personality.Timoroso_Deciso < 0)
                 {
-                    non_dominant_result_index.Add(1); // Sadness
                     non_dominant_result_index.Add(5); // Fear
+                }
+            }
+
+            // Malinconico_Allegro
+            if (non_dominant_personality_index.Contains(2))
+            {
+                if (personality.Malinconico_Allegro > 0 && personality.Ostile_Amichevole <= 0) // serve per evitare doppioni di indici
+                {
+                    non_dominant_result_index.Add(2); // Joy
+                }
+                else if (personality.Malinconico_Allegro < 0)
+                {
+                    non_dominant_result_index.Add(1); // Sadness
+                }
+            }
+
+            // Insensibile_Emotivo
+            if (non_dominant_personality_index.Contains(3))
+            {
+                if (personality.Insensibile_Emotivo > 0)
+                {
+                    non_dominant_result_index.Add(3); // Surprise
+                }
+                else if (personality.Insensibile_Emotivo < 0)
+                {
+                    non_dominant_result_index.Add(0); // Neutral
                 }
             }
         }
 
-        // Added emotions always possible
-        dominant_result_index.Add(0); // Neutral
-        dominant_result_index.Add(3); // Surprise
+        // Added emotions always possible - OBSOLETE
+        //dominant_result_index.Add(0); // Neutral
+        //dominant_result_index.Add(3); // Surprise
 
         if (dominant_emotions_index.Count > 1)
         {
@@ -652,7 +680,128 @@ public class CoreAffect : MonoBehaviour
                     return tmp_index[choice];
                 }
             }
-            else // caso senza emozioni dominanti in comune..
+            else if (tmp2_index.Count > 0) // caso con emozioni NON-dominanti in comune..
+            {
+                if (tmp2_index.Contains(actual_status))
+                {
+                    return actual_status;
+                }
+                else
+                {
+                    // INIZIO --- VERIFICA IN CORSO ---  SOTTO-CASO PER VEDERE SE VI E' UN EMOZIONE NON-DOMINANTE PIU' "CORRETTA"...
+
+                    Debug.Log(gameObject.name + ": sono entrato in questo sotto-caso particolare!");
+
+                    System.Random rnd = new System.Random();
+                    int choice;
+                    int personality_maxIndex;
+
+                    for (int i = 0; i < Personality.Length; i++)
+                    {
+                        personality_maxValue = Personality.Max();
+                        personality_maxIndex = Personality.ToList().IndexOf(personality_maxValue);
+
+                        // Ostile_Amichevole
+                        if (personality_maxIndex == 0)
+                        {
+                            if (personality.Ostile_Amichevole > 0)
+                            {
+                                if (tmp2_index.Contains(2) && tmp2_index.Contains(8))
+                                {
+                                    choice = rnd.Next(0, 2);
+
+                                    if(choice == 1)
+                                    {
+                                        return (2); // Joy
+                                    }
+                                    else
+                                    {
+                                        return (8); // Calmness
+                                    }
+                                } else if (tmp2_index.Contains(2))
+                                {
+                                    return (2); // Joy
+                                } else if (tmp2_index.Contains(8))
+                                {
+                                    return (8); // Calmness
+                                }
+                            }
+                            else if (personality.Ostile_Amichevole < 0)
+                            {
+                                if (tmp2_index.Contains(4) && tmp2_index.Contains(6))
+                                {
+                                    choice = rnd.Next(0, 2);
+
+                                    if (choice == 1)
+                                    {
+                                        return (4); // Anger
+                                    }
+                                    else
+                                    {
+                                        return (6); // Disgust
+                                    }
+                                }
+                                else if (tmp2_index.Contains(4))
+                                {
+                                    return (4); // Anger
+                                }
+                                else if (tmp2_index.Contains(6))
+                                {
+                                    return (6); // Disgust
+                                }
+                            }
+                        }
+
+                        // Timoroso_Decisivo
+                        if (personality_maxIndex == 1)
+                        {
+                            if (personality.Timoroso_Deciso > 0 && tmp2_index.Contains(8))
+                            {
+                                return (8); // Calmness
+                            }
+                            else if (personality.Timoroso_Deciso < 0 && tmp2_index.Contains(5))
+                            {
+                                return (5); // Fear
+                            }
+                        }
+
+                        // Malinconico_Allegro
+                        if (personality_maxIndex == 2)
+                        {
+                            if (personality.Malinconico_Allegro > 0 && tmp2_index.Contains(2))
+                            {
+                                return (2); // Joy
+                            }
+                            else if (personality.Malinconico_Allegro < 0 && tmp2_index.Contains(1))
+                            {
+                                return (1); // Sadness
+                            }
+                        }
+
+                        // Insensibile_Emotivo
+                        if (personality_maxIndex == 3)
+                        {
+                            if (personality.Insensibile_Emotivo > 0 && tmp2_index.Contains(3))
+                            {
+                                return (3); // Surprise
+                            }
+                            else if (personality.Insensibile_Emotivo < 0 && tmp2_index.Contains(0))
+                            {
+                                return (0); // Neutral
+                            }
+                        }
+
+                        Personality[personality_maxIndex] = 0;
+                    }
+
+                    //System.Random rnd = new System.Random();
+                    choice = rnd.Next(0, tmp2_index.Count);
+                    return tmp2_index[choice];
+
+                    // FINE --- VERIFICA IN CORSO ---  SOTTO-CASO PER VEDERE SE VI E' UN EMOZIONE NON-DOMINANTE PIU' "CORRETTA"...
+                }
+            }
+            else // caso senza emozioni dominanti e senza emozioni NON-dominanti in comune..
             {
                 if (dominant_emotions_index.Contains(actual_status))
                 {
@@ -661,27 +810,10 @@ public class CoreAffect : MonoBehaviour
                 else
                 {
                     System.Random rnd = new System.Random();
-                    int choice;
-
-                    if (tmp2_index.Count > 0) // caso con emozioni NON dominanti in comune..
-                    {
-                        if (tmp2_index.Contains(actual_status))
-                        {
-                            return actual_status;
-                        }
-                        else
-                        {
-                            choice = rnd.Next(0, tmp2_index.Count);
-                            return tmp2_index[choice];
-                        }
-                    }
-                    else
-                    {
-                        choice = rnd.Next(0, dominant_emotions_index.Count);
-                        return dominant_emotions_index[choice];
-                    }
+                    int choice = rnd.Next(0, dominant_emotions_index.Count);
+                    return dominant_emotions_index[choice];
                 }
-            }         
+            }
         }
         else
         {
