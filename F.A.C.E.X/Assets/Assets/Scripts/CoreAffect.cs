@@ -669,7 +669,7 @@ public class CoreAffect : MonoBehaviour
 
             if (tmp_index.Count > 0) // caso con emozioni dominanti in comune..
             {
-                if (tmp_index.Contains(actual_status))
+                if (tmp_index.Contains(actual_status) && actual_status != 3) // per evitare che resti per troppo tempo con l'espressione di sorpresa!
                 {
                     return actual_status;
                 }
@@ -677,20 +677,20 @@ public class CoreAffect : MonoBehaviour
                 {
                     System.Random rnd = new System.Random();
                     int choice = rnd.Next(0, tmp_index.Count);
+                    //Debug.Log(tmp_index[choice]);
+
                     return tmp_index[choice];
                 }
             }
             else if (tmp2_index.Count > 0) // caso con emozioni NON-dominanti in comune..
             {
-                if (tmp2_index.Contains(actual_status))
+                if (tmp2_index.Contains(actual_status) && actual_status != 3) // per evitare che resti per troppo tempo con l'espressione di sorpresa!
                 {
                     return actual_status;
                 }
                 else
                 {
-                    // INIZIO --- VERIFICA IN CORSO ---  SOTTO-CASO PER VEDERE SE VI E' UN EMOZIONE NON-DOMINANTE PIU' "CORRETTA"...
-
-                    Debug.Log(gameObject.name + ": sono entrato in questo sotto-caso particolare!");
+                    //Debug.Log(gameObject.name + ": sono entrato in questo sotto-caso particolare!");
 
                     System.Random rnd = new System.Random();
                     int choice;
@@ -794,16 +794,13 @@ public class CoreAffect : MonoBehaviour
                         Personality[personality_maxIndex] = 0;
                     }
 
-                    //System.Random rnd = new System.Random();
                     choice = rnd.Next(0, tmp2_index.Count);
                     return tmp2_index[choice];
-
-                    // FINE --- VERIFICA IN CORSO ---  SOTTO-CASO PER VEDERE SE VI E' UN EMOZIONE NON-DOMINANTE PIU' "CORRETTA"...
                 }
             }
             else // caso senza emozioni dominanti e senza emozioni NON-dominanti in comune..
             {
-                if (dominant_emotions_index.Contains(actual_status))
+                if (dominant_emotions_index.Contains(actual_status) && actual_status != 3) // per evitare che resti per troppo tempo con l'espressione di sorpresa!
                 {
                     return actual_status;
                 }
