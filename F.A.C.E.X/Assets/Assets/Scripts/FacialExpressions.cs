@@ -116,7 +116,7 @@ public class FacialExpressions : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
         // 0.Neutral
         if (Input.GetKeyDown(KeyCode.Alpha0) && emotion_id != 0)
@@ -180,7 +180,7 @@ public class FacialExpressions : MonoBehaviour
             speak = true;
             StartCoroutine(Speaking());
         }
-    }*/
+    }
 
     IEnumerator Head(float duration)
     {
@@ -1763,7 +1763,9 @@ public class FacialExpressions : MonoBehaviour
                 int UpperLipUp_Right = (int)rnd.Next(0, 40); // OLD 30
 
                 // NEW TEMPORAL CODE
-                if (name == "Policeman")
+                //if (name == "Policeman") OLD
+
+                if (tag == "Character_fix")
                 {
                     CheekPuff_Left = (int)rnd.Next(-30, -20);
                     CheekPuff_Right = (int)rnd.Next(-30, -20);
@@ -2332,7 +2334,9 @@ public class FacialExpressions : MonoBehaviour
                 int UpperLipIn = (int)rnd.Next(80, 100); // OLD 40 50
 
                 // NEW TEMPORAL CODE
-                if (name == "Policeman")
+                //if (name == "Policeman") OLD
+
+                if (tag == "Character_fix")
                 {
                     CheekPuff_Left = (int)rnd.Next(-30, -20);
                     CheekPuff_Right = CheekPuff_Left;
@@ -2759,7 +2763,9 @@ public class FacialExpressions : MonoBehaviour
                 int UpperLipUp_Right = UpperLipUp_Left; // OLD 30 50
 
                 // NEW TEMPORAL CODE
-                if (name == "Policeman")
+                //if (name == "Policeman") OLD
+
+                if (tag == "Character_fix")
                 {
                     JawForeward = (int)rnd.Next(0, 50);
                     UpperLipOut = (int)rnd.Next(0, 10);

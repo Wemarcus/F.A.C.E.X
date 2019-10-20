@@ -13,7 +13,7 @@ public class Paper : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Policeman")
         {
             if (count == 2)
             {
