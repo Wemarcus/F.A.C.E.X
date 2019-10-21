@@ -43,23 +43,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268dc70b105993846a123be43345df63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileIndex: 7
+  fileIndex: 13
   skinIndex: 0
   loadTag: 
   startID: 0
   curFocusID: 0
-  currentID: 50254
+  currentID: 56222
   autosave: 1
   previewPanning: 0
-  currentDiag: 7
+  currentDiag: 13
   locEdit: 0
   pNodeID: 18
   aNodeID: 2
   S_playerDiags:
   - commentCount: 1
     s_comment:
-    - text: Buon pomeriggio, signor Neal Caffrey. E' al corrente del motivo per il
-        quale si trova qui ora?
+    - text: "Comandante...comandante.. abbiamo un problema, un problema molto grande,
+        non riusciamo pi\xF9 a trovare il prigioniero Jimmy Cooper.. \xE8 scomparso!
+        Tuttavia, ha lasciato alcune tracce.."
       extraData: ExtraData
       inputSetIndex: 0
       outputNodeIndex: 1
@@ -70,37 +71,50 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 48
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 0
     rect:
       serializedVersion: 2
-      x: 140
-      y: 180
+      x: -280
+      y: -180
       width: 348
-      height: 370.2
+      height: 569.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 1
-    - 1
-    - 1
+    - -4
+    - 2
     - -1
+    - 1
+    - -2
+    - 4
+    - 2
+    - 2
     - -1
+    - -2
+    - -2
     varKeys:
     - 1_Calmness
-    - 2_Calmness
-    - 2_Fear
+    - 1_Fear
     - 1_Neutral
-    - 2_Neutral
+    - 1_Sadness
+    - 2_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Buon pomeriggio, signor Neal Caffrey. Non \xE8 stato facile rintracciarla,
-        ma finalmente possiamo fare due chiacchiere."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 1
       outputNodeIndex: 2
@@ -111,41 +125,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 63
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 1
     rect:
       serializedVersion: 2
-      x: 520
-      y: 180
+      x: 100
+      y: -180
       width: 348
-      height: 432.6
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 1
-    - 1
-    - 1
-    - 1
+    - -5
+    - 3
     - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
     - -1
-    - 1
+    - -2
+    - -2
+    - 2
     varKeys:
-    - 1_Calmness
-    - 1_Joy
-    - 2_Fear
-    - 2_Disgust
-    - 1_Neutral
-    - 2_Neutral
     - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Detective, non so perch\xE8 mi trovo qui, non ho fatto nulla contro
-        la legge."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 2
       outputNodeIndex: 3
@@ -156,41 +181,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 48
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 2
     rect:
       serializedVersion: 2
-      x: 900
-      y: 180
+      x: 480
+      y: -180
       width: 348
-      height: 418.2
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 1
+    - -5
+    - 3
     - -1
-    - 1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
     - -1
-    - 1
-    - -1
-    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
-    - 2_Joy
-    - 1_Calmness
-    - 1_Disgust
-    - 1_Joy
-    - 1_Neutral
+    - 2_Calmness
+    - 2_Fear
     - 2_Neutral
-    - 2_Disgust
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Voi piedipiatti mi avete portato qui contro la mia volont\xE0, voglio
-        il mio avvocato, non potete tenermi qui, ho i miei diritti."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 3
       outputNodeIndex: 4
@@ -201,40 +237,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 63
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 3
     rect:
       serializedVersion: 2
-      x: 1280
-      y: 180
+      x: 860
+      y: -180
       width: 348
-      height: 408.6
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
     - 2
-    - 1
-    - -1
-    - -1
-    - -1
-    - -1
     varKeys:
-    - 2_Anger
-    - 1_Anger
-    - 1_Calmness
-    - 2_Neutral
     - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
     - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Al momento lei non \xE8 un sospettato, ma vorremo farle alcune domande
-        relative alla rapina di pochi giorni fa presso la National Bank. Dov'era
-        il 23 Gennaio 2018 fra le ore 23 e le ore 4?"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 4
       outputNodeIndex: 5
@@ -245,42 +293,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 106
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 4
     rect:
       serializedVersion: 2
-      x: 1660
-      y: 180
+      x: 1240
+      y: -180
       width: 348
-      height: 475.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 1
-    - 1
+    - -5
+    - 3
     - -1
-    - 1
-    - 2
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
     - -2
-    - 1
+    - -2
+    - 2
     varKeys:
-    - 1_Calmness
-    - 1_Joy
-    - 1_Anger
-    - 2_Fear
     - 2_Calmness
-    - 2_Anger
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Abbiamo alcune prove che la legano alla rapina avvenuta alla National
-        Bank pochi giorni fa. Pu\xF2 dirci dove si trovava il 23 Gennaio 2018 fra
-        le ore 23 e le ore 4?"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 5
       outputNodeIndex: 6
@@ -291,39 +349,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 91
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 5
     rect:
       serializedVersion: 2
-      x: 2040
-      y: 180
+      x: 1620
+      y: -180
       width: 348
-      height: 437.4
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
     - -1
+    - 3
+    - -3
     - 4
-    - 1
+    - 3
+    - 4
     - -1
-    - 1
-    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
-    - 1_Calmness
-    - 2_Surprise
-    - 2_Fear
     - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
     - 1_Neutral
     - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: Non so nulla di questa rapina.. Non ricordo dove fossi.. anzi si, ero
-        nel mio letto, dormivo.. Ero molto stanco dopo una lunga giornata di lavoro..
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 6
       outputNodeIndex: 7
@@ -334,45 +405,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 77
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 6
     rect:
       serializedVersion: 2
-      x: 2420
-      y: 180
+      x: 2000
+      y: -180
       width: 348
-      height: 495
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
     - -1
-    - 1
-    - 1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
     - -1
+    - -2
+    - -2
     - 2
-    - -1
-    - -1
-    - -4
-    - -1
     varKeys:
     - 2_Calmness
     - 2_Fear
-    - 2_Anger
+    - 2_Neutral
+    - 2_Sadness
     - 1_Calmness
-    - 1_Disgust
-    - 1_Joy
-    - 2_Disgust
-    - 2_Surprise
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Detective, non so aiutarla, onestamente non ricordo dove fossi, \xE8
-        passato molto tempo ormai.."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 7
       outputNodeIndex: 8
@@ -383,42 +461,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 63
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 7
     rect:
       serializedVersion: 2
-      x: 2800
-      y: 180
+      x: 2380
+      y: -180
       width: 348
-      height: 432.6
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
     - 2
-    - 1
-    - 1
-    - -1
-    - 1
-    - -4
-    - -1
     varKeys:
     - 2_Calmness
-    - 2_Joy
-    - 1_Neutral
-    - 1_Joy
     - 2_Fear
-    - 2_Surprise
-    - 2_Anger
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Signor Caffrey, lei \xE8 stato visto arrivare nei pressi della National
-        Bank da una telecamera di sicurezza intorno alle ore 23:30 per poi andare
-        via intorno alle ore 3:05. Ha qualcosa da aggiungere?"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 8
       outputNodeIndex: 9
@@ -429,43 +517,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 106
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 8
     rect:
       serializedVersion: 2
-      x: 3180
-      y: 180
+      x: 2760
+      y: -180
       width: 348
-      height: 499.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
     - -1
-    - 1
-    - 1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
     - -1
-    - 2
-    - 5
-    - -1
+    - -2
+    - -2
     - 2
     varKeys:
-    - 1_Calmness
-    - 1_Neutral
-    - 1_Anger
     - 2_Calmness
     - 2_Fear
-    - 2_Surprise
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
-    - 2_Disgust
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: Signor Caffrey, le dico io dov'era. Era all'esterno della National Bank
-        e con due complici avete svaligiato il caveau principale della National Bank!
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 9
       outputNodeIndex: 10
@@ -476,39 +573,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 77
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 9
     rect:
       serializedVersion: 2
-      x: 3560
-      y: 180
+      x: 3140
+      y: -180
       width: 348
-      height: 423
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
     - -2
     - 2
-    - -2
-    - 3
-    - 1
-    - 6
     varKeys:
-    - 1_Calmness
-    - 1_Anger
     - 2_Calmness
     - 2_Fear
-    - 2_Anger
-    - 2_Surprise
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Non \xE8 vero, si sta sbagliando, non ero io.. non ho assolutamente
-        rapinato la National Bank!"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 10
       outputNodeIndex: 11
@@ -519,42 +629,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 48
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 10
     rect:
       serializedVersion: 2
-      x: 3940
-      y: 180
+      x: 3520
+      y: -180
       width: 348
-      height: 418.2
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
     - -2
     - 2
-    - 7
-    - -1
-    - -5
-    - -1
-    - -1
     varKeys:
     - 2_Calmness
     - 2_Fear
-    - 2_Anger
+    - 2_Neutral
+    - 2_Sadness
     - 1_Calmness
-    - 2_Surprise
-    - 2_Disgust
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Ora ricordo si, ero alla National Bank, \xE8 vero! Ma non ho assolutamente
-        preso parte alla rapina, ho semplicemente fatto un dannato prelievo con il
-        bancomat.. Non sono un ladro!"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 11
       outputNodeIndex: 12
@@ -565,44 +685,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 91
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 11
     rect:
       serializedVersion: 2
-      x: 4320
-      y: 180
+      x: 3900
+      y: -180
       width: 348
-      height: 485.4
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 5
-    - 1
-    - 6
-    - 1
-    - 1
-    - -1
-    - -1
     - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
     - 2_Calmness
     - 2_Fear
-    - 2_Anger
-    - 1_Disgust
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
     - 1_Neutral
-    - 2_Disgust
     - 2_Joy
-    - 2_Surprise
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Signor Caffrey, la smetta di mentire, le consiglio di ammettere il suo
-        reato e di dirmi il nome dei suoi complici, solo cosi potr\xF2 aiutarla ad
-        avere una pena ridotta."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 12
       outputNodeIndex: 13
@@ -613,44 +741,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 91
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 12
     rect:
       serializedVersion: 2
-      x: 4700
-      y: 180
+      x: 4280
+      y: -180
       width: 348
-      height: 485.4
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - -2
+    - -5
     - 3
-    - 1
-    - 1
-    - 1
     - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
     - -1
-    - 6
+    - -2
+    - -2
+    - 2
     varKeys:
-    - 1_Calmness
-    - 1_Anger
-    - 1_Joy
-    - 2_Fear
-    - 2_Anger
     - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
-    - 2_Disgust
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Signor Caffrey, lei fa il duro, ma noi abbiamo prove schiaccianti, lei
-        rester\xE0 in prigione per molti anni, ci pensi bene prima di mentirmi ancora..
-        Mi dica chi sono i suoi complici! Ora!"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 13
       outputNodeIndex: 14
@@ -661,42 +797,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 91
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 13
     rect:
       serializedVersion: 2
-      x: 5080
-      y: 180
+      x: 4660
+      y: -180
       width: 348
-      height: 461.4
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
     - -2
     - 2
-    - 2
-    - 6
-    - -3
-    - -3
-    - 3
     varKeys:
-    - 1_Calmness
-    - 1_Anger
-    - 2_Fear
-    - 2_Sadness
     - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
     - 2_Joy
-    - 2_Disgust
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Ho capito, avete deciso di mettermi dentro! Ma io, non far\xF2 nessun
-        nome ed ora pretendo il mio cazzo di avvocato, non dir\xF2 nient'altro! Voi
-        piedipiatti mi fate schifo!"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 14
       outputNodeIndex: 15
@@ -707,42 +853,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 91
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 14
     rect:
       serializedVersion: 2
-      x: 5460
-      y: 180
+      x: 5040
+      y: -180
       width: 348
-      height: 461.4
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
+    - -5
+    - 3
+    - -1
+    - 3
     - -3
+    - 4
     - 3
-    - 3
-    - 3
-    - 1
+    - 4
+    - -1
+    - -2
     - -2
     - 2
     varKeys:
     - 2_Calmness
-    - 2_Anger
+    - 2_Fear
+    - 2_Neutral
     - 2_Sadness
-    - 2_Disgust
-    - 1_Sadness
     - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
     - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Vabene.. lo ammetto, ero li quella sera, ma sono stato costretto.. \xE8
-        gente pericolosa! Non potevo fare altrimenti, mi hanno minacciato.. Ad ogni
-        modo, i loro nomi sono Lauren Cruz e Vincent Adler.."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 15
       outputNodeIndex: 16
@@ -753,45 +909,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 106
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 15
     rect:
       serializedVersion: 2
-      x: 5840
-      y: 180
+      x: 5420
+      y: -180
       width: 348
-      height: 523.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 1
-    - 10
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
     - 3
     - 4
-    - 1
-    - -3
-    - -10
-    - -5
-    - -4
+    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
+    - 2_Calmness
     - 2_Fear
+    - 2_Neutral
     - 2_Sadness
     - 1_Calmness
-    - 1_Joy
-    - 1_Sadness
+    - 1_Surprise
+    - 1_Fear
     - 1_Anger
-    - 2_Calmness
-    - 2_Disgust
-    - 2_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: "Mi dispiace per la sua decisione.. penso che non vedr\xE0 la luce del
-        sole per molti anni! Guardie.. portatelo dentro! "
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 16
       outputNodeIndex: 17
@@ -802,44 +965,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 63
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 16
     rect:
       serializedVersion: 2
-      x: 6220
-      y: 180
+      x: 5800
+      y: -180
       width: 348
-      height: 456.6
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 5
-    - 1
-    - 1
-    - 2
-    - 10
-    - 2
-    - -4
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
     - 2
     varKeys:
-    - 1_Anger
-    - 1_Sadness
-    - 1_Disgust
-    - 2_Disgust
-    - 2_Anger
-    - 2_Sadness
     - 2_Calmness
     - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Ha fatto la scelta migliore, parler\xF2 con chi gestisce il suo caso,
-        cercher\xF2 di farle avere una riduzione della pena, sempre che i nomi che
-        ci ha fornito siano veri.. Guardie.. potete prendere il signor Caffrey."
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 17
       outputNodeIndex: 18
@@ -850,38 +1021,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 106
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 17
     rect:
       serializedVersion: 2
-      x: 6600
-      y: 180
+      x: 6180
+      y: -180
       width: 348
-      height: 451.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 5
-    - -6
+    - -5
+    - 3
+    - -1
+    - 3
+    - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
     - 2
-    - 2
-    - 2
-    - 1
     varKeys:
+    - 2_Calmness
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
     - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
     - 1_Anger
     - 1_Neutral
-    - 1_Joy
-    - 2_Calmness
     - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 1
   - commentCount: 1
     s_comment:
-    - text: "Vada a farsi fottere, non vendo la mia lealt\xE0 ad un piedipiatti!"
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 18
       outputNodeIndex: 19
@@ -892,34 +1077,52 @@ MonoBehaviour:
         x: 301
         y: 63
         width: 30
-        height: 34
+        height: 104
       sprites: {fileID: 0}
       audios: {fileID: 0}
       visible: 1
     ID: 18
     rect:
       serializedVersion: 2
-      x: 6980
-      y: 180
+      x: 6560
+      y: -180
       width: 348
-      height: 331.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - -8
-    - 8
+    - -5
+    - 3
+    - -1
+    - 3
     - -3
     - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
     - 2_Calmness
-    - 2_Anger
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
     - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
     - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   - commentCount: 1
     s_comment:
-    - text: Sono veri.. sono veriiii! La prego, mantenga la sua promessa...
+    - text: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
       extraData: ExtraData
       inputSetIndex: 19
       outputNodeIndex: -1
@@ -937,23 +1140,39 @@ MonoBehaviour:
     ID: 19
     rect:
       serializedVersion: 2
-      x: 7360
-      y: 180
+      x: 6940
+      y: -180
       width: 348
-      height: 331.8
+      height: 593.8
     pTag: 
     expand: 1
     sprite: {fileID: 0}
     vars:
-    - 2
-    - 6
+    - -5
+    - 3
     - -1
+    - 3
     - -3
+    - 4
+    - 3
+    - 4
+    - -1
+    - -2
+    - -2
+    - 2
     varKeys:
-    - 2_Fear
-    - 2_Sadness
     - 2_Calmness
-    - 2_Anger
+    - 2_Fear
+    - 2_Neutral
+    - 2_Sadness
+    - 1_Calmness
+    - 1_Surprise
+    - 1_Fear
+    - 1_Anger
+    - 1_Neutral
+    - 2_Joy
+    - 1_Joy
+    - 1_Disgust
     isPlayer: 0
   S_actionNodes: []
   S_selNodes: []
