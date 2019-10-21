@@ -831,7 +831,7 @@ PrefabInstance:
     - target: {fileID: 6961528648374332906, guid: cbe11dce633eb8a4e9a754edf98650c2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7052757424555187877, guid: cbe11dce633eb8a4e9a754edf98650c2,
         type: 3}
@@ -872,6 +872,101 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Shadows.m_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528650102526580, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528652024187308, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528649854875732, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528650218324494, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528648605072402, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528649853406216, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528651314588630, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528649773571154, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528649624326556, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528650997784912, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961528649256517124, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345595259606, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345595259606, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345595259606, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345595259606, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345513962436, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345513962436, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345513962436, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070848345513962436, guid: cbe11dce633eb8a4e9a754edf98650c2,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbe11dce633eb8a4e9a754edf98650c2, type: 3}
