@@ -131,14 +131,34 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
+      propertyPath: trigger_history.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: dialog_history.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: ai_trigger.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: human_trigger.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
       propertyPath: human_character
       value: 
-      objectReference: {fileID: 1793573795}
+      objectReference: {fileID: 1296815494}
     - target: {fileID: 4083163805578912703, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: ai_character
       value: 
-      objectReference: {fileID: 1296815494}
+      objectReference: {fileID: 1793573795}
     - target: {fileID: 4083163805029075092, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: m_Name
@@ -258,22 +278,22 @@ PrefabInstance:
         type: 3}
       propertyPath: human_character
       value: 
-      objectReference: {fileID: 1793573795}
+      objectReference: {fileID: 1296815494}
     - target: {fileID: 4083163805431001085, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: ai_character
       value: 
-      objectReference: {fileID: 1296815494}
+      objectReference: {fileID: 1793573795}
     - target: {fileID: 4083163803622759912, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: human_character
       value: 
-      objectReference: {fileID: 1793573795}
+      objectReference: {fileID: 1296815494}
     - target: {fileID: 4083163803622759912, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: ai_character
       value: 
-      objectReference: {fileID: 1296815494}
+      objectReference: {fileID: 1793573795}
     - target: {fileID: 4083163803634337107, guid: 435771b6c26e87f4ca782925dc700b67,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -298,6 +318,1961 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: assignedIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: assignedID
+      value: 56222
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: assignedDialogue
+      value: SoldiersCamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: preload
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].s_comment.Array.data[0].text
+      value: "Comandante...comandante.. abbiamo un problema, un problema molto grande,
+        non riusciamo pi\xF9 a trovare il prigioniero Jimmy Cooper.. \xE8 scomparso!
+        Tuttavia, ha lasciato alcune tracce.."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[0]
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[4]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].isPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].isPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[9]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].vars.Array.data[10]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[0].varKeys.Array.data[10]
+      value: 1_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[9]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[10]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].vars.Array.data[11]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[10]
+      value: 1_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].varKeys.Array.data[11]
+      value: 1_Disgust
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: overrideStartNode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[1].s_comment.Array.data[0].outputNodeIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[2].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[3].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[4].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[5].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[6].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[7].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[8].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[9].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[10].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[11].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[12].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[13].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[14].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].vars.Array.data[9]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[15].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[10]
+      value: 1_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[16].varKeys.Array.data[11]
+      value: 1_Disgust
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].vars.Array.data[9]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[17].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[6]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].vars.Array.data[9]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[4]
+      value: 1_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[5]
+      value: 1_Surprise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[6]
+      value: 1_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[7]
+      value: 1_Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[8]
+      value: 1_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[18].varKeys.Array.data[9]
+      value: 2_Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].s_comment.Array.data[0].text
+      value: Comandante.. la stavo cercando per tutto il villaggio. E' successo un
+        disastro.. durante il mio turno di guardia, qualcuno mi ha colpito alle spalle
+        ed ha fatto evadere quel killer di Jimmy Cooper.. sono desolato...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.data[0]
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].vars.Array.data[4]
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.data[0]
+      value: 2_Calmness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.data[1]
+      value: 2_Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.data[2]
+      value: 2_Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.data[3]
+      value: 2_Sadness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083163805578912702, guid: 435771b6c26e87f4ca782925dc700b67,
+        type: 3}
+      propertyPath: S_playerDiags.Array.data[19].varKeys.Array.data[4]
+      value: 1_Calmness
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435771b6c26e87f4ca782925dc700b67, type: 3}
@@ -723,6 +2698,26 @@ PrefabInstance:
       propertyPath: dialogues
       value: 
       objectReference: {fileID: 1771724044}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Malinconico_Allegro
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Timoroso_Deciso
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Ostile_Amichevole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Insensibile_Emotivo
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1396700184496298468, guid: 82324874c75e5f84298abb4054049296,
         type: 3}
       propertyPath: interlocutor
@@ -1066,6 +3061,26 @@ PrefabInstance:
       propertyPath: dialogues
       value: 
       objectReference: {fileID: 1771724044}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Ostile_Amichevole
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Timoroso_Deciso
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Malinconico_Allegro
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396700184496298466, guid: 82324874c75e5f84298abb4054049296,
+        type: 3}
+      propertyPath: Insensibile_Emotivo
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1396700184496298468, guid: 82324874c75e5f84298abb4054049296,
         type: 3}
       propertyPath: interlocutor
