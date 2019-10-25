@@ -532,14 +532,14 @@ public class Personality : MonoBehaviour
                 {
                     if (i == 0 || i == 7) // Diminuisco Neutral e Sleepiness
                     {
-                        emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                        emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                     }
 
                     if (Ostile_Amichevole > 0)
                     {
                         if (i == 2 || i == 8) // Aumento Joy e Calmness                        
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Ostile_Amichevole) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -547,7 +547,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 4 || i == 6) // Aumento Anger e Disgust                     
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Ostile_Amichevole) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -555,7 +555,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 8) // Aumento Calmness                      
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Timoroso_Deciso) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -563,7 +563,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 5) // Aumento Fear                      
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Timoroso_Deciso) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -571,7 +571,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 2) // Aumento Joy                      
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Malinconico_Allegro) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -579,13 +579,13 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 1) // Aumento Sadness                      
                         {
-                            emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Malinconico_Allegro) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
                     if (i == 3) // Aumento Surprise (non fa parte nè di Ostile_Amichevole nè di Timoroso_Deciso)   
                     {
-                        emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * (1.5 * (float)Mathf.Abs(Insensibile_Emotivo) / 5)); // 1.5 è un modificatore che serve a bilanciare..
+                        emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * (1.5f * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)))); // 1.5 è un modificatore che serve a bilanciare..
                     }
                 }
             }
@@ -599,14 +599,14 @@ public class Personality : MonoBehaviour
                 {
                     if (i == 0 || i == 7) // Aumento Neutral e Sleepiness
                     {
-                        emotions[i] = emotions[i] + (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                        emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                     }
 
                     if (Ostile_Amichevole > 0)
                     {
                         if (i == 2 || i == 8) // Diminuisco Joy e Calmness                       
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Ostile_Amichevole) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -614,7 +614,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 4 || i == 6) // Diminuisco Anger e Disgust                     
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Ostile_Amichevole) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -622,7 +622,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 8) // Diminuisco Calmness                      
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Timoroso_Deciso) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -630,7 +630,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 5) // Diminuisco Fear                      
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Timoroso_Deciso) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -638,7 +638,7 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 2) // Diminuisco Joy                      
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Malinconico_Allegro) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
@@ -646,13 +646,13 @@ public class Personality : MonoBehaviour
                     {
                         if (i == 1) // Diminuisco Sadness                      
                         {
-                            emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Malinconico_Allegro) / 5 + (float)Mathf.Abs(Insensibile_Emotivo) / 5));
+                            emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                         }
                     }
 
                     if (i == 3) // Diminuisco Surprise (non fa parte nè di Ostile_Amichevole nè di Timoroso_Deciso)   
                     {
-                        emotions[i] = emotions[i] - (int)(Mathf.Abs(emotions[i]) * (1.5 * (float)Mathf.Abs(Insensibile_Emotivo) / 5)); // 1.5 è un modificatore che serve a bilanciare..
+                        emotions[i] = emotions[i] -  Mathf.RoundToInt((Mathf.Abs(emotions[i]) * (1.5f * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)))); // 1.5 è un modificatore che serve a bilanciare..
                     }
                 }
             }

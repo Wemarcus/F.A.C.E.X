@@ -116,7 +116,7 @@ public class FacialExpressions : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         // 0.Neutral
         if (Input.GetKeyDown(KeyCode.Alpha0) && emotion_id != 0)
@@ -180,7 +180,7 @@ public class FacialExpressions : MonoBehaviour
             speak = true;
             StartCoroutine(Speaking());
         }
-    }
+    }*/
 
     IEnumerator Head(float duration)
     {

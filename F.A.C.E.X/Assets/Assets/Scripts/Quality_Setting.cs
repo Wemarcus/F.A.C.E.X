@@ -11,10 +11,11 @@ public class Quality_Setting : MonoBehaviour
     {
         // Switch to 1920 x 1080 windowed
         //Screen.SetResolution(1920, 1080, true); // OLD ,60
-        Screen.SetResolution(2048, 1152, true); // OLD ,60
+        //Screen.SetResolution(2048, 1152, true); // OLD ,60
+        Screen.SetResolution(4096, 2160, true); // OLD ,60
 
         // Set quality setting to Very High Level
-        QualitySettings.SetQualityLevel(4, true);
+        QualitySettings.SetQualityLevel(5, true);
     }
 
     void Update()
