@@ -583,9 +583,9 @@ public class Personality : MonoBehaviour
                         }
                     }
 
-                    if (i == 3) // Aumento Surprise (non fa parte nè di Ostile_Amichevole nè di Timoroso_Deciso)   
+                    if (i == 3) // Aumento Surprise
                     {
-                        emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * (1.5f * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)))); // 1.5 è un modificatore che serve a bilanciare..
+                        emotions[i] = emotions[i] + Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                     }
                 }
             }
@@ -650,9 +650,9 @@ public class Personality : MonoBehaviour
                         }
                     }
 
-                    if (i == 3) // Diminuisco Surprise (non fa parte nè di Ostile_Amichevole nè di Timoroso_Deciso)   
+                    if (i == 3) // Diminuisco Surprise 
                     {
-                        emotions[i] = emotions[i] -  Mathf.RoundToInt((Mathf.Abs(emotions[i]) * (1.5f * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)))); // 1.5 è un modificatore che serve a bilanciare..
+                        emotions[i] = emotions[i] - Mathf.RoundToInt((Mathf.Abs(emotions[i]) * ((float)Mathf.Abs(Insensibile_Emotivo) / 5)));
                     }
                 }
             }

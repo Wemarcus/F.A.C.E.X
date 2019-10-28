@@ -684,22 +684,82 @@ public class CoreAffect : MonoBehaviour
             }
             else if (tmp2_index.Count > 0) // caso con emozioni NON-dominanti in comune..
             {
-                if (tmp2_index.Contains(actual_status) && actual_status != 3) // per evitare che resti per troppo tempo con l'espressione di sorpresa!
-                {
-                    return actual_status;
-                }
-                else
-                {
-                    //Debug.Log(gameObject.name + ": sono entrato in questo sotto-caso particolare!");
+                //Debug.Log(gameObject.name + ": sono entrato in questo sotto-caso particolare!");
 
-                    System.Random rnd = new System.Random();
-                    int choice;
-                    int personality_maxIndex;
+                System.Random rnd = new System.Random();
+                int choice;
+                int personality_maxIndex;
 
-                    for (int i = 0; i < Personality.Length; i++)
+                for (int i = 0; i < Personality.Length; i++)
+                {
+                    personality_maxValue = Personality.Max();
+                    //personality_maxIndex = Personality.ToList().IndexOf(personality_maxValue);
+
+                    List<int> maxIndices = new List<int>();
+                    List<int> tmp3_index = new List<int>();
+
+                    for (int k = 0; k < Personality.Length; k++)
                     {
-                        personality_maxValue = Personality.Max();
-                        personality_maxIndex = Personality.ToList().IndexOf(personality_maxValue);
+                        if (Personality[k] == personality_maxValue)
+                        {
+                            //Debug.Log(gameObject.name + " indice: " + k + " valore: " + Personality[k]);
+                            maxIndices.Add(k);
+                        }
+                    }
+
+                    for (int j = 0; j < maxIndices.Count; j++)
+                    {
+                        if (maxIndices[j] == 0 && personality.Ostile_Amichevole > 0)
+                        {
+                            tmp3_index.Add(2);
+                            tmp3_index.Add(8);
+                        }
+
+                        if (maxIndices[j] == 0 && personality.Ostile_Amichevole < 0)
+                        {
+                            tmp3_index.Add(4);
+                            tmp3_index.Add(6);
+                        }
+
+                        if (maxIndices[j] == 1 && personality.Timoroso_Deciso > 0)
+                        {
+                            tmp3_index.Add(8);
+                        }
+
+                        if (maxIndices[j] == 1 && personality.Timoroso_Deciso < 0)
+                        {
+                            tmp3_index.Add(5);
+                        }
+
+                        if (maxIndices[j] == 2 && personality.Malinconico_Allegro > 0)
+                        {
+                            tmp3_index.Add(2);
+                        }
+
+                        if (maxIndices[j] == 2 && personality.Malinconico_Allegro < 0)
+                        {
+                            tmp3_index.Add(1);
+                        }
+
+                        if (maxIndices[j] == 3 && personality.Insensibile_Emotivo > 0)
+                        {
+                            tmp3_index.Add(3);
+                        }
+
+                        if (maxIndices[j] == 3 && personality.Insensibile_Emotivo < 0)
+                        {
+                            tmp3_index.Add(0);
+                        }
+                    }
+
+                    if (tmp2_index.Contains(actual_status) && tmp3_index.Contains(actual_status) && actual_status != 3) // per evitare che resti per troppo tempo con l'espressione di sorpresa!
+                    {
+                        return actual_status;
+                    }
+                    else
+                    {
+                        personality_maxIndex = maxIndices[rnd.Next(maxIndices.Count)];
+                        //Debug.Log(gameObject.name + " personality_maxIndex: " + personality_maxIndex);
 
                         // Ostile_Amichevole
                         if (personality_maxIndex == 0)
@@ -710,7 +770,7 @@ public class CoreAffect : MonoBehaviour
                                 {
                                     choice = rnd.Next(0, 2);
 
-                                    if(choice == 1)
+                                    if (choice == 1)
                                     {
                                         return (2); // Joy
                                     }
@@ -718,10 +778,12 @@ public class CoreAffect : MonoBehaviour
                                     {
                                         return (8); // Calmness
                                     }
-                                } else if (tmp2_index.Contains(2))
+                                }
+                                else if (tmp2_index.Contains(2))
                                 {
                                     return (2); // Joy
-                                } else if (tmp2_index.Contains(8))
+                                }
+                                else if (tmp2_index.Contains(8))
                                 {
                                     return (8); // Calmness
                                 }
@@ -793,10 +855,10 @@ public class CoreAffect : MonoBehaviour
 
                         Personality[personality_maxIndex] = 0;
                     }
-
-                    choice = rnd.Next(0, tmp2_index.Count);
-                    return tmp2_index[choice];
                 }
+
+                choice = rnd.Next(0, tmp2_index.Count);
+                return tmp2_index[choice];
             }
             else // caso senza emozioni dominanti e senza emozioni NON-dominanti in comune..
             {
