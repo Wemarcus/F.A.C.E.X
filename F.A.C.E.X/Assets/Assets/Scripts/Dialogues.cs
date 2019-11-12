@@ -246,14 +246,16 @@ public class Dialogues : MonoBehaviour
 
     private void setHumanUI()
     {
-        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Scegli una risposta:");
+        // title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Scegli una risposta:");
+        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("Choose an answer:");
         left_button.GetComponent<Button>().interactable = true;
         right_button.GetComponent<Button>().interactable = true;
     }
 
     private void setAiUI()
     {
-        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("L'AI sta scegliendo una risposta..");
+        //title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("L'AI sta scegliendo una risposta..");
+        title_text.GetComponent<TMPro.TextMeshProUGUI>().SetText("The AI is choosing an answer ...");
         left_button.GetComponent<Button>().interactable = false;
         right_button.GetComponent<Button>().interactable = false;
     }
