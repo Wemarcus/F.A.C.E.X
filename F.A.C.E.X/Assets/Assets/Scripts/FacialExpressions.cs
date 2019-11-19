@@ -17,9 +17,6 @@ public class FacialExpressions : MonoBehaviour
     public GameObject left_eye;
     public GameObject right_eye;
     public GameObject head;
-    //public Material hair_material;
-    //public Material eyelashes_material;
-    //public Material eyelashes_backfaces_material;
     public GameObject interlocutor;
     private LookAtConstraint left_lookAtConstraint;
     private LookAtConstraint right_lookAtConstraint;
@@ -87,17 +84,14 @@ public class FacialExpressions : MonoBehaviour
 
     private Coroutine coroutine_Eyes;
     private Coroutine coroutine_Head;
+    private Coroutine coroutine_Widens_Eyes;
+    private Coroutine coroutine_Tighten_Eyes;
 
     void Awake()
     {
         left_lookAtConstraint = left_eye.GetComponent<LookAtConstraint>();
         right_lookAtConstraint = right_eye.GetComponent<LookAtConstraint>();
         head_lookAtConstraint = head.GetComponent<LookAtConstraint>();
-
-        // Fix for Fade Shader
-        //hair_material.SetInt("_ZWrite", 1);
-        //eyelashes_material.SetInt("_ZWrite", 1);
-        //eyelashes_backfaces_material.SetInt("_ZWrite", 1);
 
         // Active Standard Blinking
         blinking = true;
@@ -110,9 +104,6 @@ public class FacialExpressions : MonoBehaviour
         // Active Standard Head Movement
         head_movement = true;
         coroutine_Head = StartCoroutine(Head(1.5f));
-
-        // Active Standard Animation ===> OLD dall'introduzione della FSM!
-        // StartCoroutine(Neutral_Animation());
     }
 
     // Update is called once per frame
@@ -580,16 +571,6 @@ public class FacialExpressions : MonoBehaviour
                 {
                     duration = 1.5f; // OLD 1.0 // OLD 3.0 => forse meglio 1.5
                     head_frequency = UnityEngine.Random.Range(0.5f, 1.0f); // OLD 1.0 2.0
-
-                    /*if (eyes_up_down <= 0) // OLD >= 0
-                    {
-                        head_up_down = UnityEngine.Random.Range(-2.0f, 0.0f);
-                    }
-                    else
-                    {
-                        head_up_down = UnityEngine.Random.Range(-5.0f, -2.0f);
-                    }*/
-
                     head_up_down = UnityEngine.Random.Range(-15.0f, -10.0f); // OLD -13.0 -8.0
 
                     if (head_left_right >= 0)
@@ -895,7 +876,7 @@ public class FacialExpressions : MonoBehaviour
                 }
                 else if (emotion_id == 2) // Joy
                 {
-                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 0.0 7.0
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 2.0f); // OLD 0.0 4.0
                     eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
                     eyes_left_right = UnityEngine.Random.Range(-8.0f, 5.0f);
 
@@ -935,7 +916,7 @@ public class FacialExpressions : MonoBehaviour
                 }
                 else if (emotion_id == 3) // Surprise
                 {
-                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f); // OLD 2.0 4.0
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 0.5f); // OLD 0.0 4.0
                     eyes_up_down = UnityEngine.Random.Range(-1.5f, 3.5f); // OLD -1.0 3.0
                     eyes_left_right = UnityEngine.Random.Range(-3.0f, 3.0f); // OLD -2.0 2.0
 
@@ -973,9 +954,9 @@ public class FacialExpressions : MonoBehaviour
                         yield return null;
                     }
                 }
-                else if (emotion_id == 4 && emotion_id == 6) // Anger & Disgust
+                else if (emotion_id == 4 || emotion_id == 6) // Anger & Disgust
                 {
-                    eyes_frequency = UnityEngine.Random.Range(0.0f, 4.0f);
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 2.0f); // OLD 0.0 4.0
                     eyes_up_down = UnityEngine.Random.Range(-2.0f, 8.0f);
                     eyes_left_right = UnityEngine.Random.Range(-8.0f, 3.0f);
 
@@ -1015,7 +996,7 @@ public class FacialExpressions : MonoBehaviour
                 }
                 else if (emotion_id == 5) // Fear
                 {
-                    eyes_frequency = UnityEngine.Random.Range(0.0f, 2.0f); // OLD 0.0 4.0
+                    eyes_frequency = UnityEngine.Random.Range(0.0f, 0.1f); // OLD 0.0 2.0
                     eyes_up_down = UnityEngine.Random.Range(9.0f, 12.0f); // OLD 9.0 11.0
                     eyes_left_right = UnityEngine.Random.Range(-7.0f, 5.0f); // OLD -5.0 3.0
 
@@ -1223,7 +1204,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Neutral(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if(coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+        
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         System.Random rnd = new System.Random();
         float time_to_cry = UnityEngine.Random.Range(1f, 2f); // OLD 0 0.5
@@ -1507,7 +1493,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Sadness(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         //float time = 0f;
         eyes_frequency = 0;
@@ -1696,7 +1687,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Joy(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         //float time = 0f;
         eyes_frequency = 0;
@@ -1973,7 +1969,7 @@ public class FacialExpressions : MonoBehaviour
                                                         MidMouth_Left, MidMouth_Right, MouthNarrow_Left, MouthNarrow_Right, Mouth_Open, NoseScrunch_Left, NoseScrunch_Right,
                                                         UpperLipUp_Left, UpperLipUp_Right};
 
-                StartCoroutine(widensEyes());
+                coroutine_Widens_Eyes = StartCoroutine(widensEyes());
 
                 while (time <= (duration / 2) && emotion_id == 3) // OLD duration
                 {
@@ -2265,7 +2261,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Anger(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         //float time = 0f;
         eyes_frequency = 0;
@@ -2465,12 +2466,17 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Fear(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         //float time = 0f;
         eyes_frequency = 0;
         head_frequency = 0;
-        blink_frequency = 5;
+        blink_frequency = 2.5f; // OLD 5
 
         StopCoroutine(coroutine_Eyes);
         StopCoroutine(coroutine_Head);
@@ -2692,7 +2698,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Disgust(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         //float time = 0f;
         eyes_frequency = 0;
@@ -2905,7 +2916,12 @@ public class FacialExpressions : MonoBehaviour
 
     IEnumerator Calmness(float duration)
     {
-        StartCoroutine(tightenEyes());
+        if (coroutine_Widens_Eyes != null)
+        {
+            StopCoroutine(coroutine_Widens_Eyes);
+        }
+
+        coroutine_Tighten_Eyes = StartCoroutine(tightenEyes());
 
         eyes_frequency = 0;
         head_frequency = 0;

@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Police_Station.unity
     guid: 36b901bbc0eff214e9b55db54ec32e51
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Soldiers_Camp.unity
     guid: c10eb4bb7d6a45745be817bf3bdc3722
   m_configObjects: {}
